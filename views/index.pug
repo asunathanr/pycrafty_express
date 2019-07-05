@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  form(action='copy_text', method='POST')
+    textarea(name="areaA")
+    br
+    input(type='submit', value='Submit')
+
