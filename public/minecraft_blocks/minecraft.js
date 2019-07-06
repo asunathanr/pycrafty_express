@@ -175,7 +175,7 @@ Blockly.defineBlocksWithJsonArray([
     "colour": 230,
     "tooltip": "Set a single block.",
     "helpUrl": ""
-  }])
+  }]);
 
 // Code generators
 Blockly.Python['getBlock'] = function(block) {
