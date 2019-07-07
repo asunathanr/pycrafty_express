@@ -1,6 +1,9 @@
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
+// Multer is used to parse form data.
+var multer = require('multer');
+var upload = multer();
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
@@ -18,7 +21,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(upload.array());
 
 app.use('/', indexRouter);
 
