@@ -47,10 +47,7 @@
                 <button onclick="displayCodeInBrowser()">View Code</button>
                 <button onclick="save()">Save</button>
                 <button onclick="restore()">Restore</button>
-                <form action="/importAction" method="POST">
-                    <button type="submit" id="importButton" onclick="importBlocks()" name="/importAction">Import</button>
-                </form>
-
+                <button id="importButton" onclick="importBlocks()" name="/importAction">Import</button>
                 <button id="exportButton" onclick="exportBlocks()" name="/exportAction">Export</button>
 
             </p>
@@ -542,13 +539,19 @@
         codeArea.value = preamble + Blockly.Python.workspaceToCode(demoWorkspace);
     }
 
-
+    // Adapted from: https://teamtreehouse.com/community/can-i-do-more-than-redirecting-with-nodejs-and-express
     function importBlocks() {
-        let xmlText = localStorage.getItem("blockly.xml");
-        if (xmlText) {
-            Blockly.mainWorkspace.clear();
-            let xmlDom = Blockly.Xml.textToDom(xmlText);
-        }
+        let xhttp = new XMLHttpRequest();
+        xhttp.open("POST", "/importAction", true);
+        xhttp.send();
+        xhttp.onreadystatechange = function() {
+            let xmlDom = "";
+            if (this.readyState === 4 && this.status === 200) {
+                Blockly.mainWorkspace.clear();
+                xmlDom = Blockly.Xml.textToDom(this.responseText);
+                Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xmlDom);
+            }
+        };
     }
 
 

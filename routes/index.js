@@ -4,6 +4,7 @@
 
 const fs = require('fs');
 const os = require('os');
+const fileDialog = require('file-dialog');
 const express = require('express');
 let router = express.Router();
 
@@ -14,8 +15,16 @@ router.get('/', function(req, res, next) {
 });
 
 
-router.post('/importAction', function (req, res) {
-  res.send("Import was clicked");
+router.post('/importAction', function (req, res, next) {
+  let file = "C:\\Users\\absna\\WebstormProjects\\express_test\\test.xml";
+
+  res.sendFile(file, {}, function (err) {
+    if (err) {
+      next(err);
+    } else {
+      console.log("Sent file: test.xml");
+    }
+  });
 });
 
 
