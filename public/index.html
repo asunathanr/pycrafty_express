@@ -50,9 +50,9 @@
                 <form action="/importAction" method="POST">
                     <button type="submit" id="importButton" onclick="importBlocks()" name="/importAction">Import</button>
                 </form>
-                <form action="/exportAction" method="POST">
-                    <button type="submit" id="exportButton" onclick="exportBlocks()" name="/exportAction">Export</button>
-                </form>
+
+                <button id="exportButton" onclick="exportBlocks()" name="/exportAction">Export</button>
+
             </p>
         </td>
     </tr>
@@ -64,7 +64,7 @@
     </tr>
 </table>
 <form action="/copy_text" method="POST">
-    <input type="submit" value="Submit">
+    <input type="submit" value="Copy">
     <br>
     <textarea id="codeArea" name="codeArea" style="position:absolute; "></textarea>
 
@@ -530,6 +530,9 @@
         }
     }
 
+    /**
+     * Places generated python code in specified textarea of web browser.
+     */
     function displayCodeInBrowser() {
         Blockly.Python.INFINITE_LOOP_TRAP = null;
         let codeArea = document.getElementById("codeArea");
@@ -539,14 +542,29 @@
         codeArea.value = preamble + Blockly.Python.workspaceToCode(demoWorkspace);
     }
 
-    // Submit a form using javascript:
-    // https://stackoverflow.com/questions/9855656/how-to-submit-a-form-using-javascript
+
     function importBlocks() {
-        document.getElementById("importButton").submit();
+        let xmlText = localStorage.getItem("blockly.xml");
+        if (xmlText) {
+            Blockly.mainWorkspace.clear();
+            let xmlDom = Blockly.Xml.textToDom(xmlText);
+        }
     }
 
+
+    /**
+     * exportBlocks: Uses the fetch api to send all Blockly XML by POST to server.
+     */
     function exportBlocks() {
-        document.getElementById("exportButton").submit();
+        let xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+        let xmlText = Blockly.Xml.domToPrettyText(xmlDom);
+        fetch('/exportAction', {
+            method: "POST",
+            body: JSON.stringify({"xmlBlockData" : xmlText}),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
     }
 </script>
 </body>
