@@ -44,9 +44,13 @@
     <tr id="buttons">
         <td>
             <p>
-                <button onclick="displayCodeInBrowser()">View Code</button>
                 <button onclick="save()">Save</button>
                 <button onclick="restore()">Restore</button>
+                <!-- https://stackoverflow.com/questions/16215771/how-open-select-file-dialog-via-js -->
+                <button id="importButton" onclick="document.getElementById('file-input').click()">Import</button>
+                <input id="file-input" type="file" name="name" onchange="importBlocks()" style="display: none;" />
+                <button id="exportButton" onclick="exportBlocks()">Export</button>
+                <button onclick="copyCode()">Copy</button>
             </p>
         </td>
     </tr>
@@ -57,12 +61,10 @@
         </td>
     </tr>
 </table>
-<form action="/copy_text" method="POST">
-    <input type="submit" value="Submit">
-    <br>
+<text id="fileName"></text>
+<br>
     <textarea id="codeArea" name="codeArea" style="position:absolute; "></textarea>
 
-</form>
 
 
 <!--This defines the toolbox to be given to Blockly.  -->
@@ -478,6 +480,7 @@
             media: 'media' + "\\",
             toolbox: document.getElementById('toolbox')
         });
+    
     var onresize = function (e) {
         // Compute the absolute coordinates and dimensions of blocklyArea.
         var element = blocklyArea;
@@ -495,38 +498,16 @@
         blocklyDiv.style.height = blocklyArea.offsetHeight + 'px';
         Blockly.svgResize(demoWorkspace);
     };
+    // Update textarea when the workspace changes.
+    demoWorkspace.addChangeListener(function () {
+        displayCodeInBrowser();
+    });
     window.addEventListener('resize', onresize, false);
     onresize();
     Blockly.svgResize(demoWorkspace);
 </script>
 
 <script>
-    function showCode() {
-        // Generate python  code and display it/Save It.
-        //This helps Blockly avoid getting hung up
-        Blockly.Python.INFINITE_LOOP_TRAP = null;
-        //This converts the workspace into Code using the Code generation snippet in test_block
-        let preamble = "from mine import *\n\n" +
-            "mc = Minecraft()\n" +
-            "\n";
-
-        var code = preamble + Blockly.Python.workspaceToCode(demoWorkspace);
-        //This is all Preparation For Downloading the file
-        var PythonStub = new Blob([code], {type: "text/plain"});
-        var textToSaveAsURL = window.URL.createObjectURL(PythonStub);
-        var downloadLink = document.createElement("a");
-        downloadLink.download = 'Python_stub.py';
-        downloadLink.innerHTML = "Download File";
-        downloadLink.href = textToSaveAsURL;
-        downloadLink.onclick = destroyClickedElement;
-        downloadLink.style.display = "none";
-        document.body.appendChild(downloadLink);
-        //Clicks on the created element to Prompt for download.
-        downloadLink.click();
-
-        //Helpful for Debugging
-        //alert(code);
-    }
 
     function destroyClickedElement(event) {
         document.body.removeChild(event.target);
@@ -537,7 +518,6 @@
     function save() {
         var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
         var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
-
         localStorage.setItem("blockly.xml", xmlText);
     }
 
@@ -550,14 +530,63 @@
         }
     }
 
-
+    /**
+     * Places generated python code in specified textarea of web browser.
+     */
     function displayCodeInBrowser() {
+        // Prevents Blockly from getting hung in an infinite loop
         Blockly.Python.INFINITE_LOOP_TRAP = null;
         let codeArea = document.getElementById("codeArea");
         let preamble = "from mine import *\n\n" +
             "mc = Minecraft()\n" +
             "\n";
         codeArea.value = preamble + Blockly.Python.workspaceToCode(demoWorkspace);
+    }
+
+
+    function importBlocks() {
+        let selectedFile = document.getElementById('file-input').files[0];
+        let fileReader = new FileReader();
+        fileReader.readAsText(selectedFile);
+        fileReader.onload = function() {
+            let data = fileReader.result;
+            Blockly.mainWorkspace.clear();
+            let xmlDom = Blockly.Xml.textToDom(data);
+            Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xmlDom);
+        };
+    }
+
+
+    /**
+     * exportBlocks: Uses the fetch api to send all Blockly XML by POST to server.
+     */
+    function exportBlocks() {
+        let xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+        let xmlText = Blockly.Xml.domToPrettyText(xmlDom);
+        var xmlBlob = new Blob([xmlText], {type: "text/plain"});
+        var textToSaveAsURL = window.URL.createObjectURL(xmlBlob);
+        var downloadLink = document.createElement("a");
+        downloadLink.download = 'export.xml';
+        downloadLink.innerHTML = "Download File";
+        downloadLink.href = textToSaveAsURL;
+        downloadLink.onclick = destroyClickedElement;
+        downloadLink.style.display = "none";
+        document.body.appendChild(downloadLink);
+        //Clicks on the created element to Prompt for download.
+        downloadLink.click();
+    }
+
+    function copyCode() {
+        let codeForm = new FormData();
+        let preamble = "from mine import *\n\n" +
+            "mc = Minecraft()\n" +
+            "\n";
+        let xhttp = new XMLHttpRequest();
+        Blockly.Python.INFINITE_LOOP_TRAP = null;
+        let code = preamble + Blockly.Python.workspaceToCode(demoWorkspace);
+        codeForm.append("codeArea", code);
+        xhttp.open("POST", "/copy_text", true);
+        xhttp.send(codeForm);
     }
 </script>
 </body>
