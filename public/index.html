@@ -6,7 +6,7 @@
     <title>PyCrafty</title>
     <link rel="stylesheet" href="stylesheets/style.css">
 
-    <!--  -->
+    <!-- Blockly source code. WARNING: These three files must be above the other files -->
     <script src="javascripts/blockly_compressed.js"></script>
     <script src="javascripts/python_compressed.js"></script>
     <script src="msg/js/en.js"></script>
@@ -28,6 +28,8 @@
     <script src="javascripts/google_blocks/text.js"></script>
     <script src="javascripts/google_blocks/variables.js"></script>
     <script src="javascripts/google_blocks/variables_dynamic.js"></script>
+
+
 </head>
 
 <body>
@@ -42,10 +44,9 @@
     <tr id="buttons">
         <td>
             <p>
-                <button onclick="showCode()">Show Python Stub</button>
+                <button onclick="displayCodeInBrowser()">View Code</button>
                 <button onclick="save()">Save</button>
                 <button onclick="restore()">Restore</button>
-                <button onclick="displayCodeInBrowser()">View code in browser</button>
             </p>
         </td>
     </tr>
