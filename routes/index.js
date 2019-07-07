@@ -15,19 +15,6 @@ router.get('/', function(req, res, next) {
 });
 
 
-router.post('/importAction', function (req, res, next) {
-  let file = "C:\\Users\\absna\\WebstormProjects\\express_test\\test.xml";
-
-  res.sendFile(file, {}, function (err) {
-    if (err) {
-      next(err);
-    } else {
-      console.log("Sent file: test.xml");
-    }
-  });
-});
-
-
 router.post('/exportAction', function (req, res) {
   let file_path = "test.xml";
   fs.writeFile(file_path, req.body.xmlBlockData, function (err) {

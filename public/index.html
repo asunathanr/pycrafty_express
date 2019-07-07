@@ -46,9 +46,11 @@
             <p>
                 <button onclick="save()">Save</button>
                 <button onclick="restore()">Restore</button>
-                <button id="importButton" onclick="importBlocks()" name="/importAction">Import</button>
+                <!-- https://stackoverflow.com/questions/16215771/how-open-select-file-dialog-via-js -->
+                <button id="importButton" onclick="document.getElementById('file-input').click()">Import</button>
+                <input id="file-input" type="file" name="name" onchange="importBlocks()" style="display: none;" />
                 <button id="exportButton" onclick="exportBlocks()" name="/exportAction">Export</button>
-                <button onclick="copyCode()" >Copy</button>
+                <button onclick="copyCode()">Copy</button>
             </p>
         </td>
     </tr>
@@ -514,7 +516,6 @@
     function save() {
         var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
         var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
-
         localStorage.setItem("blockly.xml", xmlText);
     }
 
@@ -541,19 +542,17 @@
     }
 
 
-    // Adapted from: https://teamtreehouse.com/community/can-i-do-more-than-redirecting-with-nodejs-and-express
     function importBlocks() {
-        let xhttp = new XMLHttpRequest();
-        xhttp.open("POST", "/importAction", true);
-        xhttp.send();
-        xhttp.onreadystatechange = function() {
-            let xmlDom = "";
-            if (this.readyState === 4 && this.status === 200) {
-                Blockly.mainWorkspace.clear();
-                xmlDom = Blockly.Xml.textToDom(this.responseText);
-                Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xmlDom);
-            }
+        let selectedFile = document.getElementById('file-input').files[0];
+        let fileReader = new FileReader();
+        fileReader.readAsText(selectedFile);
+        fileReader.onload = function() {
+            let data = fileReader.result;
+            Blockly.mainWorkspace.clear();
+            let xmlDom = Blockly.Xml.textToDom(data);
+            Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xmlDom);
         };
+
     }
 
 
