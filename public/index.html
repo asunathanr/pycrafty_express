@@ -2,486 +2,488 @@
 <!-- Authors: Justin Erickson, Richie Burch, Matt Hardin, Nathan Robertson -->
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>PiCrafty</title>
+    <meta charset="utf-8">
+    <title>PyCrafty</title>
 
-  <script src="blockly_compressed.js"></script>
-  <script src="python_compressed.js"></script>
-  <script src="msg/js/en.js"></script>
+    <script src="javascripts/blockly_compressed.js"></script>
+    <script src="javascripts/python_compressed.js"></script>
+    <script src="msg/js/en.js"></script>
 
-  <!-- Minecraft block methods -->
-  <script src="minecraft_blocks/minecraft.js"></script>
-  <script src="minecraft_blocks/player.js"></script>
-  <script src="minecraft_blocks/vectorAttributes.js"></script>
-  <script src="minecraft_blocks/setVecAttrTo.js"></script>
-  <script src="minecraft_blocks/entity.js"></script>
-  <script src="minecraft_blocks/mcBlock.js"></script>
+    <!-- Minecraft block methods -->
+    <script src="javascripts/minecraft_blocks/minecraft.js"></script>
+    <script src="javascripts/minecraft_blocks/player.js"></script>
+    <script src="javascripts/minecraft_blocks/vectorAttributes.js"></script>
+    <script src="javascripts/minecraft_blocks/setVecAttrTo.js"></script>
+    <script src="javascripts/minecraft_blocks/entity.js"></script>
+    <script src="javascripts/minecraft_blocks/mcBlock.js"></script>
 
-  <!-- Google implemented blocks -->
-  <script src="google_blocks/lists.js"></script>
-  <script src="google_blocks/logic.js"></script>
-  <script src="google_blocks/loops.js"></script>
-  <script src="google_blocks/math.js"></script>
-  <script src="google_blocks/procedures.js"></script>
-  <script src="google_blocks/text.js"></script>
-  <script src="google_blocks/variables.js"></script>
-  <script src="google_blocks/variables_dynamic.js"></script>
+    <!-- Google implemented blocks -->
+    <script src="javascripts/google_blocks/lists.js"></script>
+    <script src="javascripts/google_blocks/logic.js"></script>
+    <script src="javascripts/google_blocks/loops.js"></script>
+    <script src="javascripts/google_blocks/math.js"></script>
+    <script src="javascripts/google_blocks/procedures.js"></script>
+    <script src="javascripts/google_blocks/text.js"></script>
+    <script src="javascripts/google_blocks/variables.js"></script>
+    <script src="javascripts/google_blocks/variables_dynamic.js"></script>
 
 
-  <style>
-    html, body {
-      height: 100%;
-      margin: 0;
-    }
-    body {
-      background-color: slategray;
-      font-family: sans-serif;
-    }
-    h1 {
-      font-weight: normal;
-      font-size: 140%;
-    }
-    table {
-      height: 100%;
-      width: 100%;
-    }
-    #blocklyArea {
-      height: 80%;
-    }
-    textarea {
-      background-color: white;
-      height: 50%;
-      width: 100%;
-      resize:none
-    }
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
 
-  </style>
+        body {
+            background-color: slategray;
+            font-family: sans-serif;
+        }
+
+        h1 {
+            font-weight: normal;
+            font-size: 140%;
+        }
+
+        table {
+            height: 100%;
+            width: 100%;
+        }
+
+        #blocklyArea {
+            height: 80%;
+        }
+
+        textarea {
+            background-color: white;
+            height: 50%;
+            width: 100%;
+            resize: none
+        }
+
+    </style>
 </head>
 
 <body>
-  <!-- table to divide up sections for blockly, buttons, and code in browser -->
-  <table>
+<!-- table to divide up sections for blockly, buttons, and code in browser -->
+<table>
     <tr>
-      <td id="blocklyArea">
-        <!-- This is the Div Blockly will render in. size can be adjusted here -->
-        <div id="blocklyDiv" style="position: absolute;"></div>
-      </td>
+        <td id="blocklyArea">
+            <!-- This is the Div Blockly will render in. size can be adjusted here -->
+            <div id="blocklyDiv" style="position: absolute;"></div>
+        </td>
     </tr>
     <tr id="buttons">
-      <td>
-        <p>
-          <button onclick="showCode()">Show Python Stub</button>
-          <button onclick="save()">Save</button>
-          <button onclick="restore()">Restore</button>
-          <button onclick="displayCodeInBrowser()">View code in browser</button>
-        </p>
-      </td>
+        <td>
+            <p>
+                <button onclick="showCode()">Show Python Stub</button>
+                <button onclick="save()">Save</button>
+                <button onclick="restore()">Restore</button>
+                <button onclick="displayCodeInBrowser()">View code in browser</button>
+            </p>
+        </td>
     </tr>
     <tr>
-      <td id="codeAreaRow">
+        <td id="codeAreaRow">
 
 
-
-      </td>
+        </td>
     </tr>
-  </table>
-  <form action="/copy_text" method="POST">
+</table>
+<form action="/copy_text" method="POST">
     <input type="submit" value="Submit">
     <br>
     <textarea id="codeArea" name="codeArea" style="position:absolute; "></textarea>
 
-  </form>
-  
+</form>
 
- 
 
-  <!--This defines the toolbox to be given to Blockly.  -->
-  <!--Additional blocks can be added and categorized.   -->
-  <xml xmlns="http://www.w3.org/1999/xhtml" id="toolbox" style="display: none;">
+<!--This defines the toolbox to be given to Blockly.  -->
+<!--Additional blocks can be added and categorized.   -->
+<xml xmlns="http://www.w3.org/1999/xhtml" id="toolbox" style="display: none;">
     <category name="Logic" colour="#5C81A6">
-      <block type="controls_if"></block>
-      <block type="logic_compare">
-        <field name="OP">EQ</field>
-      </block>
-      <block type="logic_operation">
-        <field name="OP">AND</field>
-      </block>
-      <block type="logic_negate"></block>
-      <block type="logic_boolean">
-        <field name="BOOL">TRUE</field>
-      </block>
-      <block type="logic_null"></block>
-      <block type="logic_ternary"></block>
+        <block type="controls_if"></block>
+        <block type="logic_compare">
+            <field name="OP">EQ</field>
+        </block>
+        <block type="logic_operation">
+            <field name="OP">AND</field>
+        </block>
+        <block type="logic_negate"></block>
+        <block type="logic_boolean">
+            <field name="BOOL">TRUE</field>
+        </block>
+        <block type="logic_null"></block>
+        <block type="logic_ternary"></block>
     </category>
     <category name="Loops" colour="#5CA65C">
-      <block type="controls_repeat_ext">
-        <value name="TIMES">
-          <shadow type="math_number">
-            <field name="NUM">10</field>
-          </shadow>
-        </value>
-      </block>
-      <block type="controls_whileUntil">
-        <field name="MODE">WHILE</field>
-      </block>
-      <block type="controls_for">
-        <field name="VAR" id="NbNqu]bPFzbkqhM0k@Cg" variabletype="">i</field>
-        <value name="FROM">
-          <shadow type="math_number">
-            <field name="NUM">1</field>
-          </shadow>
-        </value>
-        <value name="TO">
-          <shadow type="math_number">
-            <field name="NUM">10</field>
-          </shadow>
-        </value>
-        <value name="BY">
-          <shadow type="math_number">
-            <field name="NUM">1</field>
-          </shadow>
-        </value>
-      </block>
-      <block type="controls_forEach">
-        <field name="VAR" id="hTX8fmq-z%ewzgmBxZ81" variabletype="">j</field>
-      </block>
-      <block type="controls_flow_statements">
-        <field name="FLOW">BREAK</field>
-      </block>
+        <block type="controls_repeat_ext">
+            <value name="TIMES">
+                <shadow type="math_number">
+                    <field name="NUM">10</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="controls_whileUntil">
+            <field name="MODE">WHILE</field>
+        </block>
+        <block type="controls_for">
+            <field name="VAR" id="NbNqu]bPFzbkqhM0k@Cg" variabletype="">i</field>
+            <value name="FROM">
+                <shadow type="math_number">
+                    <field name="NUM">1</field>
+                </shadow>
+            </value>
+            <value name="TO">
+                <shadow type="math_number">
+                    <field name="NUM">10</field>
+                </shadow>
+            </value>
+            <value name="BY">
+                <shadow type="math_number">
+                    <field name="NUM">1</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="controls_forEach">
+            <field name="VAR" id="hTX8fmq-z%ewzgmBxZ81" variabletype="">j</field>
+        </block>
+        <block type="controls_flow_statements">
+            <field name="FLOW">BREAK</field>
+        </block>
     </category>
     <category name="Math" colour="#5C68A6">
-      <block type="math_number">
-        <field name="NUM">0</field>
-      </block>
-      <block type="math_arithmetic">
-        <field name="OP">ADD</field>
-        <value name="A">
-          <shadow type="math_number">
-            <field name="NUM">1</field>
-          </shadow>
-        </value>
-        <value name="B">
-          <shadow type="math_number">
-            <field name="NUM">1</field>
-          </shadow>
-        </value>
-      </block>
-      <block type="math_single">
-        <field name="OP">ROOT</field>
-        <value name="NUM">
-          <shadow type="math_number">
-            <field name="NUM">9</field>
-          </shadow>
-        </value>
-      </block>
-      <block type="math_trig">
-        <field name="OP">SIN</field>
-        <value name="NUM">
-          <shadow type="math_number">
-            <field name="NUM">45</field>
-          </shadow>
-        </value>
-      </block>
-      <block type="math_constant">
-        <field name="CONSTANT">PI</field>
-      </block>
-      <block type="math_number_property">
-        <mutation divisor_input="false"></mutation>
-        <field name="PROPERTY">EVEN</field>
-        <value name="NUMBER_TO_CHECK">
-          <shadow type="math_number">
+        <block type="math_number">
             <field name="NUM">0</field>
-          </shadow>
-        </value>
-      </block>
-      <block type="math_round">
-        <field name="OP">ROUND</field>
-        <value name="NUM">
-          <shadow type="math_number">
-            <field name="NUM">3.1</field>
-          </shadow>
-        </value>
-      </block>
-      <block type="math_on_list">
-        <mutation op="SUM"></mutation>
-        <field name="OP">SUM</field>
-      </block>
-      <block type="math_modulo">
-        <value name="DIVIDEND">
-          <shadow type="math_number">
-            <field name="NUM">64</field>
-          </shadow>
-        </value>
-        <value name="DIVISOR">
-          <shadow type="math_number">
-            <field name="NUM">10</field>
-          </shadow>
-        </value>
-      </block>
-      <block type="math_constrain">
-        <value name="VALUE">
-          <shadow type="math_number">
-            <field name="NUM">50</field>
-          </shadow>
-        </value>
-        <value name="LOW">
-          <shadow type="math_number">
-            <field name="NUM">1</field>
-          </shadow>
-        </value>
-        <value name="HIGH">
-          <shadow type="math_number">
-            <field name="NUM">100</field>
-          </shadow>
-        </value>
-      </block>
-      <block type="math_random_int">
-        <value name="FROM">
-          <shadow type="math_number">
-            <field name="NUM">1</field>
-          </shadow>
-        </value>
-        <value name="TO">
-          <shadow type="math_number">
-            <field name="NUM">100</field>
-          </shadow>
-        </value>
-      </block>
-      <block type="math_random_float"></block>
+        </block>
+        <block type="math_arithmetic">
+            <field name="OP">ADD</field>
+            <value name="A">
+                <shadow type="math_number">
+                    <field name="NUM">1</field>
+                </shadow>
+            </value>
+            <value name="B">
+                <shadow type="math_number">
+                    <field name="NUM">1</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="math_single">
+            <field name="OP">ROOT</field>
+            <value name="NUM">
+                <shadow type="math_number">
+                    <field name="NUM">9</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="math_trig">
+            <field name="OP">SIN</field>
+            <value name="NUM">
+                <shadow type="math_number">
+                    <field name="NUM">45</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="math_constant">
+            <field name="CONSTANT">PI</field>
+        </block>
+        <block type="math_number_property">
+            <mutation divisor_input="false"></mutation>
+            <field name="PROPERTY">EVEN</field>
+            <value name="NUMBER_TO_CHECK">
+                <shadow type="math_number">
+                    <field name="NUM">0</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="math_round">
+            <field name="OP">ROUND</field>
+            <value name="NUM">
+                <shadow type="math_number">
+                    <field name="NUM">3.1</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="math_on_list">
+            <mutation op="SUM"></mutation>
+            <field name="OP">SUM</field>
+        </block>
+        <block type="math_modulo">
+            <value name="DIVIDEND">
+                <shadow type="math_number">
+                    <field name="NUM">64</field>
+                </shadow>
+            </value>
+            <value name="DIVISOR">
+                <shadow type="math_number">
+                    <field name="NUM">10</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="math_constrain">
+            <value name="VALUE">
+                <shadow type="math_number">
+                    <field name="NUM">50</field>
+                </shadow>
+            </value>
+            <value name="LOW">
+                <shadow type="math_number">
+                    <field name="NUM">1</field>
+                </shadow>
+            </value>
+            <value name="HIGH">
+                <shadow type="math_number">
+                    <field name="NUM">100</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="math_random_int">
+            <value name="FROM">
+                <shadow type="math_number">
+                    <field name="NUM">1</field>
+                </shadow>
+            </value>
+            <value name="TO">
+                <shadow type="math_number">
+                    <field name="NUM">100</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="math_random_float"></block>
     </category>
     <category name="Text" colour="#5CA68D">
-      <block type="text">
-        <field name="TEXT"></field>
-      </block>
-      <block type="text_join">
-        <mutation items="2"></mutation>
-      </block>
-      <block type="text_append">
-        <field name="VAR" id="Wf#^#xGU]L)e!QK{d],h" variabletype="">item</field>
-        <value name="TEXT">
-          <shadow type="text">
+        <block type="text">
             <field name="TEXT"></field>
-          </shadow>
-        </value>
-      </block>
-      <block type="text_length">
-        <value name="VALUE">
-          <shadow type="text">
-            <field name="TEXT">abc</field>
-          </shadow>
-        </value>
-      </block>
-      <block type="text_isEmpty">
-        <value name="VALUE">
-          <shadow type="text">
-            <field name="TEXT"></field>
-          </shadow>
-        </value>
-      </block>
-      <block type="text_indexOf">
-        <field name="END">FIRST</field>
-        <value name="VALUE">
-          <block type="variables_get">
-            <field name="VAR" id="iKD!ueZ.y:.]R[B]P;X8" variabletype="">text</field>
-          </block>
-        </value>
-        <value name="FIND">
-          <shadow type="text">
-            <field name="TEXT">abc</field>
-          </shadow>
-        </value>
-      </block>
-      <block type="text_charAt">
-        <mutation at="true"></mutation>
-        <field name="WHERE">FROM_START</field>
-        <value name="VALUE">
-          <block type="variables_get">
-            <field name="VAR" id="iKD!ueZ.y:.]R[B]P;X8" variabletype="">text</field>
-          </block>
-        </value>
-      </block>
-      <block type="text_getSubstring">
-        <mutation at1="true" at2="true"></mutation>
-        <field name="WHERE1">FROM_START</field>
-        <field name="WHERE2">FROM_START</field>
-        <value name="STRING">
-          <block type="variables_get">
-            <field name="VAR" id="iKD!ueZ.y:.]R[B]P;X8" variabletype="">text</field>
-          </block>
-        </value>
-      </block>
-      <block type="text_changeCase">
-        <field name="CASE">UPPERCASE</field>
-        <value name="TEXT">
-          <shadow type="text">
-            <field name="TEXT">abc</field>
-          </shadow>
-        </value>
-      </block>
-      <block type="text_trim">
-        <field name="MODE">BOTH</field>
-        <value name="TEXT">
-          <shadow type="text">
-            <field name="TEXT">abc</field>
-          </shadow>
-        </value>
-      </block>
-      <block type="text_print">
-        <value name="TEXT">
-          <shadow type="text">
-            <field name="TEXT">abc</field>
-          </shadow>
-        </value>
-      </block>
-      <block type="text_prompt_ext">
-        <mutation type="TEXT"></mutation>
-        <field name="TYPE">TEXT</field>
-        <value name="TEXT">
-          <shadow type="text">
-            <field name="TEXT">abc</field>
-          </shadow>
-        </value>
-      </block>
+        </block>
+        <block type="text_join">
+            <mutation items="2"></mutation>
+        </block>
+        <block type="text_append">
+            <field name="VAR" id="Wf#^#xGU]L)e!QK{d],h" variabletype="">item</field>
+            <value name="TEXT">
+                <shadow type="text">
+                    <field name="TEXT"></field>
+                </shadow>
+            </value>
+        </block>
+        <block type="text_length">
+            <value name="VALUE">
+                <shadow type="text">
+                    <field name="TEXT">abc</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="text_isEmpty">
+            <value name="VALUE">
+                <shadow type="text">
+                    <field name="TEXT"></field>
+                </shadow>
+            </value>
+        </block>
+        <block type="text_indexOf">
+            <field name="END">FIRST</field>
+            <value name="VALUE">
+                <block type="variables_get">
+                    <field name="VAR" id="iKD!ueZ.y:.]R[B]P;X8" variabletype="">text</field>
+                </block>
+            </value>
+            <value name="FIND">
+                <shadow type="text">
+                    <field name="TEXT">abc</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="text_charAt">
+            <mutation at="true"></mutation>
+            <field name="WHERE">FROM_START</field>
+            <value name="VALUE">
+                <block type="variables_get">
+                    <field name="VAR" id="iKD!ueZ.y:.]R[B]P;X8" variabletype="">text</field>
+                </block>
+            </value>
+        </block>
+        <block type="text_getSubstring">
+            <mutation at1="true" at2="true"></mutation>
+            <field name="WHERE1">FROM_START</field>
+            <field name="WHERE2">FROM_START</field>
+            <value name="STRING">
+                <block type="variables_get">
+                    <field name="VAR" id="iKD!ueZ.y:.]R[B]P;X8" variabletype="">text</field>
+                </block>
+            </value>
+        </block>
+        <block type="text_changeCase">
+            <field name="CASE">UPPERCASE</field>
+            <value name="TEXT">
+                <shadow type="text">
+                    <field name="TEXT">abc</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="text_trim">
+            <field name="MODE">BOTH</field>
+            <value name="TEXT">
+                <shadow type="text">
+                    <field name="TEXT">abc</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="text_print">
+            <value name="TEXT">
+                <shadow type="text">
+                    <field name="TEXT">abc</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="text_prompt_ext">
+            <mutation type="TEXT"></mutation>
+            <field name="TYPE">TEXT</field>
+            <value name="TEXT">
+                <shadow type="text">
+                    <field name="TEXT">abc</field>
+                </shadow>
+            </value>
+        </block>
     </category>
     <category name="Lists" colour="#745CA6">
-      <block type="lists_create_with">
-        <mutation items="0"></mutation>
-      </block>
-      <block type="lists_create_with">
-        <mutation items="3"></mutation>
-      </block>
-      <block type="lists_repeat">
-        <value name="NUM">
-          <shadow type="math_number">
-            <field name="NUM">5</field>
-          </shadow>
-        </value>
-      </block>
-      <block type="lists_length"></block>
-      <block type="lists_isEmpty"></block>
-      <block type="lists_indexOf">
-        <field name="END">FIRST</field>
-        <value name="VALUE">
-          <block type="variables_get">
-            <field name="VAR" id="iSY:!i3xuq3afcHn#R,%" variabletype="">list</field>
-          </block>
-        </value>
-      </block>
-      <block type="lists_getIndex">
-        <mutation statement="false" at="true"></mutation>
-        <field name="MODE">GET</field>
-        <field name="WHERE">FROM_START</field>
-        <value name="VALUE">
-          <block type="variables_get">
-            <field name="VAR" id="iSY:!i3xuq3afcHn#R,%" variabletype="">list</field>
-          </block>
-        </value>
-      </block>
-      <block type="lists_setIndex">
-        <mutation at="true"></mutation>
-        <field name="MODE">SET</field>
-        <field name="WHERE">FROM_START</field>
-        <value name="LIST">
-          <block type="variables_get">
-            <field name="VAR" id="iSY:!i3xuq3afcHn#R,%" variabletype="">list</field>
-          </block>
-        </value>
-      </block>
-      <block type="lists_getSublist">
-        <mutation at1="true" at2="true"></mutation>
-        <field name="WHERE1">FROM_START</field>
-        <field name="WHERE2">FROM_START</field>
-        <value name="LIST">
-          <block type="variables_get">
-            <field name="VAR" id="iSY:!i3xuq3afcHn#R,%" variabletype="">list</field>
-          </block>
-        </value>
-      </block>
-      <block type="lists_split">
-        <mutation mode="SPLIT"></mutation>
-        <field name="MODE">SPLIT</field>
-        <value name="DELIM">
-          <shadow type="text">
-            <field name="TEXT">,</field>
-          </shadow>
-        </value>
-      </block>
-      <block type="lists_sort">
-        <field name="TYPE">NUMERIC</field>
-        <field name="DIRECTION">1</field>
-      </block>
+        <block type="lists_create_with">
+            <mutation items="0"></mutation>
+        </block>
+        <block type="lists_create_with">
+            <mutation items="3"></mutation>
+        </block>
+        <block type="lists_repeat">
+            <value name="NUM">
+                <shadow type="math_number">
+                    <field name="NUM">5</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="lists_length"></block>
+        <block type="lists_isEmpty"></block>
+        <block type="lists_indexOf">
+            <field name="END">FIRST</field>
+            <value name="VALUE">
+                <block type="variables_get">
+                    <field name="VAR" id="iSY:!i3xuq3afcHn#R,%" variabletype="">list</field>
+                </block>
+            </value>
+        </block>
+        <block type="lists_getIndex">
+            <mutation statement="false" at="true"></mutation>
+            <field name="MODE">GET</field>
+            <field name="WHERE">FROM_START</field>
+            <value name="VALUE">
+                <block type="variables_get">
+                    <field name="VAR" id="iSY:!i3xuq3afcHn#R,%" variabletype="">list</field>
+                </block>
+            </value>
+        </block>
+        <block type="lists_setIndex">
+            <mutation at="true"></mutation>
+            <field name="MODE">SET</field>
+            <field name="WHERE">FROM_START</field>
+            <value name="LIST">
+                <block type="variables_get">
+                    <field name="VAR" id="iSY:!i3xuq3afcHn#R,%" variabletype="">list</field>
+                </block>
+            </value>
+        </block>
+        <block type="lists_getSublist">
+            <mutation at1="true" at2="true"></mutation>
+            <field name="WHERE1">FROM_START</field>
+            <field name="WHERE2">FROM_START</field>
+            <value name="LIST">
+                <block type="variables_get">
+                    <field name="VAR" id="iSY:!i3xuq3afcHn#R,%" variabletype="">list</field>
+                </block>
+            </value>
+        </block>
+        <block type="lists_split">
+            <mutation mode="SPLIT"></mutation>
+            <field name="MODE">SPLIT</field>
+            <value name="DELIM">
+                <shadow type="text">
+                    <field name="TEXT">,</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="lists_sort">
+            <field name="TYPE">NUMERIC</field>
+            <field name="DIRECTION">1</field>
+        </block>
     </category>
     <category name="Minecraft" colour="#a55b6d">
 
-      <block type="getBlock"></block>
+        <block type="getBlock"></block>
 
-      <block type="getBlockWithData"></block>
-      
-      <block type="getHeight"></block>
+        <block type="getBlockWithData"></block>
 
-      <block type="getBlocks"></block>
+        <block type="getHeight"></block>
 
-      <block type="setBlock"></block>
+        <block type="getBlocks"></block>
 
-      <block type="setBlocks"></block>
+        <block type="setBlock"></block>
 
-      <block type="postToChat"></block>
+        <block type="setBlocks"></block>
 
-      <block type="getPlayerEntityIds"></block>
+        <block type="postToChat"></block>
 
-      <block type="getPlayerId"></block>
+        <block type="getPlayerEntityIds"></block>
 
-      <category name="Player" colour="#a55b6d">
+        <block type="getPlayerId"></block>
 
-        <block type="setPos">
+        <category name="Player" colour="#a55b6d">
 
-        </block>
+            <block type="setPos">
 
-        <block type="setTilePos">
+            </block>
 
-        </block>
+            <block type="setTilePos">
 
-
-        <block type="getPos"></block>
-
-        <block type="getTilePos"></block>
-
-        <block type="getPitch"></block>
-
-        <block type="getDirection"></block>
-
-        <block type="getRotation"></block>
-      </category>
+            </block>
 
 
-      <category name="Vectors" colour="#a55b6d">
+            <block type="getPos"></block>
 
-        <block type="set_vector_attribute_to"></block>
-        <block type="vector_x_attribute"></block>
-        <block type="vector_y_attribute"></block>
-        <block type="vector_z_attribute"></block>
-        
-      </category>
-      
-      <category name="Entity" colour = "#a55b6d">
+            <block type="getTilePos"></block>
 
-        <block type="entity_getPos">
-            <field name="ENTITY_ID"></field>
-        </block>
+            <block type="getPitch"></block>
 
-        <block type="entity_setPos"></block>
-        <block type="entity_getTilePos"></block>
-        <block type="entity_setTilePos"></block>
-        <block type="entity_getRotation"></block>
-        <block type="entity_getPitch"></block>
-        <block type="entity_getDirection"></block>
-      </category>
+            <block type="getDirection"></block>
 
-      <category name="Minecraft Block" colour="#A65C81">
-        <block type="mcblock_setBlock"></block>
-        <block type="mcblock_setType"></block>
-        <block type="mcblock_setData"></block>
-      </category>
+            <block type="getRotation"></block>
+        </category>
+
+
+        <category name="Vectors" colour="#a55b6d">
+
+            <block type="set_vector_attribute_to"></block>
+            <block type="vector_x_attribute"></block>
+            <block type="vector_y_attribute"></block>
+            <block type="vector_z_attribute"></block>
+
+        </category>
+
+        <category name="Entity" colour="#a55b6d">
+
+            <block type="entity_getPos">
+                <field name="ENTITY_ID"></field>
+            </block>
+
+            <block type="entity_setPos"></block>
+            <block type="entity_getTilePos"></block>
+            <block type="entity_setTilePos"></block>
+            <block type="entity_getRotation"></block>
+            <block type="entity_getPitch"></block>
+            <block type="entity_getDirection"></block>
+        </category>
+
+        <category name="Minecraft Block" colour="#A65C81">
+            <block type="mcblock_setBlock"></block>
+            <block type="mcblock_setType"></block>
+            <block type="mcblock_setData"></block>
+        </category>
 
     </category> <!-- End of Minecraft Category -->
 
@@ -490,97 +492,98 @@
 
 
     <category name="Functions" colour="#A65C81">
-      <block type="procedures_defreturn">
-        <field name="NAME" colour="#A65C81"></field>
-      </block>
+        <block type="procedures_defreturn">
+            <field name="NAME" colour="#A65C81"></field>
+        </block>
 
-      <block type="procedures_defnoreturn" colour="#A65C81"></block>
+        <block type="procedures_defnoreturn" colour="#A65C81"></block>
 
-      <block type="procedures_ifreturn" colour="#A65C81"></block>
+        <block type="procedures_ifreturn" colour="#A65C81"></block>
     </category>
-  </xml>
+</xml>
 
-  <script>
+<script>
     var blocklyArea = document.getElementById('blocklyArea');
     var blocklyDiv = document.getElementById('blocklyDiv');
     var demoWorkspace = Blockly.inject(blocklyDiv,
-        {media: 'media' + "\\",
-         toolbox: document.getElementById('toolbox')});
-    var onresize = function(e) {
-      // Compute the absolute coordinates and dimensions of blocklyArea.
-      var element = blocklyArea;
-      var x = 0;
-      var y = 0;
-      do {
-        x += element.offsetLeft;
-        y += element.offsetTop;
-        element = element.offsetParent;
-      } while (element);
-      // Position blocklyDiv over blocklyArea.
-      blocklyDiv.style.left = x + 'px';
-      blocklyDiv.style.top = y + 'px';
-      blocklyDiv.style.width = blocklyArea.offsetWidth + 'px';
-      blocklyDiv.style.height = blocklyArea.offsetHeight + 'px';
-      Blockly.svgResize(demoWorkspace);
+        {
+            media: 'media' + "\\",
+            toolbox: document.getElementById('toolbox')
+        });
+    var onresize = function (e) {
+        // Compute the absolute coordinates and dimensions of blocklyArea.
+        var element = blocklyArea;
+        var x = 0;
+        var y = 0;
+        do {
+            x += element.offsetLeft;
+            y += element.offsetTop;
+            element = element.offsetParent;
+        } while (element);
+        // Position blocklyDiv over blocklyArea.
+        blocklyDiv.style.left = x + 'px';
+        blocklyDiv.style.top = y + 'px';
+        blocklyDiv.style.width = blocklyArea.offsetWidth + 'px';
+        blocklyDiv.style.height = blocklyArea.offsetHeight + 'px';
+        Blockly.svgResize(demoWorkspace);
     };
     window.addEventListener('resize', onresize, false);
     onresize();
     Blockly.svgResize(demoWorkspace);
-  </script>
+</script>
 
 <script>
-	function showCode() {
-	// Generate python  code and display it/Save It.
-	//This helps Blockly avoid getting hung up
-	Blockly.Python.INFINITE_LOOP_TRAP = null;
-	//This converts the workspace into Code using the Code generation snippet in test_block
-    let preamble = "from mine import *\n\n" +
-        "mc = Minecraft()\n" +
-        "\n";
+    function showCode() {
+        // Generate python  code and display it/Save It.
+        //This helps Blockly avoid getting hung up
+        Blockly.Python.INFINITE_LOOP_TRAP = null;
+        //This converts the workspace into Code using the Code generation snippet in test_block
+        let preamble = "from mine import *\n\n" +
+            "mc = Minecraft()\n" +
+            "\n";
 
-  var code = preamble + Blockly.Python.workspaceToCode(demoWorkspace);
-  //This is all Preparation For Downloading the file
-	var PythonStub = new Blob([code], {type:"text/plain"});
-	var textToSaveAsURL = window.URL.createObjectURL(PythonStub);
-	var downloadLink = document.createElement("a");
-		downloadLink.download = 'Python_stub.py';
-		downloadLink.innerHTML = "Download File";
-		downloadLink.href = textToSaveAsURL;
-		downloadLink.onclick = destroyClickedElement;
-		downloadLink.style.display = "none";
-		document.body.appendChild(downloadLink);
-	//Clicks on the created element to Prompt for download.
-		downloadLink.click();
+        var code = preamble + Blockly.Python.workspaceToCode(demoWorkspace);
+        //This is all Preparation For Downloading the file
+        var PythonStub = new Blob([code], {type: "text/plain"});
+        var textToSaveAsURL = window.URL.createObjectURL(PythonStub);
+        var downloadLink = document.createElement("a");
+        downloadLink.download = 'Python_stub.py';
+        downloadLink.innerHTML = "Download File";
+        downloadLink.href = textToSaveAsURL;
+        downloadLink.onclick = destroyClickedElement;
+        downloadLink.style.display = "none";
+        document.body.appendChild(downloadLink);
+        //Clicks on the created element to Prompt for download.
+        downloadLink.click();
 
-		//Helpful for Debugging
-		//alert(code);
-  }
-  
-	function destroyClickedElement(event)
-	{
-		document.body.removeChild(event.target);
-  }
-  
-  // https://groups.google.com/forum/#!topic/blockly/NDlC-l6DLEM
-  // TODO: Clean up and finalize save and restore
-  function save() {
-    var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
-    var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
-    
-    localStorage.setItem("blockly.xml", xmlText);
-  }
-  function restore() {
-    var xmlText = localStorage.getItem("blockly.xml");
-    if (xmlText) {
-        Blockly.mainWorkspace.clear();
-        xmlDom = Blockly.Xml.textToDom(xmlText);
-        Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xmlDom);
+        //Helpful for Debugging
+        //alert(code);
     }
-  }
+
+    function destroyClickedElement(event) {
+        document.body.removeChild(event.target);
+    }
+
+    // https://groups.google.com/forum/#!topic/blockly/NDlC-l6DLEM
+    // TODO: Clean up and finalize save and restore
+    function save() {
+        var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+        var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
+
+        localStorage.setItem("blockly.xml", xmlText);
+    }
+
+    function restore() {
+        var xmlText = localStorage.getItem("blockly.xml");
+        if (xmlText) {
+            Blockly.mainWorkspace.clear();
+            xmlDom = Blockly.Xml.textToDom(xmlText);
+            Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xmlDom);
+        }
+    }
 
 
-	function displayCodeInBrowser()
-    {
+    function displayCodeInBrowser() {
         Blockly.Python.INFINITE_LOOP_TRAP = null;
         let codeArea = document.getElementById("codeArea");
         let preamble = "from mine import *\n\n" +
@@ -588,6 +591,6 @@
             "\n";
         codeArea.value = preamble + Blockly.Python.workspaceToCode(demoWorkspace);
     }
-  </script>
+</script>
 </body>
 </html>

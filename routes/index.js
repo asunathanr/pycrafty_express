@@ -7,11 +7,6 @@ router.get('/', function(req, res, next) {
 });
 
 
-router.get('/test', function (req, res, next) {
-  res.render('index.pug');
-});
-
-
 // Catches copy_text and writes requested text to python file in mcpipy directory.
 router.post('/copy_text', function (req, res) {
   const fs = require('fs');
