@@ -48,7 +48,7 @@
                 <button onclick="restore()">Restore</button>
                 <!-- https://stackoverflow.com/questions/16215771/how-open-select-file-dialog-via-js -->
                 <button id="importButton" onclick="document.getElementById('file-input').click()">Import</button>
-                <input id="file-input" type="file" name="name" onchange="importBlocks()" style="display: none;" />
+                <input id="file-input" type="file" accept="text/xml" name="name" onchange="importBlocks()" style="display: none;" />
                 <button id="exportButton" onclick="exportBlocks()">Export</button>
                 <button onclick="copyCode()">Copy</button>
             </p>
@@ -61,8 +61,8 @@
         </td>
     </tr>
 </table>
-<text id="fileName"></text>
-<br>
+
+
     <textarea id="codeArea" name="codeArea" style="position:absolute; "></textarea>
 
 
@@ -544,6 +544,9 @@
     }
 
 
+    /**
+     * importBlocks: Reads an XML file and loads it into workspace.
+     */
     function importBlocks() {
         let selectedFile = document.getElementById('file-input').files[0];
         let fileReader = new FileReader();
@@ -558,7 +561,7 @@
 
 
     /**
-     * exportBlocks: Uses the fetch api to send all Blockly XML by POST to server.
+     * exportBlocks:
      */
     function exportBlocks() {
         let xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
@@ -576,6 +579,10 @@
         downloadLink.click();
     }
 
+
+    /**
+     * copyCode: Sends request to server to record code in pycrafty directory
+     */
     function copyCode() {
         let codeForm = new FormData();
         let preamble = "from mine import *\n\n" +
