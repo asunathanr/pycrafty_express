@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>PyCrafty</title>
+
     <link rel="stylesheet" href="stylesheets/style.css">
 
     <!-- Blockly source code. WARNING: These three files must be above the other files -->
@@ -44,7 +45,7 @@
     <tr id="buttons">
         <td>
             <p>
-                <button onclick="save()">Save</button>
+                <button onclick="save()" class="btn">Save</button>
                 <button onclick="restore()">Restore</button>
                 <!-- https://stackoverflow.com/questions/16215771/how-open-select-file-dialog-via-js -->
                 <button id="importButton" onclick="document.getElementById('file-input').click()">Import</button>
@@ -63,7 +64,7 @@
 </table>
 
 
-    <textarea id="codeArea" name="codeArea" style="position:absolute; "></textarea>
+<textarea id="codeArea" name="codeArea" style="position:absolute; "></textarea>
 
 
 
@@ -475,13 +476,13 @@
 <script>
     var blocklyArea = document.getElementById('blocklyArea');
     var blocklyDiv = document.getElementById('blocklyDiv');
-    var demoWorkspace = Blockly.inject(blocklyDiv,
+    var mainWorkspace = Blockly.inject(blocklyDiv,
         {
             media: 'media' + "\\",
             toolbox: document.getElementById('toolbox')
         });
     
-    var onresize = function (e) {
+    var onresize = function (event) {
         // Compute the absolute coordinates and dimensions of blocklyArea.
         var element = blocklyArea;
         var x = 0;
@@ -496,15 +497,15 @@
         blocklyDiv.style.top = y + 'px';
         blocklyDiv.style.width = blocklyArea.offsetWidth + 'px';
         blocklyDiv.style.height = blocklyArea.offsetHeight + 'px';
-        Blockly.svgResize(demoWorkspace);
+        Blockly.svgResize(mainWorkspace);
     };
-    // Update textarea when the workspace changes.
-    demoWorkspace.addChangeListener(function () {
+    // Update python code in textarea when the workspace changes.
+    mainWorkspace.addChangeListener(function () {
         displayCodeInBrowser();
     });
     window.addEventListener('resize', onresize, false);
     onresize();
-    Blockly.svgResize(demoWorkspace);
+    Blockly.svgResize(mainWorkspace);
 </script>
 
 <script>
@@ -521,6 +522,9 @@
         localStorage.setItem("blockly.xml", xmlText);
     }
 
+    /**
+     * restore: Restores a saved workspace in browser.
+     */
     function restore() {
         var xmlText = localStorage.getItem("blockly.xml");
         if (xmlText) {
@@ -531,7 +535,7 @@
     }
 
     /**
-     * Places generated python code in specified textarea of web browser.
+     * displayCodeInBrowser: Places generated python code in specified textarea of web browser.
      */
     function displayCodeInBrowser() {
         // Prevents Blockly from getting hung in an infinite loop
@@ -540,7 +544,7 @@
         let preamble = "from mine import *\n\n" +
             "mc = Minecraft()\n" +
             "\n";
-        codeArea.value = preamble + Blockly.Python.workspaceToCode(demoWorkspace);
+        codeArea.value = preamble + Blockly.Python.workspaceToCode(mainWorkspace);
     }
 
 
@@ -550,18 +554,20 @@
     function importBlocks() {
         let selectedFile = document.getElementById('file-input').files[0];
         let fileReader = new FileReader();
-        fileReader.readAsText(selectedFile);
-        fileReader.onload = function() {
-            let data = fileReader.result;
-            Blockly.mainWorkspace.clear();
-            let xmlDom = Blockly.Xml.textToDom(data);
-            Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xmlDom);
-        };
+        if (selectedFile.type === "text/xml") {
+            fileReader.readAsText(selectedFile);
+            fileReader.onload = function() {
+                let data = fileReader.result;
+                Blockly.mainWorkspace.clear();
+                let xmlDom = Blockly.Xml.textToDom(data);
+                Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xmlDom);
+            };
+        }
     }
 
 
     /**
-     * exportBlocks:
+     * exportBlocks: Download current workspace to user's pc as an XML file.
      */
     function exportBlocks() {
         let xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
@@ -590,7 +596,7 @@
             "\n";
         let xhttp = new XMLHttpRequest();
         Blockly.Python.INFINITE_LOOP_TRAP = null;
-        let code = preamble + Blockly.Python.workspaceToCode(demoWorkspace);
+        let code = preamble + Blockly.Python.workspaceToCode(mainWorkspace);
         codeForm.append("codeArea", code);
         xhttp.open("POST", "/copy_text", true);
         xhttp.send(codeForm);
