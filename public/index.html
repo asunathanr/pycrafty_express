@@ -44,7 +44,6 @@
     <tr id="buttons">
         <td>
             <p>
-                <button onclick="displayCodeInBrowser()">View Code</button>
                 <button onclick="save()">Save</button>
                 <button onclick="restore()">Restore</button>
                 <button id="importButton" onclick="importBlocks()" name="/importAction">Import</button>
@@ -477,6 +476,7 @@
             media: 'media' + "\\",
             toolbox: document.getElementById('toolbox')
         });
+    
     var onresize = function (e) {
         // Compute the absolute coordinates and dimensions of blocklyArea.
         var element = blocklyArea;
@@ -494,6 +494,10 @@
         blocklyDiv.style.height = blocklyArea.offsetHeight + 'px';
         Blockly.svgResize(demoWorkspace);
     };
+    // Update textarea when the workspace changes.
+    demoWorkspace.addChangeListener(function () {
+        displayCodeInBrowser();
+    });
     window.addEventListener('resize', onresize, false);
     onresize();
     Blockly.svgResize(demoWorkspace);
