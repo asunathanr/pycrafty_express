@@ -19,7 +19,7 @@ Open up a minecraft chat window and type:
 ```
 \lpy gen_script.py
 ```
-to run a generated blockly script,
+to run a generated blockly script.
 
 # Libraries Used
     * Blockly: https://developers.google.com/blockly/
