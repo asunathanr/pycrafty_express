@@ -47,6 +47,12 @@
                 <button onclick="displayCodeInBrowser()">View Code</button>
                 <button onclick="save()">Save</button>
                 <button onclick="restore()">Restore</button>
+                <form action="/importAction" method="POST">
+                    <button type="submit" id="importButton" onclick="importBlocks()" name="/importAction">Import</button>
+                </form>
+                <form action="/exportAction" method="POST">
+                    <button type="submit" id="exportButton" onclick="exportBlocks()" name="/exportAction">Export</button>
+                </form>
             </p>
         </td>
     </tr>
@@ -531,6 +537,16 @@
             "mc = Minecraft()\n" +
             "\n";
         codeArea.value = preamble + Blockly.Python.workspaceToCode(demoWorkspace);
+    }
+
+    // Submit a form using javascript:
+    // https://stackoverflow.com/questions/9855656/how-to-submit-a-form-using-javascript
+    function importBlocks() {
+        document.getElementById("importButton").submit();
+    }
+
+    function exportBlocks() {
+        document.getElementById("exportButton").submit();
     }
 </script>
 </body>

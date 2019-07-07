@@ -7,6 +7,16 @@ router.get('/', function(req, res, next) {
 });
 
 
+router.post('/importAction', function (req, res) {
+  res.send("Import was clicked");
+});
+
+
+router.post('/exportAction', function (req, res) {
+  res.send("Export was clicked");
+});
+
+
 // Catches copy_text and writes requested text to python file in mcpipy directory.
 router.post('/copy_text', function (req, res) {
   const fs = require('fs');
