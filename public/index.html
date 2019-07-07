@@ -49,7 +49,7 @@
                 <button onclick="restore()">Restore</button>
                 <button id="importButton" onclick="importBlocks()" name="/importAction">Import</button>
                 <button id="exportButton" onclick="exportBlocks()" name="/exportAction">Export</button>
-
+                <button onclick="copyCode()" >Copy</button>
             </p>
         </td>
     </tr>
@@ -60,12 +60,8 @@
         </td>
     </tr>
 </table>
-<form action="/copy_text" method="POST">
-    <input type="submit" value="Copy">
-    <br>
     <textarea id="codeArea" name="codeArea" style="position:absolute; "></textarea>
 
-</form>
 
 
 <!--This defines the toolbox to be given to Blockly.  -->
@@ -531,6 +527,7 @@
      * Places generated python code in specified textarea of web browser.
      */
     function displayCodeInBrowser() {
+        // Prevents Blockly from getting hung in an infinite loop
         Blockly.Python.INFINITE_LOOP_TRAP = null;
         let codeArea = document.getElementById("codeArea");
         let preamble = "from mine import *\n\n" +
@@ -538,6 +535,7 @@
             "\n";
         codeArea.value = preamble + Blockly.Python.workspaceToCode(demoWorkspace);
     }
+
 
     // Adapted from: https://teamtreehouse.com/community/can-i-do-more-than-redirecting-with-nodejs-and-express
     function importBlocks() {
@@ -568,6 +566,20 @@
                 'Content-Type': 'application/json'
             }
         });
+    }
+
+    function copyCode() {
+        let codeForm = new FormData();
+        let preamble = "from mine import *\n\n" +
+            "mc = Minecraft()\n" +
+            "\n";
+        let xhttp = new XMLHttpRequest();
+        let code = "";
+        Blockly.Python.INFINITE_LOOP_TRAP = null;
+        code = preamble + Blockly.Python.workspaceToCode(demoWorkspace);
+        codeForm.append("codeArea", code);
+        xhttp.open("POST", "/copy_text", true);
+        xhttp.send(codeForm);
     }
 </script>
 </body>

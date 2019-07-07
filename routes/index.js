@@ -48,7 +48,6 @@ router.post('/copy_text', function (req, res) {
     }
     console.log("wrote file at " + file_path);
   });
-  res.redirect("/");
 });
 
 module.exports = router;
