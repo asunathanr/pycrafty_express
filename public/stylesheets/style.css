@@ -1,8 +1,25 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+html, body {
+  height: 100%;
+  margin: 0;
 }
-
-a {
-  color: #00B7FF;
+body {
+  background-color: slategray;
+  font-family: sans-serif;
+}
+h1 {
+  font-weight: normal;
+  font-size: 140%;
+}
+table {
+  height: 100%;
+  width: 100%;
+}
+#blocklyArea {
+  height: 80%;
+}
+textarea {
+  background-color: white;
+  height: 50%;
+  width: 100%;
+  resize:none
 }
