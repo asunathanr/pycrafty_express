@@ -4,7 +4,7 @@
 
 const fs = require('fs');
 const os = require('os');
-const fileDialog = require('file-dialog');
+// TODO: No longer need fileDialog. Remove from project.
 const express = require('express');
 let router = express.Router();
 
@@ -15,21 +15,8 @@ router.get('/', function(req, res, next) {
 });
 
 
-router.post('/importAction', function (req, res, next) {
-  let file = "C:\\Users\\absna\\WebstormProjects\\express_test\\test.xml";
-
-  res.sendFile(file, {}, function (err) {
-    if (err) {
-      next(err);
-    } else {
-      console.log("Sent file: test.xml");
-    }
-  });
-});
-
-
 router.post('/exportAction', function (req, res) {
-  let file_path = "test.xml";
+  let file_path = req.body.fileName;
   fs.writeFile(file_path, req.body.xmlBlockData, function (err) {
     if (err) {
       console.log(err);

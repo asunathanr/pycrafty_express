@@ -46,9 +46,11 @@
             <p>
                 <button onclick="save()">Save</button>
                 <button onclick="restore()">Restore</button>
-                <button id="importButton" onclick="importBlocks()" name="/importAction">Import</button>
-                <button id="exportButton" onclick="exportBlocks()" name="/exportAction">Export</button>
-                <button onclick="copyCode()" >Copy</button>
+                <!-- https://stackoverflow.com/questions/16215771/how-open-select-file-dialog-via-js -->
+                <button id="importButton" onclick="document.getElementById('file-input').click()">Import</button>
+                <input id="file-input" type="file" name="name" onchange="importBlocks()" style="display: none;" />
+                <button id="exportButton" onclick="exportBlocks()">Export</button>
+                <button onclick="copyCode()">Copy</button>
             </p>
         </td>
     </tr>
@@ -59,6 +61,8 @@
         </td>
     </tr>
 </table>
+<text id="fileName"></text>
+<br>
     <textarea id="codeArea" name="codeArea" style="position:absolute; "></textarea>
 
 
@@ -514,7 +518,6 @@
     function save() {
         var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
         var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
-
         localStorage.setItem("blockly.xml", xmlText);
     }
 
@@ -541,18 +544,15 @@
     }
 
 
-    // Adapted from: https://teamtreehouse.com/community/can-i-do-more-than-redirecting-with-nodejs-and-express
     function importBlocks() {
-        let xhttp = new XMLHttpRequest();
-        xhttp.open("POST", "/importAction", true);
-        xhttp.send();
-        xhttp.onreadystatechange = function() {
-            let xmlDom = "";
-            if (this.readyState === 4 && this.status === 200) {
-                Blockly.mainWorkspace.clear();
-                xmlDom = Blockly.Xml.textToDom(this.responseText);
-                Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xmlDom);
-            }
+        let selectedFile = document.getElementById('file-input').files[0];
+        let fileReader = new FileReader();
+        fileReader.readAsText(selectedFile);
+        fileReader.onload = function() {
+            let data = fileReader.result;
+            Blockly.mainWorkspace.clear();
+            let xmlDom = Blockly.Xml.textToDom(data);
+            Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xmlDom);
         };
     }
 
@@ -563,13 +563,17 @@
     function exportBlocks() {
         let xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
         let xmlText = Blockly.Xml.domToPrettyText(xmlDom);
-        fetch('/exportAction', {
-            method: "POST",
-            body: JSON.stringify({"xmlBlockData" : xmlText}),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
+        var xmlBlob = new Blob([xmlText], {type: "text/plain"});
+        var textToSaveAsURL = window.URL.createObjectURL(xmlBlob);
+        var downloadLink = document.createElement("a");
+        downloadLink.download = 'export.xml';
+        downloadLink.innerHTML = "Download File";
+        downloadLink.href = textToSaveAsURL;
+        downloadLink.onclick = destroyClickedElement;
+        downloadLink.style.display = "none";
+        document.body.appendChild(downloadLink);
+        //Clicks on the created element to Prompt for download.
+        downloadLink.click();
     }
 
     function copyCode() {
@@ -578,9 +582,8 @@
             "mc = Minecraft()\n" +
             "\n";
         let xhttp = new XMLHttpRequest();
-        let code = "";
         Blockly.Python.INFINITE_LOOP_TRAP = null;
-        code = preamble + Blockly.Python.workspaceToCode(demoWorkspace);
+        let code = preamble + Blockly.Python.workspaceToCode(demoWorkspace);
         codeForm.append("codeArea", code);
         xhttp.open("POST", "/copy_text", true);
         xhttp.send(codeForm);
