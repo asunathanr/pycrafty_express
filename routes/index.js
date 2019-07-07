@@ -16,10 +16,9 @@ router.post('/copy_text', function (req, res) {
     if (err) {
       console.log(err);
     }
-    console.log("wrote file");
+    console.log("wrote file at " + file_path);
   });
-  // TODO: Figure out how to send user back to Blockly page
-  res.send("Howdy pardner");
+  res.redirect("/");
 });
 
 module.exports = router;
