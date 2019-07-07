@@ -6,9 +6,11 @@ router.get('/', function(req, res, next) {
   res.render('/public/index.html');
 });
 
+
 router.get('/test', function (req, res, next) {
-  res.render('index.pug', {"title": "Hi world"})
+  res.render('index.pug');
 });
+
 
 // Catches copy_text and writes requested text to python file in mcpipy directory.
 router.post('/copy_text', function (req, res) {
