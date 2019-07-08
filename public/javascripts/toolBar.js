@@ -4,43 +4,34 @@
 
 
 // https://groups.google.com/forum/#!topic/blockly/NDlC-l6DLEM
-// TODO: Clean up and finalize save and restore
-function save() {
+// TODO: Clean up and finalize createSnapshot and restoreSnapshot
+function createSnapshot() {
     var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
     var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
     localStorage.setItem("blockly.xml", xmlText);
+    displaySuccessNotification("Snapshot created successfully");
 }
 
 /**
- * restore: Restores a saved workspace in browser.
+ * restoreSnapshot: Restores a saved workspace in browser.
  */
-function restore() {
+function restoreSnapshot() {
     var xmlText = localStorage.getItem("blockly.xml");
     if (xmlText) {
         Blockly.mainWorkspace.clear();
         xmlDom = Blockly.Xml.textToDom(xmlText);
         Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xmlDom);
     }
-}
-
-/**
- * displayCodeInBrowser: Places generated python code in specified textarea of web browser.
- */
-function displayCodeInBrowser() {
-    // Prevents Blockly from getting hung in an infinite loop
-    Blockly.Python.INFINITE_LOOP_TRAP = null;
-    let codeArea = document.getElementById("codeArea");
-    let preamble = "from mine import *\n\n" +
-        "mc = Minecraft()\n" +
-        "\n";
-    codeArea.value = preamble + Blockly.Python.workspaceToCode(mainWorkspace);
+    displaySuccessNotification("Snapshot restored successfully");
 }
 
 
+
+
 /**
- * importBlocks: Reads an XML file and loads it into workspace.
+ * loadBlocks: Reads an XML file and loads it into workspace.
  */
-function importBlocks() {
+function loadBlocks() {
     let selectedFile = document.getElementById('file-input').files[0];
     let fileReader = new FileReader();
     if (selectedFile.type === "text/xml") {
@@ -52,13 +43,14 @@ function importBlocks() {
             Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xmlDom);
         };
     }
+    displaySuccessNotification("Load was successful.");
 }
 
 
 /**
- * exportBlocks: Download current workspace to user's pc as an XML file.
+ * saveBlocks: Download current workspace to user's pc as an XML file.
  */
-function exportBlocks() {
+function saveBlocks() {
     let xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
     let xmlText = Blockly.Xml.domToPrettyText(xmlDom);
     var xmlBlob = new Blob([xmlText], {type: "text/plain"});
@@ -72,6 +64,7 @@ function exportBlocks() {
     document.body.appendChild(downloadLink);
     //Clicks on the created element to Prompt for download.
     downloadLink.click();
+    displaySuccessNotification("Save was successful.");
 }
 
 // Helper for export blocks.
@@ -80,13 +73,10 @@ function destroyClickedElement(event) {
 }
 
 
-
-
-
 /**
- * copyCode: Sends request to server to record code in pycrafty directory
+ * generateScript: Sends request to server to record code in pycrafty directory
  */
-function copyCode() {
+function generateScript() {
     let codeForm = new FormData();
     let preamble = "from mine import *\n\n" +
         "mc = Minecraft()\n" +
@@ -98,6 +88,11 @@ function copyCode() {
     xhttp.open("POST", "/copy_text", true);
     xhttp.send(codeForm);
     // With AJAX user would have no idea the file actually saved so display notification.
-    // Source: https://notifyjs.jpillora.com/
-    $.notify("File saved", "success", { position: "bottom" });
+    displaySuccessNotification("File saved");
+}
+
+
+// Source: https://notifyjs.jpillora.com/
+function displaySuccessNotification(notificationText) {
+    $.notify(notificationText, "success");
 }

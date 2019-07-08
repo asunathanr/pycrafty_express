@@ -251,7 +251,7 @@ Blockly.Blocks['text_getSubstring'] = {
     return container;
   },
   /**
-   * Parse XML to restore the 'AT' inputs.
+   * Parse XML to restoreSnapshot the 'AT' inputs.
    * @param {!Element} xmlElement XML storage element.
    * @this Blockly.Block
    */
@@ -428,7 +428,7 @@ Blockly.Blocks['text_prompt_ext'] = {
     return container;
   },
   /**
-   * Parse XML to restore the output type.
+   * Parse XML to restoreSnapshot the output type.
    * @param {!Element} xmlElement XML storage element.
    * @this Blockly.Block
    */
@@ -665,7 +665,7 @@ Blockly.Constants.Text.TEXT_JOIN_MUTATOR_MIXIN = {
     return container;
   },
   /**
-   * Parse XML to restore the text inputs.
+   * Parse XML to restoreSnapshot the text inputs.
    * @param {!Element} xmlElement XML storage element.
    * @this Blockly.Block
    */
@@ -815,7 +815,7 @@ Blockly.Constants.Text.TEXT_CHARAT_MUTATOR_MIXIN = {
     return container;
   },
   /**
-   * Parse XML to restore the 'AT' input.
+   * Parse XML to restoreSnapshot the 'AT' input.
    * @param {!Element} xmlElement XML storage element.
    * @this Blockly.Block
    */

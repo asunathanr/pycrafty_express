@@ -324,7 +324,7 @@ Blockly.Constants.Logic.CONTROLS_IF_MUTATOR_MIXIN = {
     return container;
   },
   /**
-   * Parse XML to restore the else-if and else inputs.
+   * Parse XML to restoreSnapshot the else-if and else inputs.
    * @param {!Element} xmlElement XML storage element.
    * @this Blockly.Block
    */

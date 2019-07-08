@@ -1,16 +1,30 @@
-table {
-  height: 100%;
-  width: 100%;
+html {
+  height:100%;
+  width:100%;
 }
 
-textarea {
+.row {
+  height:100%;
+  width:100%;
+}
+
+.navBar {
+    margin-bottom:5em;
+}
+
+#tabArea {
+    margin-top:5em;
+}
+
+#codeArea {
   /* background-color: white; */
-  height: 90%;
-  width: 100%;
-  resize:none
+  height:90%;
+  width:100%;
+  resize:none;
 }
 
-
-#blocklyArea {
-  height: 80%;
+#blocklyDiv {
+  height:600px;
+  width:800px;
 }
+

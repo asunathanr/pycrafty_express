@@ -466,7 +466,7 @@ Blockly.Constants.Math.IS_DIVISIBLEBY_MUTATOR_MIXIN = {
     return container;
   },
   /**
-   * Parse XML to restore the 'divisorInput'.
+   * Parse XML to restoreSnapshot the 'divisorInput'.
    * @param {!Element} xmlElement XML storage element.
    * @this Blockly.Block
    */
@@ -550,7 +550,7 @@ Blockly.Constants.Math.LIST_MODES_MUTATOR_MIXIN = {
     return container;
   },
   /**
-   * Parse XML to restore the output type.
+   * Parse XML to restoreSnapshot the output type.
    * @param {!Element} xmlElement XML storage element.
    * @this Blockly.Block
    */
