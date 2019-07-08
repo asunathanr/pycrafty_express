@@ -1,16 +1,22 @@
-table {
+html {
   height: 100%;
   width: 100%;
 }
 
-textarea {
+.row {
+  height: 100%;
+  width: 100%;
+}
+
+#codeArea {
   /* background-color: white; */
   height: 90%;
   width: 100%;
-  resize:none
+  resize:none;
 }
 
-
-#blocklyArea {
-  height: 80%;
+#blocklyDiv {
+  height: 600px;
+  width: 800px;
 }
+
