@@ -25,4 +25,8 @@ to run a generated blockly script.
     * Blockly: https://developers.google.com/blockly/
     * node.js: https://nodejs.org/en/
     * express-generator: https://expressjs.com/en/starter/generator.html
+    * picnic-css
+    * JQuery
+    * notify.js
+    * bootstrap
     
