@@ -69,8 +69,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": BLOCK_COLOR,
         "tooltip": "Change data of block",
         "helpUrl": "",
-    }
-
+    },
 ]);
 
 

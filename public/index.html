@@ -32,6 +32,7 @@
     <script src="javascripts/google_blocks/variables_dynamic.js"></script>
 
 
+
 </head>
 
 <body>
@@ -46,13 +47,13 @@
     <tr id="buttons">
         <td>
             <p>
-                <button onclick="save()" class="btn">Save</button>
-                <button onclick="restore()">Restore</button>
+                <button id="generateButton" onclick="copyCode()">Generate Script</button>
                 <!-- https://stackoverflow.com/questions/16215771/how-open-select-file-dialog-via-js -->
-                <button id="importButton" onclick="document.getElementById('file-input').click()">Import</button>
+                <button id="importButton" onclick="document.getElementById('file-input').click()">Save</button>
                 <input id="file-input" type="file" accept="text/xml" name="name" onchange="importBlocks()" style="display: none;" />
-                <button id="exportButton" onclick="exportBlocks()">Export</button>
-                <button onclick="copyCode()">Copy</button>
+                <button onclick="save()">Create Snapshot</button>
+                <button onclick="restore()">Restore Snapshot</button>
+                <button id="exportButton" onclick="exportBlocks()">Load</button>
             </p>
         </td>
     </tr>
@@ -474,8 +475,18 @@
 </xml>
 
 
+<!-- Misc Libraries -->
+<script
+        src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="javascripts/notify.js"></script>
+
 <!-- Scripts to control Blockly workspace and toolbar -->
 <script src="javascripts/workspace.js"></script>
 <script src="javascripts/toolBar.js"></script>
+
+
 </body>
 </html>

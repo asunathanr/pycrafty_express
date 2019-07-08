@@ -80,6 +80,9 @@ function destroyClickedElement(event) {
 }
 
 
+
+
+
 /**
  * copyCode: Sends request to server to record code in pycrafty directory
  */
@@ -94,4 +97,7 @@ function copyCode() {
     codeForm.append("codeArea", code);
     xhttp.open("POST", "/copy_text", true);
     xhttp.send(codeForm);
+    // With AJAX user would have no idea the file actually saved so display notification.
+    // Source: https://notifyjs.jpillora.com/
+    $.notify("File saved", "success", { position: "bottom" });
 }
