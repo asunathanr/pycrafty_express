@@ -151,7 +151,7 @@ Blockly.Blocks['lists_create_with'] = {
     return container;
   },
   /**
-   * Parse XML to restore the list inputs.
+   * Parse XML to restoreSnapshot the list inputs.
    * @param {!Element} xmlElement XML storage element.
    * @this Blockly.Block
    */
@@ -422,7 +422,7 @@ Blockly.Blocks['lists_getIndex'] = {
     return container;
   },
   /**
-   * Parse XML to restore the 'AT' input.
+   * Parse XML to restoreSnapshot the 'AT' input.
    * @param {!Element} xmlElement XML storage element.
    * @this Blockly.Block
    */
@@ -584,7 +584,7 @@ Blockly.Blocks['lists_setIndex'] = {
     return container;
   },
   /**
-   * Parse XML to restore the 'AT' input.
+   * Parse XML to restoreSnapshot the 'AT' input.
    * @param {!Element} xmlElement XML storage element.
    * @this Blockly.Block
    */
@@ -684,7 +684,7 @@ Blockly.Blocks['lists_getSublist'] = {
     return container;
   },
   /**
-   * Parse XML to restore the 'AT' inputs.
+   * Parse XML to restoreSnapshot the 'AT' inputs.
    * @param {!Element} xmlElement XML storage element.
    * @this Blockly.Block
    */
@@ -863,7 +863,7 @@ Blockly.Blocks['lists_split'] = {
     return container;
   },
   /**
-   * Parse XML to restore the input and output types.
+   * Parse XML to restoreSnapshot the input and output types.
    * @param {!Element} xmlElement XML storage element.
    * @this Blockly.Block
    */

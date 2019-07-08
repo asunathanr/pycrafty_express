@@ -130,7 +130,7 @@ Blockly.Blocks['procedures_defnoreturn'] = {
     return container;
   },
   /**
-   * Parse XML to restore the argument inputs.
+   * Parse XML to restoreSnapshot the argument inputs.
    * @param {!Element} xmlElement XML storage element.
    * @this Blockly.Block
    */
@@ -825,7 +825,7 @@ Blockly.Blocks['procedures_callnoreturn'] = {
     return container;
   },
   /**
-   * Parse XML to restore the (non-editable) name and parameters.
+   * Parse XML to restoreSnapshot the (non-editable) name and parameters.
    * @param {!Element} xmlElement XML storage element.
    * @this Blockly.Block
    */
@@ -1032,7 +1032,7 @@ Blockly.Blocks['procedures_ifreturn'] = {
     return container;
   },
   /**
-   * Parse XML to restore whether this block has a return value.
+   * Parse XML to restoreSnapshot whether this block has a return value.
    * @param {!Element} xmlElement XML storage element.
    * @this Blockly.Block
    */
