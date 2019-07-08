@@ -48,12 +48,13 @@
         <td>
             <p>
                 <button id="generateButton" onclick="copyCode()">Generate Script</button>
+                <button id="exportButton" onclick="exportBlocks()">Save</button>
                 <!-- https://stackoverflow.com/questions/16215771/how-open-select-file-dialog-via-js -->
-                <button id="importButton" onclick="document.getElementById('file-input').click()">Save</button>
+                <button id="importButton" onclick="document.getElementById('file-input').click()">Load</button>
                 <input id="file-input" type="file" accept="text/xml" name="name" onchange="importBlocks()" style="display: none;" />
                 <button onclick="save()">Create Snapshot</button>
                 <button onclick="restore()">Restore Snapshot</button>
-                <button id="exportButton" onclick="exportBlocks()">Load</button>
+
             </p>
         </td>
     </tr>
