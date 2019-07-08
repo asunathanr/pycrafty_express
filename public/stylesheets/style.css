@@ -1,8 +1,30 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+html {
+  height:100%;
+  width:100%;
 }
 
-a {
-  color: #00B7FF;
+.row {
+  height:100%;
+  width:100%;
 }
+
+.navBar {
+    margin-bottom:5em;
+}
+
+#tabArea {
+    margin-top:5em;
+}
+
+#codeArea {
+  /* background-color: white; */
+  height:90%;
+  width:100%;
+  resize:none;
+}
+
+#blocklyDiv {
+  height:600px;
+  width:800px;
+}
+
