@@ -37,7 +37,28 @@
 
 <body>
 
-<div class="tabs two app-tabs">
+<!-- Top nav bar source: https://picnicss.com/documentation#nav -->
+<nav class="navBar">
+    <a href="#" class="brand"><span>PyCrafty</span></a>
+
+    <input id="bmenub" type="checkbox" class="show">
+    <label for="bmenub" class="burger pseudo button">menu</label>
+
+    <div class="menu">
+        <a href="#" class="pseudo button" id="generateButton" onclick="generateScript()">Generate Script</a>
+        <a href="#" class="pseudo button" id="exportButton" onclick="saveBlocks()">Save</a>
+        <!-- https://stackoverflow.com/questions/16215771/how-open-select-file-dialog-via-js -->
+        <a href="#" class="pseudo button" id="importButton" onclick="document.getElementById('file-input').click()">Load</a>
+        <input id="file-input" type="file" accept="text/xml" name="name" onchange="loadBlocks()"
+               style="display: none;"/>
+        <a href="#" class="pseudo button" onclick="createSnapshot()">Create Snapshot</a>
+        <a href="#" class="pseudo button" onclick="restoreSnapshot()">Restore Snapshot</a>
+    </div>
+
+</nav>
+
+<!-- Defines tabs between code and workspace -->
+<div id="tabArea" class="tabs two app-tabs">
     <input id="tab-1" type="radio" name="tabgroupA" checked>
     <label class="pseudo button toggle" for="tab-1">Workspace</label>
 
@@ -46,33 +67,9 @@
 
     <div class="row">
         <div>
-
-        <div class="third">
-
-
-            <div>
-                <span>
-                    <!-- This is the Div Blockly will render in. size can be adjusted here -->
-                    <div class="stack" id="blocklyDiv" style="position: relative;"></div>
-                </span>
-            </div>
-
-            <!-- TOOL BAR -->
-            <div class="stack">
-                <span>
-                    <button id="generateButton" onclick="generateScript()">Generate Script</button>
-                    <button id="exportButton" onclick="saveBlocks()">Save</button>
-                    <!-- https://stackoverflow.com/questions/16215771/how-open-select-file-dialog-via-js -->
-                    <button id="importButton" onclick="document.getElementById('file-input').click()">Load</button>
-                    <input id="file-input" type="file" accept="text/xml" name="name" onchange="loadBlocks()" style="display: none;" />
-                    <button onclick="createSnapshot()">Create Snapshot</button>
-                    <button onclick="restoreSnapshot()">Restore Snapshot</button>
-                </span>
-            </div>
-
+            <!-- This is the Div Blockly will render in. size can be adjusted here -->
+            <div id="blocklyDiv" style="position:relative;"></div>
         </div>
-        </div>
-
 
         <div>
             <textarea id="codeArea" name="codeArea" style="position:relative; "></textarea>
@@ -80,6 +77,7 @@
     </div>
 
 </div>
+
 
 <!--This defines the toolbox to be given to Blockly.  -->
 <!--Additional blocks can be added and categorized.   -->

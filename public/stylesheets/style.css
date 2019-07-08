@@ -1,22 +1,30 @@
 html {
-  height: 100%;
-  width: 100%;
+  height:100%;
+  width:100%;
 }
 
 .row {
-  height: 100%;
-  width: 100%;
+  height:100%;
+  width:100%;
+}
+
+.navBar {
+    margin-bottom:5em;
+}
+
+#tabArea {
+    margin-top:5em;
 }
 
 #codeArea {
   /* background-color: white; */
-  height: 90%;
-  width: 100%;
+  height:90%;
+  width:100%;
   resize:none;
 }
 
 #blocklyDiv {
-  height: 600px;
-  width: 800px;
+  height:600px;
+  width:800px;
 }
 
