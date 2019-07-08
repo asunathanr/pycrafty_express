@@ -69,8 +69,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": BLOCK_COLOR,
         "tooltip": "Change data of block",
         "helpUrl": "",
-    }
-
+    },
 ]);
 
 
@@ -95,9 +94,8 @@ Blockly.Python['mcblock_setData'] = function (block) {
 };
 
 
-
 /**
- * @function retrieveValue: Retrieves a new value from
+ * @function retrieveValue: Wrapper around code generator.
  * @param block: Blockly block which contains value input
  * @param name: Name of particular value input to retrieve from block
  * @param order: Precedence of retrieved value compared to other blocks around it (defaults to atomic)
