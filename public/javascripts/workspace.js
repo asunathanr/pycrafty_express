@@ -28,10 +28,25 @@ var onresize = function (event) {
     blocklyDiv.style.height = blocklyArea.offsetHeight + 'px';
     Blockly.svgResize(mainWorkspace);
 };
+
+/**
+ * displayCodeInBrowser: Places generated python code in the codeArea textarea of web browser.
+ */
+function displayCodeInBrowser() {
+    // Prevents Blockly from getting hung in an infinite loop
+    Blockly.Python.INFINITE_LOOP_TRAP = null;
+    let codeArea = document.getElementById("codeArea");
+    let preamble = "from mine import *\n\n" +
+        "mc = Minecraft()\n" +
+        "\n";
+    codeArea.value = preamble + Blockly.Python.workspaceToCode(mainWorkspace);
+}
+
 // Update python code in textarea when the workspace changes.
 mainWorkspace.addChangeListener(function () {
     displayCodeInBrowser();
 });
+
 window.addEventListener('resize', onresize, false);
 onresize();
 Blockly.svgResize(mainWorkspace);
