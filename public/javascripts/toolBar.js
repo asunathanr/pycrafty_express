@@ -9,6 +9,7 @@ function createSnapshot() {
     var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
     var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
     localStorage.setItem("blockly.xml", xmlText);
+    displaySuccessNotification("Snapshot created successfully");
 }
 
 /**
@@ -21,6 +22,7 @@ function restoreSnapshot() {
         xmlDom = Blockly.Xml.textToDom(xmlText);
         Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xmlDom);
     }
+    displaySuccessNotification("Snapshot restored successfully");
 }
 
 /**
@@ -52,6 +54,7 @@ function loadBlocks() {
             Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xmlDom);
         };
     }
+    displaySuccessNotification("Load was successful.");
 }
 
 
@@ -72,6 +75,7 @@ function saveBlocks() {
     document.body.appendChild(downloadLink);
     //Clicks on the created element to Prompt for download.
     downloadLink.click();
+    displaySuccessNotification("Save was successful.");
 }
 
 // Helper for export blocks.
