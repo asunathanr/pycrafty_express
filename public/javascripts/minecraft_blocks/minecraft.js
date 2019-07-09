@@ -19,7 +19,7 @@ Blockly.defineBlocksWithJsonArray([{
       "check": "Vector"
     }
   ],
-  "output": null,
+  "output": "Block",
   "colour": 230,
   "tooltip": "Get block type from provided coordinates.",
   "helpUrl": ""
@@ -92,7 +92,7 @@ Blockly.defineBlocksWithJsonArray([{
   // mc.getPlayerEntityIds()
   "type": "get_player_entity_ids",
   "message0": "Get player ids.",
-  "output": null,
+  "output": "List",
   "colour": 230,
   "tooltip": "",
   "helpUrl": ""
@@ -130,7 +130,7 @@ Blockly.defineBlocksWithJsonArray([{
       "check": "Vector"
     }
   ],
-  "output": null,
+  "output": "Block",
   "colour": 230,
   "tooltip": "",
   "helpUrl": ""
@@ -176,7 +176,7 @@ Blockly.defineBlocksWithJsonArray([{
       "check": "Vector"
     }
   ],
-  "output": null,
+  "output": "List",
   "colour": 230,
   "tooltip": "Gets types of blocks in a cuboid. Returns a list of ints.",
   "helpUrl": ""
