@@ -37,18 +37,19 @@
 
 <body>
 
-<!-- Top nav bar source: https://picnicss.com/documentation#nav -->
+<!-- Nav bar source: https://picnicss.com/documentation#nav -->
 <nav class="navBar">
     <a href="#" class="brand"><span>PyCrafty</span></a>
 
     <input id="bmenub" type="checkbox" class="show">
     <label for="bmenub" class="burger pseudo button">menu</label>
 
+
     <div class="menu">
-        <a href="#" class="pseudo button" id="generateButton" onclick="generateScript()">Generate Script</a>
-        <a href="#" class="pseudo button" id="exportButton" onclick="saveBlocks()">Save</a>
+        <a href="#" class="pseudo button" id="generateButton" onclick="generateScript()">Create Script</a>
+        <a href="#" class="pseudo button" id="exportButton" onclick="saveBlocks()">Save Blocks</a>
         <!-- https://stackoverflow.com/questions/16215771/how-open-select-file-dialog-via-js -->
-        <a href="#" class="pseudo button" id="importButton" onclick="document.getElementById('file-input').click()">Load</a>
+        <a href="#" class="pseudo button" id="importButton" onclick="document.getElementById('file-input').click()">Load Blocks</a>
         <input id="file-input" type="file" accept="text/xml" name="name" onchange="loadBlocks()"
                style="display: none;"/>
         <a href="#" class="pseudo button" onclick="createSnapshot()">Create Snapshot</a>
@@ -59,6 +60,7 @@
 
 <!-- Defines tabs between code and workspace -->
 <div id="tabArea" class="tabs two app-tabs">
+
     <input id="tab-1" type="radio" name="tabgroupA" checked>
     <label class="pseudo button toggle" for="tab-1">Workspace</label>
 
@@ -66,9 +68,9 @@
     <label class="pseudo button toggle" for="tab-2">Code</label>
 
     <div class="row">
-        <div>
+        <div id="blocklyArea">
             <!-- This is the Div Blockly will render in. size can be adjusted here -->
-            <div id="blocklyDiv" style="position:relative;"></div>
+            <div id="blocklyDiv"></div>
         </div>
 
         <div>
@@ -486,11 +488,10 @@
 
 
 <!-- Misc Libraries -->
-<script
-        src="https://code.jquery.com/jquery-3.4.1.js"
-        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="javascripts/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<!-- TODO: Install bootstrap so network connection is not necessary -->
+<script src="javascripts/bootstrap-4.3.1-dist/css/bootstrap.css"></script>
 <script src="javascripts/notify.js"></script>
 
 <!-- Scripts to control Blockly workspace and toolbar -->

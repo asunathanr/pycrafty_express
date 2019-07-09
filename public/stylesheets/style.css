@@ -1,9 +1,9 @@
-html {
-  height:100%;
-  width:100%;
+body {
+    height: auto;
 }
 
 .row {
+    position: relative;
   height:100%;
   width:100%;
 }
@@ -13,18 +13,37 @@ html {
 }
 
 #tabArea {
-    margin-top:5em;
+    padding-top: 3em;
+
 }
 
 #codeArea {
-  /* background-color: white; */
-  height:90%;
+  height:calc(100vh - 3em);
   width:100%;
   resize:none;
 }
 
-#blocklyDiv {
-  height:600px;
-  width:800px;
+#blocklyArea {
+    /* From Edublocks css */
+    height: calc(100vh - 3em);
+    width: 100%;
 }
 
+#blocklyDiv {
+    height: 10em;
+    width: 10em;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+#tab-1 {
+    margin: auto;
+    padding-left: 3em !important;
+}
+
+#tab-2 {
+    margin: auto;
+    padding-left: 3em !important;
+}
