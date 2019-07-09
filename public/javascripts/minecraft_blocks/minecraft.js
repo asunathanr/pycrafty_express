@@ -111,7 +111,7 @@ Blockly.defineBlocksWithJsonArray([{
       "check": "Vector"
     }
   ],
-  "output": null,
+  "output": "Number",
   "colour": 230,
   "tooltip": "Get height of tallest non-air block at position.",
   "helpUrl": ""
