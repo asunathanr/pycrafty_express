@@ -196,7 +196,6 @@ Blockly.Python['get_blocks'] = function(block) {
     var value_vec2 = Blockly.Python.valueToCode(block, 'vec2', Blockly.Python.ORDER_ATOMIC);
     var code = 'mc.getBlocks('+value_vec1+', '+value_vec2+')\n';
     // TODO: Change ORDER_NONE to the correct strength.
-
     return [code, Blockly.Python.ORDER_NONE];
 };
 
