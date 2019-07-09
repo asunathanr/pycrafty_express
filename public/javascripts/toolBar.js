@@ -26,8 +26,6 @@ function restoreSnapshot() {
 }
 
 
-
-
 /**
  * loadBlocks: Reads an XML file and loads it into workspace.
  */

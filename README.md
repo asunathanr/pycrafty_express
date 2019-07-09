@@ -1,3 +1,9 @@
+# Prerequisites
+1. Minecraft
+2. RaspberryJam Minecraft Mod
+3. Python3
+4. Node.js
+
 # Start Pycrafty
 First, install node.js on your system.
 To verify node is properly installed open up a terminal and type:
@@ -25,8 +31,5 @@ to run a generated blockly script.
     * Blockly: https://developers.google.com/blockly/
     * node.js: https://nodejs.org/en/
     * express-generator: https://expressjs.com/en/starter/generator.html
-    * picnic-css
-    * JQuery
-    * notify.js
-    * bootstrap
+    * picnic CSS: https://picnicss.com/
     
