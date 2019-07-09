@@ -45,10 +45,10 @@
     <label for="bmenub" class="burger pseudo button">menu</label>
 
     <div class="menu">
-        <a href="#" class="pseudo button" id="generateButton" onclick="generateScript()">Generate Script</a>
-        <a href="#" class="pseudo button" id="exportButton" onclick="saveBlocks()">Save</a>
+        <a href="#" class="pseudo button" id="generateButton" onclick="generateScript()">Create Script</a>
+        <a href="#" class="pseudo button" id="exportButton" onclick="saveBlocks()">Save Blocks</a>
         <!-- https://stackoverflow.com/questions/16215771/how-open-select-file-dialog-via-js -->
-        <a href="#" class="pseudo button" id="importButton" onclick="document.getElementById('file-input').click()">Load</a>
+        <a href="#" class="pseudo button" id="importButton" onclick="document.getElementById('file-input').click()">Load Blocks</a>
         <input id="file-input" type="file" accept="text/xml" name="name" onchange="loadBlocks()"
                style="display: none;"/>
         <a href="#" class="pseudo button" onclick="createSnapshot()">Create Snapshot</a>
@@ -66,9 +66,9 @@
     <label class="pseudo button toggle" for="tab-2">Code</label>
 
     <div class="row">
-        <div>
+        <div id="blocklyArea">
             <!-- This is the Div Blockly will render in. size can be adjusted here -->
-            <div id="blocklyDiv" style="position:relative;"></div>
+            <div id="blocklyDiv"></div>
         </div>
 
         <div>
