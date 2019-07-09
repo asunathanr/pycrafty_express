@@ -1,3 +1,9 @@
+# Prerequisites
+1. Minecraft
+2. RaspberryJam Minecraft Mod
+3. Python3
+4. Node.js
+
 # Start Pycrafty
 First, install node.js on your system.
 To verify node is properly installed open up a terminal and type:

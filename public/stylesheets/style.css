@@ -1,16 +1,49 @@
-table {
-  height: 100%;
-  width: 100%;
+body {
+    height: auto;
 }
 
-textarea {
-  /* background-color: white; */
-  height: 90%;
-  width: 100%;
-  resize:none
+.row {
+    position: relative;
+  height:100%;
+  width:100%;
 }
 
+.navBar {
+    margin-bottom:5em;
+}
+
+#tabArea {
+    padding-top: 3em;
+
+}
+
+#codeArea {
+  height:calc(100vh - 3em);
+  width:100%;
+  resize:none;
+}
 
 #blocklyArea {
-  height: 80%;
+    /* From Edublocks css */
+    height: calc(100vh - 3em);
+    width: 100%;
+}
+
+#blocklyDiv {
+    height: 10em;
+    width: 10em;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+#tab-1 {
+    margin: auto;
+    padding-left: 3em !important;
+}
+
+#tab-2 {
+    margin: auto;
+    padding-left: 3em !important;
 }
