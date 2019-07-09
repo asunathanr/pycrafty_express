@@ -289,6 +289,7 @@ Blockly.Msg["MATH_TRIG_TOOLTIP_TAN"] = "Return the tangent of a degree (not radi
 Blockly.Msg["NEW_COLOUR_VARIABLE"] = "Create colour variable...";
 Blockly.Msg["NEW_NUMBER_VARIABLE"] = "Create number variable...";
 Blockly.Msg["NEW_STRING_VARIABLE"] = "Create string variable...";
+Blockly.Msg["NEW_VECTOR_VARIABLE"] = "Create vector variable...";
 Blockly.Msg["NEW_VARIABLE"] = "Create variable...";
 Blockly.Msg["NEW_VARIABLE_TITLE"] = "New variable name:";
 Blockly.Msg["NEW_VARIABLE_TYPE_TITLE"] = "New variable type:";
