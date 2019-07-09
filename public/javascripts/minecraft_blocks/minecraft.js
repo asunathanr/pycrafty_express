@@ -8,7 +8,7 @@
 Blockly.defineBlocksWithJsonArray([{
   // mc.getBlock()
   "type": "get_block",
-  "message0": "Get Block %1 Vector: %2",
+  "message0": "Get Block %1 Position: %2",
   "args0": [
     {
       "type": "input_dummy"
@@ -27,7 +27,7 @@ Blockly.defineBlocksWithJsonArray([{
 {
   // mc.setBlock()
   "type": "set_block",
-  "message0": "Set a single block. %1 Vector: %2 Block: %3",
+  "message0": "Set a single block. %1 Position: %2 Block: %3",
   "args0": [
     {
       "type": "input_dummy"
@@ -52,7 +52,7 @@ Blockly.defineBlocksWithJsonArray([{
 {
   //mc.setBlocks()
   "type": "set_blocks",
-  "message0": "Set cube of blocks. %1 Start Vector: %2 End Vector: %3 Block: %4",
+  "message0": "Set cube of blocks. %1 Start Position: %2 End Position: %3 Block: %4",
   "args0": [
     {
       "type": "input_dummy"
@@ -100,7 +100,7 @@ Blockly.defineBlocksWithJsonArray([{
 {
   // mc.getHeight()
   "type": "get_height",
-  "message0": "Get Height %1 Vector: %2",
+  "message0": "Get Height %1 Position: %2",
   "args0": [
     {
       "type": "input_dummy"
@@ -119,7 +119,7 @@ Blockly.defineBlocksWithJsonArray([{
 {
   // mc.getBlockWithData()
   "type": "get_block_with_data",
-  "message0": "Get block type and id. %1 Vector: %2",
+  "message0": "Get block type and id. %1 Position: %2",
   "args0": [
     {
       "type": "input_dummy"
@@ -160,7 +160,7 @@ Blockly.defineBlocksWithJsonArray([{
 {
   // mc.getBlocks()
   "type": "get_blocks",
-  "message0": "Get list of block types. %1 Start Vector: %2 End Vector: %3",
+  "message0": "Get list of block types. %1 Start Position: %2 End Position: %3",
   "args0": [
     {
       "type": "input_dummy"
