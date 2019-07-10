@@ -75,12 +75,9 @@ function destroyClickedElement(event) {
 }
 
 /**
- * generateScript: Sends request to server to record code in pycrafty directory
+ * createScript: Sends request to server to record code in pycrafty directory
  */
-const SUCCESS_MSG = "SUCCESS";
-const FILE_WRITE_ERROR = "WRITE_ERROR";
-const UNKNOWN_OS_ERROR = "UNKNOWN_OS";
-function generateScript() {
+function createScript() {
     let codeForm = new FormData();
     let xhttp = new XMLHttpRequest();
     Blockly.Python.INFINITE_LOOP_TRAP = null;
@@ -95,6 +92,9 @@ function generateScript() {
  * Displays notification to user based on result of AJAX query.
  * @param xhttp: Object representing the AJAX transaction.
  */
+const SUCCESS_MSG = "SUCCESS";
+const FILE_WRITE_ERROR = "WRITE_ERROR";
+const UNKNOWN_OS_ERROR = "UNKNOWN_OS";
 function addLoadEvent(xhttp) {
     xhttp.addEventListener('load', function () {
         if (xhttp.responseText === SUCCESS_MSG) {
