@@ -28,7 +28,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": 230,
         "tooltip": "Moves player to provided position.",
         "helpUrl": ""
-      },
+    },
 
     // BLOCK: mc.player.setTilePos()
     {
@@ -46,17 +46,17 @@ Blockly.defineBlocksWithJsonArray([
         "colour": 230,
         "tooltip": "Move player on top of tile at provided position.",
         "helpUrl": ""
-      },
+    },
 
     // BLOCK:  mc.player.getDirection()
     {
-    "type": "getDirection",
-    "message0": 'Get player direction',
-    "output": "Number",
-    "colour": BLOCK_COLOR,
-    "tooltip": "Returns player direction as a Vec3 object.",
-    "helpUrl": "documentation/index.html"
-    },
+        "type": "player_get_direction",
+        "message0": "Get players direction.",
+        "output": "Vector",
+        "colour": 230,
+        "tooltip": "Get players direction. Returns a vector object.",
+        "helpUrl": ""
+      },
 
     // BLOCK: mc.player.getPitch()
     {
@@ -76,7 +76,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": 230,
         "tooltip": "Gets players position in the world. Returns coordinates as vector.",
         "helpUrl": ""
-      },
+    },
 
     // BLOCK: mc.player.getRotation()
     {
@@ -96,7 +96,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": 230,
         "tooltip": "",
         "helpUrl": ""
-      }
+    }
 ]);
 
 
@@ -112,7 +112,7 @@ Blockly.Python['player_set_tile_position'] = function (block) {
 };
 
 
-Blockly.Python['getDirection'] = function (block) {
+Blockly.Python['player_get_direction'] = function (block) {
     let code = makeFunctionCall("mc.player.getDirection");
     return [code, Blockly.Python.ORDER_NONE];
 };
