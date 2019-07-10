@@ -1,183 +1,185 @@
 // FILE: entity.js
-// AUTHOR: Matt Hardin, Nathan Robertson
+// AUTHOR: Matt Hardin, Nathan Robertson, Richie Burch
 // PURPOSE: Implement google_blocks to map to Minecraft().entity methods.
 
-const ENTITY_ID = 'ENTITY_ID';
-const ENTITY_ID_LABEL = "Entity ID:";
-
-const ENTITY_MESSAGE = ENTITY_ID_LABEL+"%1";
-
-const ENTITY_ARGS = {
-    "type": "field_input",
-    "name": ENTITY_ID,
-    "text": "0"
-};
-
-
 // JSON Block Layout
-
-
 Blockly.defineBlocksWithJsonArray([
-
-    // BLOCK: mc.entity.setPos()
     {
-        "type":"entity_setPos",
-        "message0": "Set an entities position",
-        "message1": ENTITY_MESSAGE + "Vector3: %2",
-        "args1": [
-            ENTITY_ARGS,
-            {
-                "type": "input_value",
-                "name": "VEC3",
-            }
+        //BLOCK: mc.entity.getPos()
+        "type": "entity_get_position",
+        "message0": "Get position of other player: %1",
+        "args0": [
+          {
+            "type": "input_value",
+            "name": "ENTITYID",
+            "check": "Number"
+          }
         ],
+        "output": "Vector",
+        "colour": 230,
+        "tooltip": "Get position of specified player.",
+        "helpUrl": ""
+    },
+    {
+        //BLOCK: mc.entity.setPos()
+        "type": "entity_set_position",
+        "message0": "Set position of %1 to %2",
+        "args0": [
+          {
+            "type": "input_value",
+            "name": "ENTITYID",
+            "check": "Number"
+          },
+          {
+            "type": "input_value",
+            "name": "VECTOR",
+            "check": "Vector"
+          }
+        ],
+        "inputsInline": true,
         "previousStatement": null,
         "nextStatement": null,
-        "colour": BLOCK_COLOR,
-        "tooltip": "Sets an entities position to new x,y,z coordinates",
-        "helpUrl": "",
+        "colour": 230,
+        "tooltip": "Move the specified player to the provided location.",
+        "helpUrl": ""
     },
-
-    // BLOCK: mc.entity.setTilePos()
     {
-        "type": "entity_setTilePos",
-        "message0": "Set entity tile position",
-        "message1": ENTITY_MESSAGE + "Vector3: %2",
-        "args1": [
-            ENTITY_ARGS,
-            {
-                "type": "input_value",
-                "name": "VEC3",
-            }
+        //BLOCK: mc.entity.getTilePos()
+        "type": "entity_get_tile_position",
+        "message0": "Get position directly under:  %1",
+        "args0": [
+          {
+            "type": "input_value",
+            "name": "ENTITYID",
+            "check": "Number"
+          }
         ],
+        "output": "Vector",
+        "colour": 230,
+        "tooltip": "Get the position of the block located directly under the supplied player.",
+        "helpUrl": ""
+    },
+    {
+        // BLOCK: mc.entity.setTilePos()
+        "type": "entity_set_tile_position",
+        "message0": "Set position of  %1 on top of  %2",
+        "args0": [
+          {
+            "type": "input_value",
+            "name": "ENTITYID",
+            "check": "Number"
+          },
+          {
+            "type": "input_value",
+            "name": "VECTOR",
+            "check": "Vector"
+          }
+        ],
+        "inputsInline": true,
         "previousStatement": null,
         "nextStatement": null,
-        "colour": BLOCK_COLOR,
-        "tooltip": "Sets an entities tile position to new x,y,z coordinates",
-        "helpUrl": "",
+        "colour": 230,
+        "tooltip": "Move the provided player on top of the provided position.",
+        "helpUrl": ""
     },
-
-    // BLOCK: mc.entity.getPos()
     {
-        "type": "entity_getPos",
-        "message0": "Get entity position",
-        "message1": ENTITY_MESSAGE,
-        "args1": [
-            ENTITY_ARGS
+        // BLOCK: mc.entity.getDirection()
+        "type": "entity_get_direction",
+        "message0": "Get direction of other player:  %1",
+        "args0": [
+          {
+            "type": "input_value",
+            "name": "ENTITYID",
+            "check": "Number"
+          }
         ],
         "output": "Number",
-        "colour": BLOCK_COLOR,
-        "tooltip": "Returns entity position as a Vec3 object.",
-        "helpUrl": "documentation/index.html"
+        "colour": 230,
+        "tooltip": "Get the direction of the provided player.",
+        "helpUrl": ""
     },
-
-    // BLOCK: mc.entity.getTilePos()
     {
-        "type": "entity_getTilePos",
-        "message0": "Get entity tile position",
-        "message1": ENTITY_ID_LABEL + "%1",
-        "args1": [
-            ENTITY_ARGS
+        // BLOCK: mc.entity.getRotation()
+        "type": "entity_get_rotation",
+        "message0": "Get rotation of other player:  %1",
+        "args0": [
+          {
+            "type": "input_value",
+            "name": "ENTITYID",
+            "check": "Number"
+          }
         ],
         "output": "Number",
-        "colour": BLOCK_COLOR,
-        "tooltip": "Returns entity position as a Vec3 object.",
-        "helpUrl": "documentation/index.html"
+        "colour": 230,
+        "tooltip": "Get rotation of the provided player.",
+        "helpUrl": ""
     },
-
-    // BLOCK: mc.entity.getTilePos()
     {
-        "type": "entity_getRotation",
-        "message0": "Get entity rotation",
-        "message1": ENTITY_ID_LABEL + "%1",
-        "args1": [
-            ENTITY_ARGS
+        "type": "entity_get_pitch",
+        "message0": "Get pitch of other player: %1",
+        "args0": [
+          {
+            "type": "input_value",
+            "name": "ENTITYID",
+            "check": "Number"
+          }
         ],
         "output": "Number",
-        "colour": BLOCK_COLOR,
-        "tooltip": "Returns entity rotation as a Vec3 object.",
-        "helpUrl": "documentation/index.html"
-    },
-
-    // BLOCK: mc.entity.getPitch()
-    {
-        "type": "entity_getPitch",
-        "message0": "Get entity pitch",
-        "message1": ENTITY_ID_LABEL + "%1",
-        "args1": [
-            ENTITY_ARGS
-        ],
-        "output": "Number",
-        "colour": BLOCK_COLOR,
-        "tooltip": "Returns entity pitch as a Vec3 object.",
-        "helpUrl": "documentation/index.html"
-    },
-
-    // BLOCK: mc.entity.getDirection()
-    {
-        "type": "entity_getDirection",
-        "message0": "Get entity tile position",
-        "message1": ENTITY_ID_LABEL + "%1",
-        "args1": [
-            ENTITY_ARGS
-        ],
-        "output": "Number",
-        "colour": BLOCK_COLOR,
-        "tooltip": "Returns entity position as a Vec3 object.",
-        "helpUrl": "documentation/index.html"
+        "colour": 230,
+        "tooltip": "Get pitch of the provided player.",
+        "helpUrl": ""
     }
+
 ]);
 
 
 // Code Generation Functions
-
-Blockly.Python['entity_getPos'] = function (block) {
-    let entity_id = block.getFieldValue(ENTITY_ID);
-    let code = "mc.entity.getPos(" + entity_id + ")\n";
+Blockly.Python['entity_get_position'] = function(block) {
+    var value_entityid = Blockly.Python.valueToCode(block, 'ENTITYID', Blockly.Python.ORDER_ATOMIC);
+    // TODO: Assemble Python into code variable.
+    var code = 'mc.entity.getPos('+value_entityid+')\n';
+    // TODO: Change ORDER_NONE to the correct strength.
     return [code, Blockly.Python.ORDER_NONE];
-};
-
-
-Blockly.Python['entity_setPos'] = function (block) {
-    let entityId = block.getFieldValue(ENTITY_ID);
-    let x = block.getFieldValue('X');
-    let y = block.getFieldValue('Y');
-    let z = block.getFieldValue('Z');
-    let arguments = [entityId, x, y, z].join(',');
-    return 'mc.entity.setPos(' + arguments + ')' + '\n';
-};
-
-
-Blockly.Python['entity_setTilePos'] = function (block) {
-    let entityId = block.getField(ENTITY_ID);
-    let X = block.getFieldValue('X');
-    let Y = block.getFieldValue('Y');
-    let Z = block.getFieldValue('Z');
-    return 'mc.entity.setTilePos(' + [entityId, X, Y, Z].join(',') + ')\n';
-};
-
-
-Blockly.Python['entity_getTilePos'] = function (block) {
-    let entityId = block.getFieldValue(ENTITY_ID);
-    let code = 'mc.entity.getTilePos(' + entityId + ')\n';
+  };
+  Blockly.Python['entity_set_position'] = function(block) {
+    var value_entityid = Blockly.Python.valueToCode(block, 'ENTITYID', Blockly.Python.ORDER_ATOMIC);
+    var value_vector = Blockly.Python.valueToCode(block, 'VECTOR', Blockly.Python.ORDER_ATOMIC);
+    // TODO: Assemble Python into code variable.
+    var code = 'mc.entity.setPos('+value_entityid+', '+value_vector+')\n';
+    return code;
+  };
+  Blockly.Python['entity_get_tile_position'] = function(block) {
+    var value_entityid = Blockly.Python.valueToCode(block, 'ENTITYID', Blockly.Python.ORDER_ATOMIC);
+    // TODO: Assemble Python into code variable.
+    var code = 'mc.entity.getTilePos('+value_entityid+')\n';
+    // TODO: Change ORDER_NONE to the correct strength.
     return [code, Blockly.Python.ORDER_NONE];
-};
-
-
-Blockly.Python['entity_getRotation'] = function (block) {
-    let code = 'mc.entity.getRotation(' + block.getFieldValue(ENTITY_ID) + ')\n';
+  };
+  Blockly.Python['entity_set_tile_position'] = function(block) {
+    var value_entityid = Blockly.Python.valueToCode(block, 'ENTITYID', Blockly.Python.ORDER_ATOMIC);
+    var value_vector = Blockly.Python.valueToCode(block, 'VECTOR', Blockly.Python.ORDER_ATOMIC);
+    // TODO: Assemble Python into code variable.
+    var code = 'mc.entity.setTilePos('+value_entityid+', '+value_vector+')\n';
+    return code;
+  };
+  Blockly.Python['entity_get_direction'] = function(block) {
+    var value_entityid = Blockly.Python.valueToCode(block, 'ENTITYID', Blockly.Python.ORDER_ATOMIC);
+    // TODO: Assemble Python into code variable.
+    var code = 'mc.entity.getDirection('+value_entityid+')\n';
+    // TODO: Change ORDER_NONE to the correct strength.
     return [code, Blockly.Python.ORDER_NONE];
-};
-
-
-Blockly.Python['entity_getPitch'] = function (block) {
-    let entityId = block.getFieldValue(ENTITY_ID);
-    let code = 'mc.entity.getPitch(' + entityId + '\n';
+  };
+  Blockly.Python['entity_get_rotation'] = function(block) {
+    var value_entityid = Blockly.Python.valueToCode(block, 'ENTITYID', Blockly.Python.ORDER_ATOMIC);
+    // TODO: Assemble Python into code variable.
+    var code = 'mc.entity.getRotation('+value_entityid+')\n';
+    // TODO: Change ORDER_NONE to the correct strength.
     return [code, Blockly.Python.ORDER_NONE];
-};
-
-
-Blockly.Python['entity_getDirection'] = function (block) {
-    let code = 'mc.entity.getDirection(' + block.getFieldValue(ENTITY_ID) + ')\n';
+  };
+  Blockly.Python['entity_get_pitch'] = function(block) {
+    var value_entityid = Blockly.Python.valueToCode(block, 'ENTITYID', Blockly.Python.ORDER_ATOMIC);
+    // TODO: Assemble Python into code variable.
+    var code = 'mc.entity.getPitch('+value_entityid+')\n';
+    // TODO: Change ORDER_NONE to the correct strength.
     return [code, Blockly.Python.ORDER_NONE];
-};
+  };
