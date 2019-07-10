@@ -11,136 +11,116 @@ const BLOCK_COLOR = 230;
 
 
 Blockly.defineBlocksWithJsonArray([
-
-    // BLOCK: mc.player.setPos()
     {
-        "type":"setPos",
-        "message0": "Set Player's position",
-        "message1": "%1",
-        "args1": [
-            {
-                "type": "input_value",
-                "name": "VEC3",
-            }
+        // BLOCK: mc.player.getPos()
+        "type": "player_get_position",
+        "message0": "Get players position.",
+        "output": "Vector",
+        "colour": 230,
+        "tooltip": "Gets players position in the world. Returns coordinates as vector.",
+        "helpUrl": ""
+    },
+    {
+        // BLOCK: mc.player.setPos()
+        "type": "player_set_position",
+        "message0": "Set players position to : %1",
+        "args0": [
+          {
+            "type": "input_value",
+            "name": "VEC3",
+            "check": "Vector"
+          }
         ],
         "previousStatement": null,
         "nextStatement": null,
-        "colour": BLOCK_COLOR,
-        "tooltip": "Sets player position to new x,y,z coordinates",
-        "helpUrl": "",
+        "colour": 230,
+        "tooltip": "Moves player to provided position.",
+        "helpUrl": ""
     },
-
-    // BLOCK: mc.player.setTilePos()
     {
-        "type":"setTilePos",
-        "message0": "Set Player tile position",
-        "message1": "%1",
-        "args1": [
-            {
-                "type": "input_value",
-                "name": "VEC3",
-            }
+        // BLOCK: mc.player.getTilePos()
+        "type": "player_get_tile_position",
+        "message0": "Get position under player.",
+        "output": "Vector",
+        "colour": 230,
+        "tooltip": "",
+        "helpUrl": ""
+    },  
+    {
+        // BLOCK: mc.player.setTilePos()
+        "type": "player_set_tile_position",
+        "message0": "Set players position on top of: %1",
+        "args0": [
+          {
+            "type": "input_value",
+            "name": "NAME",
+            "check": "Vector"
+          }
         ],
         "previousStatement": null,
         "nextStatement": null,
-        "colour": BLOCK_COLOR,
-        "tooltip": "Sets position underneath player to new x,y,z coordinates",
-        "helpUrl": "",
+        "colour": 230,
+        "tooltip": "Move player on top of tile at provided position.",
+        "helpUrl": ""
     },
-
-    // BLOCK:  mc.player.getDirection()
     {
-    "type": "getDirection",
-    "message0": 'Get player direction',
-    "output": "Number",
-    "colour": BLOCK_COLOR,
-    "tooltip": "Returns player direction as a Vec3 object.",
-    "helpUrl": "documentation/index.html"
+        // BLOCK:  mc.player.getDirection()
+        "type": "player_get_direction",
+        "message0": "Get players direction.",
+        "output": "Vector",
+        "colour": 230,
+        "tooltip": "Get players direction. Returns a vector object.",
+        "helpUrl": ""
     },
-
+    {
+        // BLOCK: mc.player.getRotation()
+        "type": "player_get_rotation",
+        "message0": "Get players angle of rotation.",
+        "output": "Number",
+        "colour": 230,
+        "tooltip": "Get the angle of players rotation.",
+        "helpUrl": ""
+    },
     // BLOCK: mc.player.getPitch()
     {
-        "type": "getPitch",
-        "message0": "Get Player Pitch",
+        "type": "player_get_pitch",
+        "message0": "Get players pitch.",
         "output": "Number",
-        "colour": BLOCK_COLOR,
-        "tooltip": "Returns player pitch as a Vec3 object.",
-        "helpUrl": "documentation/index.html"
-    },
-
-    // BLOCK: mc.player.getPos()
-    {
-        "type": "getPos",
-        "message0": "Get Player Position",
-        "output": "Number",
-        "colour": BLOCK_COLOR,
-        "tooltip": "Returns player position as a Vec3 object.",
-        "helpUrl": "documentation/index.html"
-    },
-
-    // BLOCK: mc.player.getRotation()
-    {
-        "type": "getRotation",
-        "message0": "Get player rotation",
-        "output": "Number",
-        "colour": BLOCK_COLOR,
-        "tooltip": "Returns player rotation as a Vec3 object.",
-        "helpUrl": "documentation/index.html"
-    },
-
-    // BLOCK: mc.player.getTilePos()
-    {
-        "type": "getTilePos",
-        "message0": "Get tile position",
-        "output": "Number",
-        "colour": BLOCK_COLOR,
-        "tooltip": "Returns position of tile player is standing on.",
-        "helpUrl": "documentation/index.html"
+        "colour": 230,
+        "tooltip": "Gets the players pitch",
+        "helpUrl": ""
     }
 ]);
 
-
-Blockly.Python['setPos'] = function (block) {
-    let vector3 = Blockly.Python.valueToCode(block,"VEC3", Blockly.Python.ORDER_ATOMIC);
-    return makeFunctionCall("mc.player.setPos", [vector3]);
-};
-
-
-Blockly.Python['setTilePos'] = function (block) {
-    let vector3 = Blockly.Python.valueToCode(block,"VEC3", Blockly.Python.ORDER_ATOMIC);
-    return makeFunctionCall("mc,.player.setTilePos", [vector3]);
-};
-
-
-Blockly.Python['getDirection'] = function (block) {
-    let code = makeFunctionCall("mc.player.getDirection");
-    return [code, Blockly.Python.ORDER_NONE];
-};
-
-
-Blockly.Python['getPitch'] = function (block) {
-    let code = makeFunctionCall("mc.player.getPitch");
-    return [code, Blockly.Python.ORDER_NONE];
-};
-
-
-Blockly.Python['getPos'] = function (block) {
+// code generators
+Blockly.Python['player_get_position'] = function (block) {
     let code = makeFunctionCall("mc.player.getPos");
     return [code, Blockly.Python.ORDER_NONE];
 };
-
-
-Blockly.Python['getRotation'] = function (block) {
-    let code = makeFunctionCall("mc.player.getRotation");
-    return [code, Blockly.Python.ORDER_NONE];
+Blockly.Python['player_set_position'] = function (block) {
+    let vector3 = Blockly.Python.valueToCode(block,"VEC3", Blockly.Python.ORDER_ATOMIC);
+    return makeFunctionCall("mc.player.setPos", [vector3]);
 };
-
-
-Blockly.Python['getTilePos'] = function (block) {
+Blockly.Python['player_get_tile_position'] = function (block) {
     let code = makeFunctionCall("mc.player.getTilePos");
     return [code, Blockly.Python.ORDER_NONE];
 };
-
+Blockly.Python['player_set_tile_position'] = function (block) {
+    let vector3 = Blockly.Python.valueToCode(block,"VEC3", Blockly.Python.ORDER_ATOMIC);
+    return makeFunctionCall("mc,.player.setTilePos", [vector3]);
+};
+Blockly.Python['player_get_direction'] = function (block) {
+    let code = makeFunctionCall("mc.player.getDirection");
+    return [code, Blockly.Python.ORDER_NONE];
+};
+Blockly.Python['player_get_rotation'] = function (block) {
+    let code = makeFunctionCall("mc.player.getRotation");
+    return [code, Blockly.Python.ORDER_NONE];
+};
+Blockly.Python['player_get_pitch'] = function (block) {
+    let code = makeFunctionCall("mc.player.getPitch");
+    return [code, Blockly.Python.ORDER_NONE];
+};
 
 // HELPERS
 
