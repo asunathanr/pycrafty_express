@@ -85,7 +85,7 @@ Blockly.defineBlocksWithJsonArray([
     {
         // BLOCK: mc.entity.getDirection()
         "type": "entity_get_direction",
-        "message0": "Get direction of  %1",
+        "message0": "Get direction of other player:  %1",
         "args0": [
           {
             "type": "input_value",
@@ -101,7 +101,7 @@ Blockly.defineBlocksWithJsonArray([
     {
         // BLOCK: mc.entity.getRotation()
         "type": "entity_get_rotation",
-        "message0": "Get rotation of  %1",
+        "message0": "Get rotation of other player:  %1",
         "args0": [
           {
             "type": "input_value",
@@ -112,6 +112,21 @@ Blockly.defineBlocksWithJsonArray([
         "output": "Number",
         "colour": 230,
         "tooltip": "Get rotation of the provided player.",
+        "helpUrl": ""
+    },
+    {
+        "type": "entity_get_pitch",
+        "message0": "Get pitch of other player: %1",
+        "args0": [
+          {
+            "type": "input_value",
+            "name": "ENTITYID",
+            "check": "Number"
+          }
+        ],
+        "output": "Number",
+        "colour": 230,
+        "tooltip": "Get pitch of the provided player.",
         "helpUrl": ""
     }
 
@@ -158,6 +173,13 @@ Blockly.Python['entity_get_position'] = function(block) {
     var value_entityid = Blockly.Python.valueToCode(block, 'ENTITYID', Blockly.Python.ORDER_ATOMIC);
     // TODO: Assemble Python into code variable.
     var code = 'mc.entity.getRotation('+value_entityid+')\n';
+    // TODO: Change ORDER_NONE to the correct strength.
+    return [code, Blockly.Python.ORDER_NONE];
+  };
+  Blockly.Python['entity_get_pitch'] = function(block) {
+    var value_entityid = Blockly.Python.valueToCode(block, 'ENTITYID', Blockly.Python.ORDER_ATOMIC);
+    // TODO: Assemble Python into code variable.
+    var code = 'mc.entity.getPitch('+value_entityid+')\n';
     // TODO: Change ORDER_NONE to the correct strength.
     return [code, Blockly.Python.ORDER_NONE];
   };
