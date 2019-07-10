@@ -83,13 +83,16 @@ function generateScript() {
     let code = preamble + Blockly.Python.workspaceToCode(mainWorkspace);
     codeForm.append("codeArea", code);
     xhttp.open("POST", "/copy_text", true);
+    xhttp.addEventListener('load', function () {
+        if (xhttp.readyState === 4 && xhttp.status === 200) {
+            displaySuccessNotification(".menu", xhttp.responseText);
+        }
+    });
     xhttp.send(codeForm);
-    // With AJAX user would have no idea the file actually saved so display notification.
-    displaySuccessNotification(".menu","File saved");
 }
 
 
 // Source: https://notifyjs.jpillora.com/
 function displaySuccessNotification(element, notificationText) {
-    $(element).notify(notificationText, "success", { position: "bottom right" });
+    $(element).notify(notificationText, "success");
 }
