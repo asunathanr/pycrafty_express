@@ -70,13 +70,13 @@ Blockly.defineBlocksWithJsonArray([
 
     // BLOCK: mc.player.getPos()
     {
-        "type": "getPos",
-        "message0": "Get Player Position",
-        "output": "Number",
-        "colour": BLOCK_COLOR,
-        "tooltip": "Returns player position as a Vec3 object.",
-        "helpUrl": "documentation/index.html"
-    },
+        "type": "player_get_position",
+        "message0": "Get players position.",
+        "output": "Vector",
+        "colour": 230,
+        "tooltip": "Gets players position in the world. Returns coordinates as vector.",
+        "helpUrl": ""
+      },
 
     // BLOCK: mc.player.getRotation()
     {
@@ -124,7 +124,7 @@ Blockly.Python['getPitch'] = function (block) {
 };
 
 
-Blockly.Python['getPos'] = function (block) {
+Blockly.Python['player_get_position'] = function (block) {
     let code = makeFunctionCall("mc.player.getPos");
     return [code, Blockly.Python.ORDER_NONE];
 };
