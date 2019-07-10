@@ -224,8 +224,12 @@ Blockly.Python['get_blocks'] = function(block) {
     var value_vec1 = Blockly.Python.valueToCode(block, 'vec1', Blockly.Python.ORDER_ATOMIC);
     var value_vec2 = Blockly.Python.valueToCode(block, 'vec2', Blockly.Python.ORDER_ATOMIC);
     var code = 'mc.getBlocks('+value_vec1+', '+value_vec2+')\n';
-    // TODO: Change ORDER_NONE to the correct strength.
-    return [code, Blockly.Python.ORDER_NONE];
+    if(block.getParent() === null) {
+        // TODO: Change ORDER_NONE to the correct strength.
+        return [code+'\n', Blockly.Python.ORDER_NONE];
+    } else {
+        return [code, Blockly.Python.ORDER_NONE];
+    }
 };
 Blockly.Python['get_height'] = function(block) {
     var value_vec = Blockly.Python.valueToCode(block, 'vec', Blockly.Python.ORDER_ATOMIC);
