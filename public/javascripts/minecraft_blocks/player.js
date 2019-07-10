@@ -32,7 +32,7 @@ Blockly.defineBlocksWithJsonArray([
 
     // BLOCK: mc.player.setTilePos()
     {
-        "type": "set_player_tile_position",
+        "type": "player_set_tile_position",
         "message0": "Set players position on top of: %1",
         "args0": [
           {
@@ -106,7 +106,7 @@ Blockly.Python['player_set_position'] = function (block) {
 };
 
 
-Blockly.Python['set_player_tile_position'] = function (block) {
+Blockly.Python['player_set_tile_position'] = function (block) {
     let vector3 = Blockly.Python.valueToCode(block,"VEC3", Blockly.Python.ORDER_ATOMIC);
     return makeFunctionCall("mc,.player.setTilePos", [vector3]);
 };
