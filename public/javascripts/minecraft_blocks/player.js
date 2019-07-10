@@ -80,12 +80,12 @@ Blockly.defineBlocksWithJsonArray([
 
     // BLOCK: mc.player.getRotation()
     {
-        "type": "getRotation",
-        "message0": "Get player rotation",
+        "type": "player_get_rotation",
+        "message0": "Get players angle of rotation.",
         "output": "Number",
-        "colour": BLOCK_COLOR,
-        "tooltip": "Returns player rotation as a Vec3 object.",
-        "helpUrl": "documentation/index.html"
+        "colour": 230,
+        "tooltip": "Get the angle of players rotation.",
+        "helpUrl": ""
     },
 
     // BLOCK: mc.player.getTilePos()
@@ -130,7 +130,7 @@ Blockly.Python['player_get_position'] = function (block) {
 };
 
 
-Blockly.Python['getRotation'] = function (block) {
+Blockly.Python['player_get_rotation'] = function (block) {
     let code = makeFunctionCall("mc.player.getRotation");
     return [code, Blockly.Python.ORDER_NONE];
 };
