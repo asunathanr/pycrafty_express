@@ -1,105 +1,46 @@
 // FILE: mcBlock.js
-// AUTHOR: Nathan Robertson
+// AUTHOR: Nathan Robertson, Richie Burch
 // PURPOSE: Code to display and generate minecraft blocks
 
 
 Blockly.defineBlocksWithJsonArray([
 
-    // BLOCK: mcblock_setBlock
     {
-        "type":"mcblock_setBlock",
-        "message0": "Set block variable: %1 to %2",
+        // BLOCK: block.id = \n block.data = 
+        "type": "mcblock_all_attrs",
+        "message0": "Modify block:  %1 ID:  %2 Data:  %3",
         "args0": [
-            {
-                "type": "input_value",
-                "name": "VAR",
-            },
-            {
-                "type": "input_value",
-                "name": "NEW_MCBLOCK"
-            }
+          {
+            "type": "input_value",
+            "name": "BLOCK",
+            "check": "Block"
+          },
+          {
+            "type": "input_value",
+            "name": "ID",
+            "check": "Number"
+          },
+          {
+            "type": "input_value",
+            "name": "DATA",
+            "check": "Number"
+          }
         ],
-
+        "inputsInline": true,
         "previousStatement": null,
         "nextStatement": null,
-        "colour": BLOCK_COLOR,
-        "tooltip": "Sets block to a new block value.",
-        "helpUrl": "",
-    },
-
-    // BLOCK: setType
-    {
-        "type": "mcblock_setType",
-        "message0": "Set type of block: %1 to new type: %2",
-        "args0": [
-            {
-                "type": "input_value",
-                "name": "CURRENT_MCBLOCK",
-            },
-            {
-                "type": "input_value",
-                "name": "NEW_TYPE"
-            }
-        ],
-
-        "previousStatement": null,
-        "nextStatement": null,
-        "colour": BLOCK_COLOR,
-        "tooltip": "Change type of block",
-        "helpUrl": "",
-    },
-
-    // BLOCK: setData
-    {
-        "type":"mcblock_setData",
-        "message0": "Set data of block %1 to %2",
-        "args0": [
-            {
-                "type": "input_value",
-                "name": "CURRENT_MCBLOCK",
-            },
-            {
-                "type": "input_value",
-                "name": "NEW_DATA"
-            }
-        ],
-
-        "previousStatement": null,
-        "nextStatement": null,
-        "colour": BLOCK_COLOR,
-        "tooltip": "Change data of block",
-        "helpUrl": "",
-    },
+        "colour": 230,
+        "tooltip": "Change the type and sup-type of a provided block object.",
+        "helpUrl": ""
+      }
 ]);
 
-
-Blockly.Python['mcblock_setBlock'] = function (block) {
-    let variable = retrieveValue(block, "VAR");
-    let new_mcblock = retrieveValue(block, "NEW_MCBLOCK");
-    return variable + " = " + new_mcblock + "\n";
-};
-
-
-Blockly.Python['mcblock_setType'] = function (block) {
-    let current_mcblock = retrieveValue(block, "CURRENT_MCBLOCK");
-    let new_type = retrieveValue(block, "NEW_TYPE");
-    return current_mcblock + ".type" + " = " + new_type + "\n";
-};
-
-
-Blockly.Python['mcblock_setData'] = function (block) {
-    let current_mcblock = retrieveValue(block, "CURRENT_MCBLOCK");
-    let new_data = retrieveValue(block, "NEW_DATA");
-    return current_mcblock + ".data" + " = " + new_data + "\n";
-};
-
-
-/**
- * @function retrieveValue: Wrapper around code generator.
- * @param block: Blockly block which contains value input
- * @param name: Name of particular value input to retrieve from block
- * @param order: Precedence of retrieved value compared to other blocks around it (defaults to atomic)
- */
-let retrieveValue = (block, name, order=Blockly.Python.ORDER_ATOMIC) => {
-    return Blockly.Python.valueToCode(block, name, order);
-};
+// code generators
+Blockly.Python['mcblock_all_attrs'] = function(block) {
+    var value_block = Blockly.Python.valueToCode(block, 'BLOCK', Blockly.Python.ORDER_ATOMIC);
+    var value_id = Blockly.Python.valueToCode(block, 'ID', Blockly.Python.ORDER_ATOMIC);
+    var value_data = Blockly.Python.valueToCode(block, 'DATA', Blockly.Python.ORDER_ATOMIC);
+    // TODO: Assemble Python into code variable.
+    var code = value_block+'.id = '+value_id+'\n'+value_block+'.data = '+value_data+'\n';
+    return code;
+  };

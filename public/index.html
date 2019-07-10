@@ -438,30 +438,31 @@
                     </block>
                 </value>
             </block>
-            <block type="set_vector_attribute_to"></block>
-            <block type="vector_x_attribute"></block>
-            <block type="vector_y_attribute"></block>
-            <block type="vector_z_attribute"></block>
         </category>
 
         <category name="Entity" colour="#a55b6d">
-
-            <block type="entity_getPos">
-                <field name="ENTITY_ID"></field>
-            </block>
-
-            <block type="entity_setPos"></block>
-            <block type="entity_getTilePos"></block>
-            <block type="entity_setTilePos"></block>
-            <block type="entity_getRotation"></block>
-            <block type="entity_getPitch"></block>
-            <block type="entity_getDirection"></block>
+            <block type="entity_get_position"></block>
+            <block type="entity_set_position"></block>
+            <block type="entity_get_tile_position"></block>
+            <block type="entity_set_tile_position"></block>
+            <block type="entity_get_direction"></block>
+            <block type="entity_get_rotation"></block>
+            <block type="entity_get_pitch"></block>
         </category>
 
         <category name="Minecraft Block" colour="#A65C81">
-            <block type="mcblock_setBlock"></block>
-            <block type="mcblock_setType"></block>
-            <block type="mcblock_setData"></block>
+            <block type="mcblock_all_attrs">
+                <value name="ID">
+                    <block type="math_number">
+                        <field name="NUM">1</field>
+                    </block>
+                </value>
+                <value name="DATA">
+                    <block type="math_number">
+                        <field name="NUM">0</field>
+                    </block>
+                </value>
+            </block>
         </category>
 
     </category> <!-- End of Minecraft Category -->
