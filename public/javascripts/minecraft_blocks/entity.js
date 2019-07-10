@@ -59,6 +59,28 @@ Blockly.defineBlocksWithJsonArray([
         "tooltip": "Get the position of the block located directly under the supplied player.",
         "helpUrl": ""
     },
+    {
+        "type": "entity_set_tile_position",
+        "message0": "Set position of  %1 on top of  %2",
+        "args0": [
+          {
+            "type": "input_value",
+            "name": "ENTITYID",
+            "check": "Number"
+          },
+          {
+            "type": "input_value",
+            "name": "VECTOR",
+            "check": "Vector"
+          }
+        ],
+        "inputsInline": true,
+        "previousStatement": null,
+        "nextStatement": null,
+        "colour": 230,
+        "tooltip": "Move the provided player on top of the provided position.",
+        "helpUrl": ""
+    }
 
 ]);
 
@@ -84,4 +106,11 @@ Blockly.Python['entity_get_position'] = function(block) {
     var code = 'mc.entity.getTilePos('+value_entityid+')\n';
     // TODO: Change ORDER_NONE to the correct strength.
     return [code, Blockly.Python.ORDER_NONE];
+  };
+  Blockly.Python['entity_set_tile_position'] = function(block) {
+    var value_entityid = Blockly.Python.valueToCode(block, 'ENTITYID', Blockly.Python.ORDER_ATOMIC);
+    var value_vector = Blockly.Python.valueToCode(block, 'VECTOR', Blockly.Python.ORDER_ATOMIC);
+    // TODO: Assemble Python into code variable.
+    var code = 'mc.entity.setTilePos('+value_entityid+', '+value_vector+')\n';
+    return code;
   };
