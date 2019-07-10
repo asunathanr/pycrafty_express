@@ -19,23 +19,23 @@ Blockly.defineBlocksWithJsonArray([
             "options": [
               [
                 "+",
-                "XPLUS"
+                "+"
               ],
               [
                 "-",
-                "XMINUS"
+                "-"
               ],
               [
                 "*",
-                "XTIMES"
+                "*"
               ],
               [
                 "\\",
-                "XDIV"
+                "\\"
               ],
               [
                 "%",
-                "XMOD"
+                "%"
               ]
             ]
           },
@@ -50,23 +50,23 @@ Blockly.defineBlocksWithJsonArray([
             "options": [
               [
                 "+",
-                "YPLUS"
+                "+"
               ],
               [
                 "-",
-                "YMINUS"
+                "-"
               ],
               [
                 "*",
-                "YTIMES"
+                "*"
               ],
               [
                 "\\",
-                "YDIV"
+                "\\"
               ],
               [
                 "%",
-                "YMOD"
+                "%"
               ]
             ]
           },
@@ -81,23 +81,23 @@ Blockly.defineBlocksWithJsonArray([
             "options": [
               [
                 "+",
-                "ZPLUS"
+                "+"
               ],
               [
                 "-",
-                "ZMINUS"
+                "-"
               ],
               [
                 "*",
-                "ZTIMES"
+                "*"
               ],
               [
                 "\\",
-                "ZDIV"
+                "\\"
               ],
               [
                 "%",
-                "ZMOD"
+                "%"
               ]
             ]
           },
@@ -113,7 +113,7 @@ Blockly.defineBlocksWithJsonArray([
         "colour": 230,
         "tooltip": "Modify attributes of a position variable.",
         "helpUrl": ""
-    },
+      },
     {
         // BLOCK: set_vector_attribute_to
         "type": "set_vector_attribute_to",
@@ -191,7 +191,7 @@ Blockly.Python['vector_all_attrs'] = function(block) {
     var dropdown_zoperator = block.getFieldValue('ZOPERATOR');
     var value_z = Blockly.Python.valueToCode(block, 'Z', Blockly.Python.ORDER_ATOMIC);
     // TODO: Assemble Python into code variable.
-    var code = '...\n';
+    var code = value_variable+'.x = '+value_variable+'.x '+dropdown_xoperator+' '+value_x+'\n'+value_variable+'.y = '+value_variable+'.y '+dropdown_yoperator+' '+value_y+'\n'+value_variable+'.z = '+value_variable+'.z '+dropdown_zoperator+' '+value_z+'\n';
     return code;
 };
 Blockly.Python['vector_x_attribute'] = function(block) {
