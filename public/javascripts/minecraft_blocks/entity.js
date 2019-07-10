@@ -21,6 +21,7 @@ Blockly.defineBlocksWithJsonArray([
         "helpUrl": ""
     },
     {
+        //BLOCK: mc.entity.setPos()
         "type": "entity_set_position",
         "message0": "Set position of %1 to %2",
         "args0": [
@@ -42,6 +43,22 @@ Blockly.defineBlocksWithJsonArray([
         "tooltip": "Move the specified player to the provided location.",
         "helpUrl": ""
     },
+    {
+        //BLOCK: mc.entity.getTilePos()
+        "type": "entity_get_tile_position",
+        "message0": "Get position directly under:  %1",
+        "args0": [
+          {
+            "type": "input_value",
+            "name": "ENTITYID",
+            "check": "Number"
+          }
+        ],
+        "output": "Vector",
+        "colour": 230,
+        "tooltip": "Get the position of the block located directly under the supplied player.",
+        "helpUrl": ""
+    },
 
 ]);
 
@@ -60,4 +77,11 @@ Blockly.Python['entity_get_position'] = function(block) {
     // TODO: Assemble Python into code variable.
     var code = 'mc.entity.setPos('+value_entityid+', '+value_vector+')\n';
     return code;
+  };
+  Blockly.Python['entity_get_tile_position'] = function(block) {
+    var value_entityid = Blockly.Python.valueToCode(block, 'ENTITYID', Blockly.Python.ORDER_ATOMIC);
+    // TODO: Assemble Python into code variable.
+    var code = 'mc.entity.getTilePos('+value_entityid+')\n';
+    // TODO: Change ORDER_NONE to the correct strength.
+    return [code, Blockly.Python.ORDER_NONE];
   };
