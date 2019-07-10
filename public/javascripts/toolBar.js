@@ -9,7 +9,7 @@ function createSnapshot() {
     var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
     var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
     localStorage.setItem("blockly.xml", xmlText);
-    displaySuccessNotification("Snapshot created successfully");
+    displaySuccessNotification(".menu","Snapshot created");
 }
 
 /**
@@ -22,7 +22,7 @@ function restoreSnapshot() {
         xmlDom = Blockly.Xml.textToDom(xmlText);
         Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xmlDom);
     }
-    displaySuccessNotification("Snapshot restored successfully");
+    displaySuccessNotification(".menu", "Snapshot restored");
 }
 
 
@@ -41,7 +41,7 @@ function loadBlocks() {
             Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xmlDom);
         };
     }
-    displaySuccessNotification("Load was successful.");
+    displaySuccessNotification(".menu","Load was successful.");
 }
 
 
@@ -62,14 +62,13 @@ function saveBlocks() {
     document.body.appendChild(downloadLink);
     //Clicks on the created element to Prompt for download.
     downloadLink.click();
-    displaySuccessNotification("Save was successful.");
+    displaySuccessNotification(".menu", "Save was successful");
 }
 
 // Helper for export blocks.
 function destroyClickedElement(event) {
     document.body.removeChild(event.target);
 }
-
 
 /**
  * generateScript: Sends request to server to record code in pycrafty directory
@@ -86,11 +85,11 @@ function generateScript() {
     xhttp.open("POST", "/copy_text", true);
     xhttp.send(codeForm);
     // With AJAX user would have no idea the file actually saved so display notification.
-    displaySuccessNotification("File saved");
+    displaySuccessNotification(".menu","File saved");
 }
 
 
 // Source: https://notifyjs.jpillora.com/
-function displaySuccessNotification(notificationText) {
-    $.notify(notificationText, "success");
+function displaySuccessNotification(element, notificationText) {
+    $(element).notify(notificationText, "success", { position: "bottom right" });
 }
