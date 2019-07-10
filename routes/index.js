@@ -13,36 +13,55 @@ router.get('/', function(req, res, next) {
     res.render('/public/index.html');
 });
 
-const UNKNOWN_OS = "";
+
 const SUCCESS_MSG = "SUCCESS";
 const FILE_WRITE_ERROR = "WRITE_ERROR";
 const UNKNOWN_OS_ERROR = "UNKNOWN_OS";
 // Catches copy_text and writes requested text to python file in mcpipy directory.
 router.post('/copy_text', function (req, res) {
-    let file_path = getFilePath();
-    let responseMsg = SUCCESS_MSG;
-    if (file_path !== UNKNOWN_OS) {
-        file_path += "gen_script.py";
+    let userOS = getOS();
+    let file_path = getFilePath(userOS);
+    if (userOS === UNKNOWN_OS) {
+        console.log("Error: operating system could not be determined");
+        res.send(UNKNOWN_OS_ERROR);
     }
     else {
-        responseMsg = UNKNOWN_OS_ERROR;
-        console.log("Error: operating system could not be determined");
-        res.send(responseMsg);
+        file_path += "gen_script.py";
+        fs.writeFile(file_path, req.body.codeArea, function (err) {
+            if (!err) {
+                console.log("wrote file at " + file_path);
+                res.send(SUCCESS_MSG);
+            }
+            else {
+                console.log(err);
+                res.send(FILE_WRITE_ERROR);
+            }
+        });
     }
-    fs.writeFile(file_path, req.body.codeArea, function (err) {
-        if (err) {
-            responseMsg = FILE_WRITE_ERROR;
-            console.log(err);
-            res.send(responseMsg);
-        }
-        else {
-            responseMsg = SUCCESS_MSG;
-            console.log("wrote file at " + file_path);
-            res.send(responseMsg);
-        }
-    });
-
 });
+
+
+/**
+ * Function: getOS
+ * Returns either name of a supported OS or UNKNOWN_OS if OS is not supported
+ * @type {string}
+ */
+const WINDOWS = "win32";
+const MAC_OS = "darwin";
+const LINUX = "linux";
+const UNKNOWN_OS = "UNKNOWN";
+function getOS() {
+    let userOS = os.platform();
+    let isSupportedOS = [WINDOWS, MAC_OS, LINUX].find(function (element, index, array) {
+        return element === userOS;
+    }) !== undefined;
+    if (isSupportedOS) {
+        return userOS;
+    }
+    else {
+        return UNKNOWN_OS;
+    }
+}
 
 
 /**
@@ -51,11 +70,8 @@ router.post('/copy_text', function (req, res) {
  * https://stackoverflow.com/questions/8683895/how-do-i-determine-the-current-operating-system-with-node-js
  * https://minecraft.gamepedia.com/.minecraft
  */
-const WINDOWS = "win32";
-const MAC_OS = "darwin";
-const LINUX = "linux";
-function getFilePath() {
-    let userOS = os.platform();
+
+function getFilePath(userOS) {
     let file_path = "";
     if (userOS === WINDOWS) {
         file_path = os.userInfo().homedir + "\\AppData\\Roaming\\.minecraft\\mcpipy\\";

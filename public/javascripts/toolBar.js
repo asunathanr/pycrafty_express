@@ -2,6 +2,10 @@
 // AUTHORS: Justin Erickson, Richie Burch, Matt Hardin, Nathan Robertson
 // PURPOSE: Controls behavior of the toolbar. Most functions in this file are triggered upon an event happening.
 
+const PREAMBLE = "from mine import *\n\n" +
+    "mc = Minecraft()\n" +
+    "\n";
+
 
 // https://groups.google.com/forum/#!topic/blockly/NDlC-l6DLEM
 // TODO: Clean up and finalize createSnapshot and restoreSnapshot
@@ -73,40 +77,37 @@ function destroyClickedElement(event) {
 /**
  * generateScript: Sends request to server to record code in pycrafty directory
  */
-const DONE = 4;
 const SUCCESS_MSG = "SUCCESS";
 const FILE_WRITE_ERROR = "WRITE_ERROR";
 const UNKNOWN_OS_ERROR = "UNKNOWN_OS";
 function generateScript() {
     let codeForm = new FormData();
-    let preamble = "from mine import *\n\n" +
-        "mc = Minecraft()\n" +
-        "\n";
     let xhttp = new XMLHttpRequest();
     Blockly.Python.INFINITE_LOOP_TRAP = null;
-    let code = preamble + Blockly.Python.workspaceToCode(mainWorkspace);
+    let code = PREAMBLE + Blockly.Python.workspaceToCode(mainWorkspace);
     codeForm.append("codeArea", code);
     xhttp.open("POST", "/copy_text", true);
-    xhttp.addEventListener('load', function () {
-        if (xhttp.readyState === DONE && xhttp.status === 200) {
-            if (xhttp.responseText === SUCCESS_MSG) {
-                displaySuccessNotification(".menu", "File saved");
-            }
-            else if (xhttp.responseText === UNKNOWN_OS_ERROR) {
-                $(".menu").notify("Unknown OS", "error");
-            }
-            else if (xhttp.responseText === FILE_WRITE_ERROR) {
-                $(".menu").notify("File write error", "error");
-            }
-            else {
-                $(".menu").notify("Unknown error occurred " + xhttp.responseText, "error");
-            }
-
-        }
-    });
+    addLoadEvent(xhttp);
     xhttp.send(codeForm);
 }
 
+/**
+ * Displays notification to user based on result of AJAX query.
+ * @param xhttp: Object representing the AJAX transaction.
+ */
+function addLoadEvent(xhttp) {
+    xhttp.addEventListener('load', function () {
+        if (xhttp.responseText === SUCCESS_MSG) {
+            displaySuccessNotification(".menu", "File saved");
+        } else if (xhttp.responseText === UNKNOWN_OS_ERROR) {
+            $(".menu").notify("Unknown OS", "error");
+        } else if (xhttp.responseText === FILE_WRITE_ERROR) {
+            $(".menu").notify("File write error", "error");
+        } else {
+            $(".menu").notify("Unknown error occurred " + xhttp.responseText, "error");
+        }
+    });
+}
 
 // Source: https://notifyjs.jpillora.com/
 function displaySuccessNotification(element, notificationText) {
