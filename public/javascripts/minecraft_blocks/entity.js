@@ -97,6 +97,22 @@ Blockly.defineBlocksWithJsonArray([
         "colour": 230,
         "tooltip": "Get the direction of the provided player.",
         "helpUrl": ""
+    },
+    {
+        // BLOCK: mc.entity.getRotation()
+        "type": "entity_get_rotation",
+        "message0": "Get rotation of  %1",
+        "args0": [
+          {
+            "type": "input_value",
+            "name": "ENTITYID",
+            "check": "Number"
+          }
+        ],
+        "output": "Number",
+        "colour": 230,
+        "tooltip": "Get rotation of the provided player.",
+        "helpUrl": ""
     }
 
 ]);
@@ -135,6 +151,13 @@ Blockly.Python['entity_get_position'] = function(block) {
     var value_entityid = Blockly.Python.valueToCode(block, 'ENTITYID', Blockly.Python.ORDER_ATOMIC);
     // TODO: Assemble Python into code variable.
     var code = 'mc.entity.getDirection('+value_entityid+')\n';
+    // TODO: Change ORDER_NONE to the correct strength.
+    return [code, Blockly.Python.ORDER_NONE];
+  };
+  Blockly.Python['entity_get_rotation'] = function(block) {
+    var value_entityid = Blockly.Python.valueToCode(block, 'ENTITYID', Blockly.Python.ORDER_ATOMIC);
+    // TODO: Assemble Python into code variable.
+    var code = 'mc.entity.getRotation('+value_entityid+')\n';
     // TODO: Change ORDER_NONE to the correct strength.
     return [code, Blockly.Python.ORDER_NONE];
   };
