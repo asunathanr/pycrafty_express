@@ -49,7 +49,7 @@ function getFilePath() {
         file_path = os.userInfo().homedir + "\\AppData\\Roaming\\.minecraft\\mcpipy\\";
     }
     else if (userOS === MAC_OS) {
-        file_path = "~/Library/Application Support/minecraft/mcpipy/";
+        file_path = "~/Library/\"Application Support\"/minecraft/mcpipy/";
     }
     else if (userOS === LINUX) {
         file_path = "~/.minecraft/mcpipy/";
