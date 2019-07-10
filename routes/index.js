@@ -14,29 +14,34 @@ router.get('/', function(req, res, next) {
 });
 
 const UNKNOWN_OS = "";
-
+const SUCCESS_MSG = "SUCCESS";
+const FILE_WRITE_ERROR = "WRITE_ERROR";
+const UNKNOWN_OS_ERROR = "UNKNOWN_OS";
 // Catches copy_text and writes requested text to python file in mcpipy directory.
 router.post('/copy_text', function (req, res) {
     let file_path = getFilePath();
-    let responseMsg = "File saved.";
+    let responseMsg = SUCCESS_MSG;
     if (file_path !== UNKNOWN_OS) {
         file_path += "gen_script.py";
     }
     else {
-        responseMsg = "Unknown OS";
+        responseMsg = UNKNOWN_OS_ERROR;
         console.log("Error: operating system could not be determined");
+        res.send(responseMsg);
     }
     fs.writeFile(file_path, req.body.codeArea, function (err) {
         if (err) {
-            responseMsg = "Could not write file.";
+            responseMsg = FILE_WRITE_ERROR;
             console.log(err);
+            res.send(responseMsg);
         }
         else {
-            responseMsg = "File saved.";
+            responseMsg = SUCCESS_MSG;
             console.log("wrote file at " + file_path);
+            res.send(responseMsg);
         }
     });
-    res.send(responseMsg);
+
 });
 
 
