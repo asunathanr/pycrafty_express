@@ -7,7 +7,7 @@
 //JSON array of blocks
 Blockly.defineBlocksWithJsonArray([
   {
-    // mc.postToChat()
+    // BLOCK: mc.postToChat()
     "type": "post_to_chat",
     "message0": "Post to chat. %1 %2 %3",
     "args0": [
@@ -29,7 +29,7 @@ Blockly.defineBlocksWithJsonArray([
     "helpUrl": ""
   },
   {
-    // mc.setBlock()
+    // BLOCK: mc.setBlock()
     "type": "set_block",
     "message0": "Set a single block. %1 Position: %2 Block: %3",
     "args0": [
@@ -54,7 +54,7 @@ Blockly.defineBlocksWithJsonArray([
     "helpUrl": ""
   },
   {
-    //mc.setBlocks()
+    // BLOCK: mc.setBlocks()
     "type": "set_blocks",
     "message0": "Set cube of blocks. %1 Start Position: %2 End Position: %3 Block: %4",
     "args0": [
@@ -84,7 +84,7 @@ Blockly.defineBlocksWithJsonArray([
     "helpUrl": ""
   },
   {
-    // mc.getBlock()
+    // BLOCK: mc.getBlock()
     "type": "get_block",
     "message0": "Get Block %1 Position: %2",
     "args0": [
@@ -103,7 +103,7 @@ Blockly.defineBlocksWithJsonArray([
     "helpUrl": ""
   },
   {
-    // mc.getBlockWithData()
+    // BLOCK: mc.getBlockWithData()
     "type": "get_block_with_data",
     "message0": "Get block type and id. %1 Position: %2",
     "args0": [
@@ -122,7 +122,7 @@ Blockly.defineBlocksWithJsonArray([
     "helpUrl": ""
   },
   {
-    // mc.getBlocks()
+    // BLOCK: mc.getBlocks()
     "type": "get_blocks",
     "message0": "Get list of block types. %1 Start Position: %2 End Position: %3",
     "args0": [
@@ -146,7 +146,7 @@ Blockly.defineBlocksWithJsonArray([
     "helpUrl": ""
   },
   {
-    // mc.getHeight()
+    // BLOCK: mc.getHeight()
     "type": "get_height",
     "message0": "Get Height %1 Position: %2",
     "args0": [
@@ -165,7 +165,7 @@ Blockly.defineBlocksWithJsonArray([
     "helpUrl": ""
   },
   {
-    // mc.getPlayerId()
+    // BLOCK: mc.getPlayerId()
     "type": "get_player_id",
     "message0": "Get player id.",
     "output": "Number",
@@ -174,7 +174,7 @@ Blockly.defineBlocksWithJsonArray([
     "helpUrl": ""
   },
   {
-    // mc.getPlayerEntityIds()
+    // BLOCK: mc.getPlayerEntityIds()
     "type": "get_player_entity_ids",
     "message0": "Get player ids.",
     "output": "List",
