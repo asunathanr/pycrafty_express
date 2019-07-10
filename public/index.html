@@ -19,8 +19,7 @@
     <!-- Minecraft block methods -->
     <script src="javascripts/minecraft_blocks/minecraft.js"></script>
     <script src="javascripts/minecraft_blocks/player.js"></script>
-    <script src="javascripts/minecraft_blocks/vectorAttributes.js"></script>
-    <script src="javascripts/minecraft_blocks/setVecAttrTo.js"></script>
+    <script src="javascripts/minecraft_blocks/position.js"></script>
     <script src="javascripts/minecraft_blocks/entity.js"></script>
     <script src="javascripts/minecraft_blocks/mcBlock.js"></script>
 
@@ -421,7 +420,24 @@
             <block type="player_get_pitch"></block>            
         </category>
 
-        <category name="Vectors" colour="#a55b6d">
+        <category name="Position" colour="#a55b6d">
+            <block type="vector_all_attrs">
+                <value name="X">
+                    <block type="math_number">
+                        <field name="NUM">0</field>
+                    </block>
+                </value>
+                <value name="Y">
+                    <block type="math_number">
+                        <field name="NUM">0</field>
+                    </block>
+                </value>
+                <value name="Z">
+                    <block type="math_number">
+                        <field name="NUM">0</field>
+                    </block>
+                </value>
+            </block>
             <block type="set_vector_attribute_to"></block>
             <block type="vector_x_attribute"></block>
             <block type="vector_y_attribute"></block>
