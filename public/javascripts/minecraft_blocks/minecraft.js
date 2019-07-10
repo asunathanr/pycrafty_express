@@ -212,7 +212,6 @@ Blockly.Python['get_block'] = function(block) {
     } else {
       return [code, Blockly.Python.ORDER_NONE];
     }
-    
 };
 Blockly.Python['get_block_with_data'] = function(block) {
   var value_vec = Blockly.Python.valueToCode(block, 'vec', Blockly.Python.ORDER_ATOMIC);
@@ -238,8 +237,12 @@ Blockly.Python['get_blocks'] = function(block) {
 Blockly.Python['get_height'] = function(block) {
     var value_vec = Blockly.Python.valueToCode(block, 'vec', Blockly.Python.ORDER_ATOMIC);
     var code = 'mc.getHeight('+value_vec+')\n';
-    // TODO: Change ORDER_NONE to the correct strength.
-    return [code, Blockly.Python.ORDER_NONE];
+    if(block.getParent() === null) {
+      // TODO: Change ORDER_NONE to the correct strength.
+      return [code+'\n', Blockly.Python.ORDER_NONE];
+    } else {
+      return [code, Blockly.Python.ORDER_NONE];
+    }
 };
 Blockly.Python['get_player_id'] = function (block) {
   var code = 'mc.getPlayerId()\n';
