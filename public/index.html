@@ -451,9 +451,18 @@
         </category>
 
         <category name="Minecraft Block" colour="#A65C81">
-            <block type="mcblock_setBlock"></block>
-            <block type="mcblock_setType"></block>
-            <block type="mcblock_setData"></block>
+            <block type="mcblock_all_attrs">
+                <value name="ID">
+                    <block type="math_number">
+                        <field name="NUM">1</field>
+                    </block>
+                </value>
+                <value name="DATA">
+                    <block type="math_number">
+                        <field name="NUM">0</field>
+                    </block>
+                </value>
+            </block>
         </category>
 
     </category> <!-- End of Minecraft Category -->
