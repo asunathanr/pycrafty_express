@@ -32,21 +32,21 @@ Blockly.defineBlocksWithJsonArray([
 
     // BLOCK: mc.player.setTilePos()
     {
-        "type":"setTilePos",
-        "message0": "Set Player tile position",
-        "message1": "%1",
-        "args1": [
-            {
-                "type": "input_value",
-                "name": "VEC3",
-            }
+        "type": "set_player_tile_position",
+        "message0": "Set players position on top of: %1",
+        "args0": [
+          {
+            "type": "input_value",
+            "name": "NAME",
+            "check": "Vector"
+          }
         ],
         "previousStatement": null,
         "nextStatement": null,
-        "colour": BLOCK_COLOR,
-        "tooltip": "Sets position underneath player to new x,y,z coordinates",
-        "helpUrl": "",
-    },
+        "colour": 230,
+        "tooltip": "Move player on top of tile at provided position.",
+        "helpUrl": ""
+      },
 
     // BLOCK:  mc.player.getDirection()
     {
@@ -106,7 +106,7 @@ Blockly.Python['set_player_position'] = function (block) {
 };
 
 
-Blockly.Python['setTilePos'] = function (block) {
+Blockly.Python['set_player_tile_position'] = function (block) {
     let vector3 = Blockly.Python.valueToCode(block,"VEC3", Blockly.Python.ORDER_ATOMIC);
     return makeFunctionCall("mc,.player.setTilePos", [vector3]);
 };
