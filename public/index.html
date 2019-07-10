@@ -19,8 +19,7 @@
     <!-- Minecraft block methods -->
     <script src="javascripts/minecraft_blocks/minecraft.js"></script>
     <script src="javascripts/minecraft_blocks/player.js"></script>
-    <script src="javascripts/minecraft_blocks/vectorAttributes.js"></script>
-    <script src="javascripts/minecraft_blocks/setVecAttrTo.js"></script>
+    <script src="javascripts/minecraft_blocks/position.js"></script>
     <script src="javascripts/minecraft_blocks/entity.js"></script>
     <script src="javascripts/minecraft_blocks/mcBlock.js"></script>
 
@@ -401,55 +400,48 @@
         </block>
     </category>
     <category name="Minecraft" colour="#a55b6d">
-
-        <block type="getBlock"></block>
-
-        <block type="getBlockWithData"></block>
-
-        <block type="getHeight"></block>
-
-        <block type="getBlocks"></block>
-
-        <block type="setBlock"></block>
-
-        <block type="setBlocks"></block>
-
-        <block type="postToChat"></block>
-
-        <block type="getPlayerEntityIds"></block>
-
-        <block type="getPlayerId"></block>
+        <block type="post_to_chat"></block>
+        <block type="set_block"></block>
+        <block type="set_blocks"></block>
+        <block type="get_block"></block>
+        <block type="get_block_with_data"></block>
+        <block type="get_blocks"></block>
+        <block type="get_height"></block>
+        <block type="get_player_id"></block>
+        <block type="get_player_entity_ids"></block>
 
         <category name="Player" colour="#a55b6d">
-
-            <block type="setPos">
-
-            </block>
-
-            <block type="setTilePos">
-
-            </block>
-
-
-            <block type="getPos"></block>
-
-            <block type="getTilePos"></block>
-
-            <block type="getPitch"></block>
-
-            <block type="getDirection"></block>
-
-            <block type="getRotation"></block>
+            <block type="player_get_position"></block>
+            <block type="player_set_position"></block>
+            <block type="player_get_tile_position"></block>
+            <block type="player_set_tile_position"></block>
+            <block type="player_get_direction"></block>
+            <block type="player_get_rotation"></block>
+            <block type="player_get_pitch"></block>            
         </category>
 
-
-        <category name="Vectors" colour="#a55b6d">
-
+        <category name="Position" colour="#a55b6d">
+            <block type="vector_all_attrs">
+                <value name="X">
+                    <block type="math_number">
+                        <field name="NUM">0</field>
+                    </block>
+                </value>
+                <value name="Y">
+                    <block type="math_number">
+                        <field name="NUM">0</field>
+                    </block>
+                </value>
+                <value name="Z">
+                    <block type="math_number">
+                        <field name="NUM">0</field>
+                    </block>
+                </value>
+            </block>
             <block type="set_vector_attribute_to"></block>
             <block type="vector_x_attribute"></block>
             <block type="vector_y_attribute"></block>
             <block type="vector_z_attribute"></block>
-
         </category>
 
         <category name="Entity" colour="#a55b6d">
@@ -475,8 +467,7 @@
     </category> <!-- End of Minecraft Category -->
 
     <sep></sep>
-    <category name="Variables" colour="#A65C81" custom="VARIABLE"></category>
-
+    <category name="Variables" colour="#A65C81" custom="VARIABLE_DYNAMIC"></category>
 
     <category name="Functions" colour="#A65C81">
         <block type="procedures_defreturn">
