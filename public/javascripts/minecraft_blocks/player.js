@@ -14,7 +14,7 @@ Blockly.defineBlocksWithJsonArray([
 
     // BLOCK: mc.player.setPos()
     {
-        "type": "set_player_position",
+        "type": "player_set_position",
         "message0": "Set players position to : %1",
         "args0": [
           {
@@ -90,17 +90,17 @@ Blockly.defineBlocksWithJsonArray([
 
     // BLOCK: mc.player.getTilePos()
     {
-        "type": "getTilePos",
-        "message0": "Get tile position",
-        "output": "Number",
-        "colour": BLOCK_COLOR,
-        "tooltip": "Returns position of tile player is standing on.",
-        "helpUrl": "documentation/index.html"
-    }
+        "type": "player_get_tile_position",
+        "message0": "Get position under player.",
+        "output": "Vector",
+        "colour": 230,
+        "tooltip": "",
+        "helpUrl": ""
+      }
 ]);
 
 
-Blockly.Python['set_player_position'] = function (block) {
+Blockly.Python['player_set_position'] = function (block) {
     let vector3 = Blockly.Python.valueToCode(block,"VEC3", Blockly.Python.ORDER_ATOMIC);
     return makeFunctionCall("mc.player.setPos", [vector3]);
 };
@@ -136,7 +136,7 @@ Blockly.Python['getRotation'] = function (block) {
 };
 
 
-Blockly.Python['getTilePos'] = function (block) {
+Blockly.Python['player_get_tile_position'] = function (block) {
     let code = makeFunctionCall("mc.player.getTilePos");
     return [code, Blockly.Python.ORDER_NONE];
 };
