@@ -60,12 +60,12 @@ Blockly.defineBlocksWithJsonArray([
 
     // BLOCK: mc.player.getPitch()
     {
-        "type": "getPitch",
-        "message0": "Get Player Pitch",
+        "type": "player_get_pitch",
+        "message0": "Get players pitch.",
         "output": "Number",
-        "colour": BLOCK_COLOR,
-        "tooltip": "Returns player pitch as a Vec3 object.",
-        "helpUrl": "documentation/index.html"
+        "colour": 230,
+        "tooltip": "Gets the players pitch",
+        "helpUrl": ""
     },
 
     // BLOCK: mc.player.getPos()
@@ -118,7 +118,7 @@ Blockly.Python['player_get_direction'] = function (block) {
 };
 
 
-Blockly.Python['getPitch'] = function (block) {
+Blockly.Python['player_get_pitch'] = function (block) {
     let code = makeFunctionCall("mc.player.getPitch");
     return [code, Blockly.Python.ORDER_NONE];
 };
