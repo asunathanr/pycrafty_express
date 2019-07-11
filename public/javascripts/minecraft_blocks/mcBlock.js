@@ -42,5 +42,28 @@ Blockly.Python['mcblock_all_attrs'] = function(block) {
     var value_data = Blockly.Python.valueToCode(block, 'DATA', Blockly.Python.ORDER_ATOMIC);
     // TODO: Assemble Python into code variable.
     var code = value_block+'.id = '+value_id+'\n'+value_block+'.data = '+value_data+'\n';
+    fetch('http://localhost:3000/javascripts/minecraft_blocks/mcBlockIds.txt')
+    .then(response => response.text())
+    .then(data => {
+      var dropdown = new Blockly.FieldDropdown(dynamicOptions(data)); // stopped here. maybe wrapping the code to populate the dropdown in a fetch inside an extension will be the answer?
+    })
+    .catch(error => console.log(error));
     return code;
   };
+
+
+  // helper functions
+  function getvals(){
+    return fetch('http://localhost:3000/javascripts/minecraft_blocks/mcBlockIds.txt')
+    .then(response => response.text())
+    .then(data => {
+      console.dir(data);
+    })
+    .catch(error => console.log(error));
+  }
+
+  function dynamicOptions(optsString) {
+    var options = [];
+    console.log(optsString);
+    return options;
+  }
