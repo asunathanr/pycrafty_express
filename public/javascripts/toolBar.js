@@ -20,7 +20,7 @@ function createSnapshot() {
  * restoreSnapshot: Restores a saved workspace in browser.
  */
 function restoreSnapshot() {
-    var xmlText = localStorage.getItem("blockly.xml");
+    let xmlText = localStorage.getItem("blockly.xml");
     if (xmlText) {
         Blockly.mainWorkspace.clear();
         xmlDom = Blockly.Xml.textToDom(xmlText);
@@ -66,7 +66,6 @@ function saveBlocks() {
     document.body.appendChild(downloadLink);
     //Clicks on the created element to Prompt for download.
     downloadLink.click();
-    displaySuccessNotification(".menu", "Save was successful");
 }
 
 // Helper for export blocks.
@@ -75,17 +74,15 @@ function destroyClickedElement(event) {
 }
 
 /**
- * generateScript: Sends request to server to record code in pycrafty directory
+ * createScript: Sends request to server to record code in pycrafty directory
  */
-const SUCCESS_MSG = "SUCCESS";
-const FILE_WRITE_ERROR = "WRITE_ERROR";
-const UNKNOWN_OS_ERROR = "UNKNOWN_OS";
-function generateScript() {
+function createScript() {
     let codeForm = new FormData();
     let xhttp = new XMLHttpRequest();
     Blockly.Python.INFINITE_LOOP_TRAP = null;
     let code = PREAMBLE + Blockly.Python.workspaceToCode(mainWorkspace);
     codeForm.append("codeArea", code);
+    codeForm.append("fileName", document.getElementById("fileNameTextBox").value);
     xhttp.open("POST", "/copy_text", true);
     addLoadEvent(xhttp);
     xhttp.send(codeForm);
@@ -95,6 +92,9 @@ function generateScript() {
  * Displays notification to user based on result of AJAX query.
  * @param xhttp: Object representing the AJAX transaction.
  */
+const SUCCESS_MSG = "SUCCESS";
+const FILE_WRITE_ERROR = "WRITE_ERROR";
+const UNKNOWN_OS_ERROR = "UNKNOWN_OS";
 function addLoadEvent(xhttp) {
     xhttp.addEventListener('load', function () {
         if (xhttp.responseText === SUCCESS_MSG) {
