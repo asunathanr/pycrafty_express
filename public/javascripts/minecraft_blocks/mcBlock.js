@@ -29,6 +29,7 @@ Blockly.defineBlocksWithJsonArray([
         "inputsInline": true,
         "previousStatement": null,
         "nextStatement": null,
+        "extensions": ["dynamic_dropdown_extension"],
         "colour": 230,
         "tooltip": "Change the type and sup-type of a provided block object.",
         "helpUrl": ""
@@ -42,12 +43,7 @@ Blockly.Python['mcblock_all_attrs'] = function(block) {
     var value_data = Blockly.Python.valueToCode(block, 'DATA', Blockly.Python.ORDER_ATOMIC);
     // TODO: Assemble Python into code variable.
     var code = value_block+'.id = '+value_id+'\n'+value_block+'.data = '+value_data+'\n';
-    fetch('http://localhost:3000/javascripts/minecraft_blocks/mcBlockIds.txt')
-    .then(response => response.text())
-    .then(data => {
-      var dropdown = new Blockly.FieldDropdown(dynamicOptions(data)); // stopped here. maybe wrapping the code to populate the dropdown in a fetch inside an extension will be the answer?
-    })
-    .catch(error => console.log(error));
+    
     return code;
   };
 
@@ -63,7 +59,23 @@ Blockly.Python['mcblock_all_attrs'] = function(block) {
   }
 
   function dynamicOptions(optsString) {
-    var options = [];
-    console.log(optsString);
+    var options = []
+    for(i of optsString.split(" ")) {
+      options.push([i, i]);
+    }
     return options;
   }
+
+// Extension for dropdown
+Blockly.Extensions.register('dynamic_dropdown_extension', 
+  function() {
+    fetch('http://localhost:3000/javascripts/minecraft_blocks/mcBlockIds.txt')
+    .then(response => response.text())
+    .then(data => {
+      var dropdown = new Blockly.FieldDropdown(dynamicOptions(data)); // stopped here. maybe wrapping the code to populate the dropdown in a fetch inside an extension will be the answer?
+      this.inputList[1].appendField(dropdown, "LIST");
+    })
+    .catch(error => console.log(error));
+    
+    
+  });
