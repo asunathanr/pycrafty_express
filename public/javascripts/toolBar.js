@@ -20,7 +20,7 @@ function createSnapshot() {
  * restoreSnapshot: Restores a saved workspace in browser.
  */
 function restoreSnapshot() {
-    var xmlText = localStorage.getItem("blockly.xml");
+    let xmlText = localStorage.getItem("blockly.xml");
     if (xmlText) {
         Blockly.mainWorkspace.clear();
         xmlDom = Blockly.Xml.textToDom(xmlText);
@@ -66,7 +66,6 @@ function saveBlocks() {
     document.body.appendChild(downloadLink);
     //Clicks on the created element to Prompt for download.
     downloadLink.click();
-    displaySuccessNotification(".menu", "Save was successful");
 }
 
 // Helper for export blocks.
