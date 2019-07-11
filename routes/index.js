@@ -2,9 +2,11 @@
 // AUTHORS: Richie Burch, Nathan Robertson
 // PURPOSE: Detects various GET and POST requests and performs appropriate actions on them.
 
+
 const fs = require('fs');
 const os = require('os');
 const express = require('express');
+const validator = require('express-validator');
 let router = express.Router();
 
 
@@ -18,11 +20,18 @@ const SUCCESS_MSG = "SUCCESS";
 const FILE_WRITE_ERROR = "WRITE_ERROR";
 const UNKNOWN_OS_ERROR = "UNKNOWN_OS";
 // Catches copy_text and writes requested text to python file in mcpipy directory.
+// If the input field is empty a default file called "script.py" is used.
 // TODO: Ensure file name is sanitized before trying to save it
-router.post('/copy_text', function (req, res) {
+router.post(
+    '/copy_text',
+    [
+        validator.check('fileName').trim().escape()
+    ],
+    function (req, res) {
     let userOS = getOS();
     let file_path = getFilePath(userOS);
-    let fileName = req.body.fileName;
+    let rawFileName = req.body.fileName;
+    let fileName = parseFileName(rawFileName);
     if (userOS === UNKNOWN_OS) {
         console.log("Error: operating system could not be determined");
         res.send(UNKNOWN_OS_ERROR);
@@ -88,6 +97,21 @@ function getFilePath(userOS) {
         file_path = UNKNOWN_OS;
     }
     return file_path;
+}
+
+
+/**
+ * Parses file name given by user and determines if it can be saved in its current state.
+ * If not it suggests a file name or suggests termination of process
+ * @param rawFileName
+ */
+function parseFileName(rawFileName) {
+    if (rawFileName === "") {
+        return "script.py";
+    }
+    else {
+        return rawFileName;
+    }
 }
 
 module.exports = router;
