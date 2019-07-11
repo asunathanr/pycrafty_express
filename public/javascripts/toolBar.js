@@ -82,6 +82,7 @@ function createScript() {
     Blockly.Python.INFINITE_LOOP_TRAP = null;
     let code = PREAMBLE + Blockly.Python.workspaceToCode(mainWorkspace);
     codeForm.append("codeArea", code);
+    codeForm.append("fileName", document.getElementById("fileNameTextBox").value);
     xhttp.open("POST", "/copy_text", true);
     addLoadEvent(xhttp);
     xhttp.send(codeForm);
