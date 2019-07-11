@@ -19,35 +19,43 @@ router.get('/', function(req, res, next) {
 const SUCCESS_MSG = "SUCCESS";
 const FILE_WRITE_ERROR = "WRITE_ERROR";
 const UNKNOWN_OS_ERROR = "UNKNOWN_OS";
-// Catches copy_text and writes requested text to python file in mcpipy directory.
+const BLACKLIST = ":\\|?*";
+const MAX_FILE_LENGTH = 100;
+// Writes requested code to python file in mcpipy directory.
 // If the input field is empty a default file called "script.py" is used.
+// The built in validator also removes invalid characters from file name:
+// https://docs.microsoft.com/en-us/windows/win32/fileio/naming-a-file
+// List of sanitizers: https://github.com/validatorjs/validator.js#sanitizers
 // TODO: Ensure file name is sanitized before trying to save it
 router.post(
     '/copy_text',
     [
-        validator.check('fileName').trim().escape()
+        validator.check('fileName')
+            .trim()
+            .escape()
+            .stripLow()
+            .contains(BLACKLIST)
+            .isLength({max:MAX_FILE_LENGTH})
     ],
     function (req, res) {
-    let userOS = getOS();
-    let file_path = getFilePath(userOS);
-    let rawFileName = req.body.fileName;
-    let fileName = parseFileName(rawFileName);
-    if (userOS === UNKNOWN_OS) {
-        console.log("Error: operating system could not be determined");
-        res.send(UNKNOWN_OS_ERROR);
-    }
-    else {
-        file_path += fileName;
-        fs.writeFile(file_path, req.body.codeArea, function (err) {
-            if (!err) {
-                console.log("wrote file at " + file_path);
-                res.send(SUCCESS_MSG);
-            }
-            else {
-                console.log(err);
-                res.send(FILE_WRITE_ERROR);
-            }
-        });
+        let userOS = getOS();
+        let file_path = getFilePath(userOS);
+        let rawFileName = req.body.fileName;
+        let fileName = parseFileName(rawFileName) + ".py";
+        if (userOS === UNKNOWN_OS) {
+            console.log("Error: operating system could not be determined");
+            res.send(UNKNOWN_OS_ERROR);
+        } else {
+            file_path += fileName;
+            fs.writeFile(file_path, req.body.codeArea, function (err) {
+                if (!err) {
+                    console.log("wrote file at " + file_path);
+                    res.send(SUCCESS_MSG);
+                } else {
+                    console.log(err);
+                    res.send(FILE_WRITE_ERROR);
+                }
+            });
     }
 });
 
