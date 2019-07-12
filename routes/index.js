@@ -35,14 +35,18 @@ router.post(
             .trim()
             .escape()
             .stripLow()
-            .contains(BLACKLIST)
-            .isLength({max:MAX_FILE_LENGTH})
+            .customSanitizer((value, {req}) => { return value.replace(/(\.[\w]*)$/, ""); })
+            .customSanitizer((value, {req, location, path}) => {
+                return String(value).length === 0 ? String("script") : String(value);
+            })
+            .contains(BLACKLIST).withMessage("Character found in file name is invalid")
+            .isLength({min: 1, max:MAX_FILE_LENGTH})
     ],
     function (req, res) {
         let userOS = getOS();
         let file_path = getFilePath(userOS);
         let rawFileName = req.body.fileName;
-        let fileName = parseFileName(rawFileName) + ".py";
+        let fileName = rawFileName + ".py";
         if (userOS === UNKNOWN_OS) {
             console.log("Error: operating system could not be determined");
             res.send(UNKNOWN_OS_ERROR);
@@ -57,7 +61,7 @@ router.post(
                     res.send(FILE_WRITE_ERROR);
                 }
             });
-    }
+        }
 });
 
 
