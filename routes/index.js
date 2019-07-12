@@ -27,6 +27,7 @@ const MAX_FILE_LENGTH = 100;
 // https://docs.microsoft.com/en-us/windows/win32/fileio/naming-a-file
 // List of sanitizers: https://github.com/validatorjs/validator.js#sanitizers
 // TODO: Ensure file name is sanitized before trying to save it
+// TODO: Reject saving file with characters in blacklist
 router.post(
     '/copy_text',
     [
@@ -112,14 +113,14 @@ function getFilePath(userOS) {
  * Parses file name given by user and determines if it can be saved in its current state.
  * If not it suggests a file name or suggests termination of process
  * @param rawFileName
+ * @returns string
  */
 function parseFileName(rawFileName) {
+    let newFileName = rawFileName.replace(/(\.[\w]*)$/, "");
     if (rawFileName === "") {
-        return "script.py";
+        newFileName = "script";
     }
-    else {
-        return rawFileName;
-    }
+    return newFileName;
 }
 
 module.exports = router;
