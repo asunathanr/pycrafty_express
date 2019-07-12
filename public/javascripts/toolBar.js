@@ -6,6 +6,8 @@ const PREAMBLE = "from mine import *\n\n" +
     "mc = Minecraft()\n" +
     "\n";
 
+const NOTIFY_OPTIONS = {autoHideDelay: 10000};
+
 
 // https://groups.google.com/forum/#!topic/blockly/NDlC-l6DLEM
 // TODO: Clean up and finalize createSnapshot and restoreSnapshot
@@ -92,19 +94,13 @@ function createScript() {
  * Displays notification to user based on result of AJAX query.
  * @param xhttp: Object representing the AJAX transaction.
  */
-const SUCCESS_MSG = "SUCCESS";
-const FILE_WRITE_ERROR = "WRITE_ERROR";
-const UNKNOWN_OS_ERROR = "UNKNOWN_OS";
 function addLoadEvent(xhttp) {
     xhttp.addEventListener('load', function () {
-        if (xhttp.responseText === SUCCESS_MSG) {
-            displaySuccessNotification(".menu", "File saved");
-        } else if (xhttp.responseText === UNKNOWN_OS_ERROR) {
-            $(".menu").notify("Unknown OS", "error");
-        } else if (xhttp.responseText === FILE_WRITE_ERROR) {
-            $(".menu").notify("File write error", "error");
+        let response = JSON.parse(xhttp.responseText);
+        if (response['errors'] === undefined) {
+            displaySuccessNotification(".menu", "File: " + response.file_name + ".py saved");
         } else {
-            $(".menu").notify("Unknown error occurred " + xhttp.responseText, "error");
+            $(".menu").notify(JSON.stringify(response.errors[0].msg), "error", NOTIFY_OPTIONS);
         }
     });
 }
