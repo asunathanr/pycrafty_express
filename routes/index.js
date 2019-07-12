@@ -21,11 +21,9 @@ const MAX_FILE_LENGTH = 100;
 const WINDOWS = "win32";
 // Writes requested code to python file in mcpipy directory.
 // If the input field is empty a default file called "script.py" is used.
-// The built in validator also removes invalid characters from file name:
 // https://docs.microsoft.com/en-us/windows/win32/fileio/naming-a-file
 // List of sanitizers: https://github.com/validatorjs/validator.js#sanitizers
 // TODO: Ensure file name is sanitized before trying to save it
-// TODO: Reject saving file with characters in blacklist
 router.post(
     '/copy_text',
     [
@@ -55,7 +53,7 @@ router.post(
         fs.writeFile(file_path, req.body.codeArea, function (err) {
             if (!err) {
                 console.log("wrote file at " + file_path);
-                res.status(200).json({});
+                res.status(200).json({file_name: req.body.fileName});
             } else {
                 console.log(err);
                 res.status(422).json({"errors": [{msg: "Could not write file"}]});

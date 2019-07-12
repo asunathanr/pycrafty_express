@@ -98,7 +98,7 @@ function addLoadEvent(xhttp) {
     xhttp.addEventListener('load', function () {
         let response = JSON.parse(xhttp.responseText);
         if (response['errors'] === undefined) {
-            displaySuccessNotification(".menu", "File saved");
+            displaySuccessNotification(".menu", "File: " + response.file_name + ".py saved");
         } else {
             $(".menu").notify(JSON.stringify(response.errors[0].msg), "error", NOTIFY_OPTIONS);
         }
