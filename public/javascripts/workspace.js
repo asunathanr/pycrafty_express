@@ -47,6 +47,8 @@ mainWorkspace.addChangeListener(function () {
     displayCodeInBrowser();
 });
 
+// TODO: Make scrollbars start at 0,0
+
 window.addEventListener('resize', onresize, false);
 onresize();
 Blockly.svgResize(mainWorkspace);
