@@ -16,10 +16,7 @@ router.get('/', function(req, res, next) {
 });
 
 
-const SUCCESS_MSG = "SUCCESS";
-const FILE_WRITE_ERROR = "WRITE_ERROR";
-const UNKNOWN_OS_ERROR = "UNKNOWN_OS";
-const BLACKLIST = ":\\|?*";
+const BLACKLIST = /:\\|\?\*/;
 const MAX_FILE_LENGTH = 100;
 const WINDOWS = "win32";
 // Writes requested code to python file in mcpipy directory.
@@ -33,28 +30,34 @@ router.post(
     '/copy_text',
     [
         validator.check('fileName')
+            // SANITIZERS
             .trim()
             .escape()
             .stripLow()
             // TODO: make regex recognize ..py and ...py and so on
             .customSanitizer((value, {req}) => value.replace(/(\.[\w]*)$/, ""))
             .customSanitizer((value, {req, location, path}) => {
-                return String(value).length === 0 ? String("script") : String(value);
+                return String(value).length === 0 ? "script" : value;
             })
-            .contains(BLACKLIST).withMessage("Character found in file name is invalid")
+            // VALIDATORS
             .isLength({min: 1, max:MAX_FILE_LENGTH})
+            .custom((value, {req}) => !value.match(BLACKLIST))
             .custom((value, {req}) => os.platform() === WINDOWS)
             .withMessage("This page only supports Windows based operating systems.")
     ],
     function (req, res) {
+        let errors = validator.validationResult(req);
         let file_path = getFilePath(req.body.fileName);
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
+        }
         fs.writeFile(file_path, req.body.codeArea, function (err) {
             if (!err) {
                 console.log("wrote file at " + file_path);
-                res.send(SUCCESS_MSG);
+                res.status(200).json({});
             } else {
                 console.log(err);
-                res.send(FILE_WRITE_ERROR);
+                res.status(422).json({"errors": ["Could not write file"]});
             }
         });
 
