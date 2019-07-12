@@ -100,7 +100,7 @@ function addLoadEvent(xhttp) {
         if (response['errors'] === undefined) {
             displaySuccessNotification(".menu", "File saved");
         } else {
-            $(".menu").notify(JSON.stringify(response['errors']), "error", NOTIFY_OPTIONS);
+            $(".menu").notify(JSON.stringify(response.errors[0].msg), "error", NOTIFY_OPTIONS);
         }
     });
 }

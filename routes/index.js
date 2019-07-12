@@ -16,7 +16,7 @@ router.get('/', function(req, res, next) {
 });
 
 
-const BLACKLIST = /:\\|\?\*/;
+const ILLEGAL_FILENAME_CHARS = /[:\\|?*]+/;
 const MAX_FILE_LENGTH = 100;
 const WINDOWS = "win32";
 // Writes requested code to python file in mcpipy directory.
@@ -40,10 +40,11 @@ router.post(
                 return String(value).length === 0 ? "script" : value;
             })
             // VALIDATORS
-            .isLength({min: 1, max:MAX_FILE_LENGTH})
-            .custom((value, {req}) => !value.match(BLACKLIST))
             .custom((value, {req}) => os.platform() === WINDOWS)
             .withMessage("This page only supports Windows based operating systems.")
+            .isLength({min: 1, max:MAX_FILE_LENGTH})
+            .custom((value, {req}) => value.match(ILLEGAL_FILENAME_CHARS) === null)
+            .withMessage("?, :, \\, |, ?, and * cannot be used in file names.")
     ],
     function (req, res) {
         let errors = validator.validationResult(req);
@@ -57,7 +58,7 @@ router.post(
                 res.status(200).json({});
             } else {
                 console.log(err);
-                res.status(422).json({"errors": ["Could not write file"]});
+                res.status(422).json({"errors": [{msg: "Could not write file"}]});
             }
         });
 
