@@ -21,6 +21,7 @@ const FILE_WRITE_ERROR = "WRITE_ERROR";
 const UNKNOWN_OS_ERROR = "UNKNOWN_OS";
 const BLACKLIST = ":\\|?*";
 const MAX_FILE_LENGTH = 100;
+const WINDOWS = "win32";
 // Writes requested code to python file in mcpipy directory.
 // If the input field is empty a default file called "script.py" is used.
 // The built in validator also removes invalid characters from file name:
@@ -35,92 +36,40 @@ router.post(
             .trim()
             .escape()
             .stripLow()
-            .contains(BLACKLIST)
-            .isLength({max:MAX_FILE_LENGTH})
+            // TODO: make regex recognize ..py and ...py and so on
+            .customSanitizer((value, {req}) => value.replace(/(\.[\w]*)$/, ""))
+            .customSanitizer((value, {req, location, path}) => {
+                return String(value).length === 0 ? String("script") : String(value);
+            })
+            .contains(BLACKLIST).withMessage("Character found in file name is invalid")
+            .isLength({min: 1, max:MAX_FILE_LENGTH})
+            .custom((value, {req}) => os.platform() === WINDOWS)
+            .withMessage("This page only supports Windows based operating systems.")
     ],
     function (req, res) {
-        let userOS = getOS();
-        let file_path = getFilePath(userOS);
-        let rawFileName = req.body.fileName;
-        let fileName = parseFileName(rawFileName) + ".py";
-        if (userOS === UNKNOWN_OS) {
-            console.log("Error: operating system could not be determined");
-            res.send(UNKNOWN_OS_ERROR);
-        } else {
-            file_path += fileName;
-            fs.writeFile(file_path, req.body.codeArea, function (err) {
-                if (!err) {
-                    console.log("wrote file at " + file_path);
-                    res.send(SUCCESS_MSG);
-                } else {
-                    console.log(err);
-                    res.send(FILE_WRITE_ERROR);
-                }
-            });
-    }
+        let file_path = getFilePath(req.body.fileName);
+        fs.writeFile(file_path, req.body.codeArea, function (err) {
+            if (!err) {
+                console.log("wrote file at " + file_path);
+                res.send(SUCCESS_MSG);
+            } else {
+                console.log(err);
+                res.send(FILE_WRITE_ERROR);
+            }
+        });
+
 });
 
 
 /**
- * Function: getOS
- * Returns either name of a supported OS or UNKNOWN_OS if OS is not supported
- * @type {string}
- */
-const WINDOWS = "win32";
-const MAC_OS = "darwin";
-const LINUX = "linux";
-const UNKNOWN_OS = "UNKNOWN";
-function getOS() {
-    let userOS = os.platform();
-    let isSupportedOS = [WINDOWS, MAC_OS, LINUX].find(function (element, index, array) {
-        return element === userOS;
-    }) !== undefined;
-    if (isSupportedOS) {
-        return userOS;
-    }
-    else {
-        return UNKNOWN_OS;
-    }
-}
-
-
-/**
- * getFilePath: Returns correct file path for .minecraft/mcpipy folder based on user's OS
+ * getFilePath: Returns correct file path for .minecraft/mcpipy folder
  * Sources:
- * https://stackoverflow.com/questions/8683895/how-do-i-determine-the-current-operating-system-with-node-js
  * https://minecraft.gamepedia.com/.minecraft
  */
 
-function getFilePath(userOS) {
-    let file_path = "";
-    if (userOS === WINDOWS) {
-        file_path = os.userInfo().homedir + "\\AppData\\Roaming\\.minecraft\\mcpipy\\";
-    }
-    else if (userOS === MAC_OS) {
-        file_path = os.homedir() + "/Library/\"Application Support\"/minecraft/mcpipy/";
-    }
-    else if (userOS === LINUX) {
-        file_path = "~/.minecraft/mcpipy/";
-    }
-    else {
-        file_path = UNKNOWN_OS;
-    }
-    return file_path;
+function getFilePath(fileName) {
+    return os.userInfo().homedir + "\\AppData\\Roaming\\.minecraft\\mcpipy\\" + fileName + ".py";
 }
 
-
-/**
- * Parses file name given by user and determines if it can be saved in its current state.
- * If not it suggests a file name or suggests termination of process
- * @param rawFileName
- * @returns string
- */
-function parseFileName(rawFileName) {
-    let newFileName = rawFileName.replace(/(\.[\w]*)$/, "");
-    if (rawFileName === "") {
-        newFileName = "script";
-    }
-    return newFileName;
-}
 
 module.exports = router;
