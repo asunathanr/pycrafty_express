@@ -55,7 +55,7 @@ Blockly.defineBlocksWithJsonArray([ // BEGIN JSON EXTRACT
     "style": "variable_dynamic_blocks",
     "helpUrl": "%{BKY_VARIABLES_GET_HELPURL}",
     "tooltip": "%{BKY_VARIABLES_GET_TOOLTIP}",
-    "extensions": ["contextMenu_variableDynamicSetterGetter"]
+    "extensions": ["contextMenu_variableDynamicSetterGetter", "check_for_setter"]
   },
   // Block for variable setter.
   {
@@ -184,3 +184,19 @@ Blockly.Constants.VariablesDynamic.DELETE_OPTION_CALLBACK_FACTORY = function(blo
 
 Blockly.Extensions.registerMixin('contextMenu_variableDynamicSetterGetter',
     Blockly.Constants.VariablesDynamic.CUSTOM_CONTEXT_MENU_VARIABLE_GETTER_SETTER_MIXIN);
+
+
+// Check to verify a blocks setter is being used so block is correctly initiallized before use
+
+Blockly.Extensions.register("check_for_setter", function() {
+  
+  this.setOnChange(function(changeEvent) {
+    var workspace = Blockly.getMainWorkspace();
+    var id = this.getFieldValue("VAR");
+    console.log(this.type);
+    console.log(this.getRelativeToSurfaceXY());
+    //console.log(this.getFieldValue('VAR'));
+    
+  });
+
+})
