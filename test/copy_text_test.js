@@ -2,17 +2,22 @@ let assert = require('assert');
 let chai = require('chai');
 let chaiHttp = require('chai-http');
 
-let server = require('../bin/www');
+let server = 'localhost:3000';
 
 chai.use(chaiHttp);
 
+// TODO: Fix issue where tests succeed when run separately but fail when running together.
+
 /**
  * Tests the POST request /copy_text with several cases.
- * The test server must be running first.
+ * The server cannot be running in another process while running these test cases.
  */
-describe('/copy_text', () => {
-    it('should save no file name as script.py', (done) => {
-       chai.request('localhost:3000')
+describe('valid /copy_text', function () {
+    // TEST OF SUCCESSFUL FILE NAMES
+
+    // test empty text box
+    it('should save no file name as script.py', function (done) {
+       chai.request(server)
            .post('/copy_text')
            .type('text/json')
            .send({
@@ -26,5 +31,120 @@ describe('/copy_text', () => {
               chai.expect(res.body).to.have.property('file_name').equal("script.py");
            });
        done();
+    });
+
+    // test text box with name "file"
+    it('should save file as file.py', function (done) {
+        chai.request(server)
+            .post('/copy_text')
+            .type('text/json')
+            .send({
+                'method_': 'post',
+                'fileName': 'file',
+                'codeArea': ''
+            })
+            .end(function (err, res) {
+                chai.expect(err).to.be.null;
+                chai.expect(res).to.have.status(200);
+                chai.expect(res.body).to.have.property('file_name').equal("file.py");
+            });
+        done();
+    });
+
+    // test text box with name "file.py"
+    it('should save file.py as file.py', function (done) {
+        chai.request(server)
+            .post('/copy_text')
+            .type('text/json')
+            .send({
+                'method_': 'post',
+                'fileName': 'file.py',
+                'codeArea': ''
+            })
+            .end(function (err, res) {
+                chai.expect(err).to.be.null;
+                chai.expect(res).to.have.status(200);
+                chai.expect(res.body).to.have.property('file_name').equal("file.py");
+            });
+        done();
+    });
+
+
+
+
+});
+
+
+describe('invalid /copy_text', function () {
+    // TEST UNSUCCESSFUL FILE NAMES
+
+    // test text box with '?'
+    it('should reject ? as a file name', function (done) {
+        chai.request(server)
+            .post('/copy_text')
+            .type('text/json')
+            .send({
+                'method_': 'post',
+                'fileName': '?',
+                'codeArea': ''
+            })
+            .end(function (err, res) {
+                chai.expect(err).to.not.be.null;
+                chai.expect(res).to.have.status(422);
+                chai.expect(res.body.errors[0].msg).to.have.property('?, :, \\, |, and * cannot be used in file names.');
+            });
+        done();
+    });
+
+    it('should reject ?: as a file name', function (done) {
+        chai.request(server)
+            .post('/copy_text')
+            .type('text/json')
+            .send({
+                'method_': 'post',
+                'fileName': '?:',
+                'codeArea': ''
+            })
+            .end(function (err, res) {
+                chai.expect(err).to.not.be.null;
+                chai.expect(res).to.have.status(422);
+                chai.expect(res.body.errors[0].msg).to.have.property('?, :, \\, |, and * cannot be used in file names.');
+            });
+        done();
+    });
+
+    it('should reject ?:\\|* as a file name', function (done) {
+        chai.request(server)
+            .post('/copy_text')
+            .type('text/json')
+            .send({
+                'method_': 'post',
+                'fileName': '?:\\|*',
+                'codeArea': ''
+            })
+            .end(function (err, res) {
+                chai.expect(err).to.not.be.null;
+                chai.expect(res).to.have.status(422);
+                chai.expect(res.body.errors[0].msg).to.have.property('?, :, \\, |, and * cannot be used in file names.');
+            });
+        done();
+    });
+
+    it('should reject strings longer than 100 characters', function (done) {
+        let bigString = String().padStart(101, 'a');
+        chai.request(server)
+            .post('/copy_text')
+            .type('text/json')
+            .send({
+                'method_': 'post',
+                'fileName': '?:',
+                'codeArea': ''
+            })
+            .end(function (err, res) {
+                chai.expect(err).to.not.be.null;
+                chai.expect(res).to.have.status(422);
+                chai.expect(res.body.errors[0].msg).to.have.property("File names must be 100 characters or less.");
+            });
+        done();
     });
 });

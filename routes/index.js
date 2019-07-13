@@ -15,6 +15,13 @@ router.get('/', function(req, res, next) {
     res.render('/public/index.html');
 });
 
+// FROM: https://medium.com/@Abazhenov/using-async-await-in-express-with-node-8-b8af872c0016
+const asyncMiddleware = fn =>
+    (req, res, next) => {
+        Promise.resolve(fn(req, res, next))
+            .catch(next);
+    };
+
 
 
 // Writes requested code to python file in mcpipy directory.
@@ -46,24 +53,27 @@ router.post(
             .custom((_, {}) => os.platform() === WINDOWS)
             .withMessage("This page only supports Windows based operating systems.")
             .isLength({min: 1, max:MAX_FILE_LENGTH})
+            .withMessage("File names must be 100 characters or less.")
             .custom((value, {}) => value.match(ILLEGAL_FILENAME_CHARS) === null)
-            .withMessage("?, :, \\, |, ?, and * cannot be used in file names.")
+            .withMessage("?, :, \\, |, and * cannot be used in file names.")
     ],
-    function (req, res) {
-        let errors = validator.validationResult(req);
-        let file_path = getFilePath(req.body.fileName);
-        if (!errors.isEmpty()) {
-            return res.status(ERROR_STATUS_CODE).json({ errors: errors.array() });
-        }
-        fs.writeFile(file_path, req.body.codeArea, function (err) {
-            if (!err) {
-                res.status(SUCCESS_STATUS_CODE).json({file_name: req.body.fileName});
-            } else {
-                res.status(ERROR_STATUS_CODE).json({"errors": [{msg: "Could not write file"}]});
+    asyncMiddleware(async function (req, res, next) {
+            let errors = validator.validationResult(req);
+            let file_path = getFilePath(req.body.fileName);
+            if (!errors.isEmpty()) {
+                return res.status(ERROR_STATUS_CODE).json({errors: errors.array()});
             }
-        });
+            fs.writeFile(file_path, req.body.codeArea, function (err) {
+                if (!err) {
+                    res.status(SUCCESS_STATUS_CODE).json({file_name: String(req.body.fileName) + ".py"});
+                } else {
+                    res.status(ERROR_STATUS_CODE).json({"errors": [{msg: "Could not write file"}]});
+                }
+            });
+        })
+);
 
-});
+
 
 
 /**
