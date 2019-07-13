@@ -189,25 +189,33 @@ Blockly.Extensions.registerMixin('contextMenu_variableDynamicSetterGetter',
 // Check to verify a blocks setter is being used so block is correctly initiallized before use
 
 Blockly.Extensions.register("check_for_setter", function() {
-  
+  // on change function so this check will happen every time a variables_get_dynamic block fires an event
   this.setOnChange(function(changeEvent) {
+    //get a list of all blocks in the workspace
     var blocks = Blockly.getMainWorkspace().getAllBlocks();
+    // get the id of the variable we're checking for so we can match it to it's own setter
     var id = this.getFieldValue("VAR");
-    for(var i of blocks) {
-      if(i.type === "variables_set_dynamic") {
-        if(id === i.getFieldValue("VAR")) {
-            if(this.getRelativeToSurfaceXY().y < i.getRelativeToSurfaceXY().y) {
-                this.setWarningText("You need to set variable first!");
-            } else {
-              console.log("you're ok!");
-              this.setWarningText(null);
-            }
+    // check if there are any setter variables in the list
+    if(blocks.some(e => (e.type === "variables_set_dynamic") && (e.getFieldValue("VAR") === id))) {
+      //itterate through the blocks in the workspace
+      for(var i of blocks) {
+        // if the block is the setter type for that variable
+        if(i.type === "variables_set_dynamic") {
+          // and if it is the right variable
+          if(id === i.getFieldValue("VAR")) {
+            // if the getter is lower than the setter, warn 
+              if(this.getRelativeToSurfaceXY().y < i.getRelativeToSurfaceXY().y) {
+                  this.setWarningText("You need to set variable first!");
+              } else { // otherwise remove warning
+                this.setWarningText(null);
+                break;
+              }
+          }
         }
       }
+    } else { // if there are no setters for the current variable, warn
+      this.setWarningText("You need to set variable first!");
     }
-    //console.log(this.getRelativeToSurfaceXY());
-    //console.log(this.getFieldValue('VAR'));
-    
   });
 
 })
