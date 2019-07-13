@@ -191,10 +191,21 @@ Blockly.Extensions.registerMixin('contextMenu_variableDynamicSetterGetter',
 Blockly.Extensions.register("check_for_setter", function() {
   
   this.setOnChange(function(changeEvent) {
-    var workspace = Blockly.getMainWorkspace();
+    var blocks = Blockly.getMainWorkspace().getAllBlocks();
     var id = this.getFieldValue("VAR");
-    console.log(this.type);
-    console.log(this.getRelativeToSurfaceXY());
+    for(var i of blocks) {
+      if(i.type === "variables_set_dynamic") {
+        if(id === i.getFieldValue("VAR")) {
+            if(this.getRelativeToSurfaceXY().y < i.getRelativeToSurfaceXY().y) {
+                this.setWarningText("You need to set variable first!");
+            } else {
+              console.log("you're ok!");
+              this.setWarningText(null);
+            }
+        }
+      }
+    }
+    //console.log(this.getRelativeToSurfaceXY());
     //console.log(this.getFieldValue('VAR'));
     
   });
