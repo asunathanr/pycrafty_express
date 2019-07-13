@@ -28,7 +28,7 @@ describe('valid /copy_text', function () {
            .end(function (err, res) {
               chai.expect(err).to.be.null;
               chai.expect(res).to.have.status(200);
-              chai.expect(res.body).to.have.property('file_name').equal("script.py");
+              chai.expect(res.body).to.have.property('file_name', 'script.py');
            });
        done();
     });
@@ -46,7 +46,7 @@ describe('valid /copy_text', function () {
             .end(function (err, res) {
                 chai.expect(err).to.be.null;
                 chai.expect(res).to.have.status(200);
-                chai.expect(res.body).to.have.property('file_name').equal("file.py");
+                chai.expect(res.body).to.have.property('file_name', 'file.py');
             });
         done();
     });
@@ -64,7 +64,7 @@ describe('valid /copy_text', function () {
             .end(function (err, res) {
                 chai.expect(err).to.be.null;
                 chai.expect(res).to.have.status(200);
-                chai.expect(res.body).to.have.property('file_name').equal("file.py");
+                chai.expect(res.body).to.have.property('file_name', 'file.py');
             });
         done();
     });
@@ -91,7 +91,7 @@ describe('invalid /copy_text', function () {
             .end(function (err, res) {
                 chai.expect(err).to.not.be.null;
                 chai.expect(res).to.have.status(422);
-                chai.expect(res.body.errors[0].msg).to.have.property('?, :, \\, |, and * cannot be used in file names.');
+                chai.expect(res.body.errors[0]).to.have.property("msg",'?, :, \\, |, and * cannot be used in file names.');
             });
         done();
     });
@@ -108,7 +108,7 @@ describe('invalid /copy_text', function () {
             .end(function (err, res) {
                 chai.expect(err).to.not.be.null;
                 chai.expect(res).to.have.status(422);
-                chai.expect(res.body.errors[0].msg).to.have.property('?, :, \\, |, and * cannot be used in file names.');
+                chai.expect(res.body.errors[0]).to.have.property("msg", '?, :, \\, |, and * cannot be used in file names.');
             });
         done();
     });
@@ -125,7 +125,7 @@ describe('invalid /copy_text', function () {
             .end(function (err, res) {
                 chai.expect(err).to.not.be.null;
                 chai.expect(res).to.have.status(422);
-                chai.expect(res.body.errors[0].msg).to.have.property('?, :, \\, |, and * cannot be used in file names.');
+                chai.expect(res.body.errors[0]).to.have.property("msg", '?, :, \\, |, and * cannot be used in file names.');
             });
         done();
     });
@@ -137,13 +137,13 @@ describe('invalid /copy_text', function () {
             .type('text/json')
             .send({
                 'method_': 'post',
-                'fileName': '?:',
+                'fileName': bigString,
                 'codeArea': ''
             })
             .end(function (err, res) {
                 chai.expect(err).to.not.be.null;
                 chai.expect(res).to.have.status(422);
-                chai.expect(res.body.errors[0].msg).to.have.property("File names must be 100 characters or less.");
+                chai.expect(res.body.errors[0]).to.have.property("msg","File names must be 100 characters or less.");
             });
         done();
     });
