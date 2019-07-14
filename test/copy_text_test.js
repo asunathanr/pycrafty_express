@@ -5,8 +5,9 @@
 let assert = require('assert');
 let chai = require('chai');
 let chaiHttp = require('chai-http');
+var multer = require('multer');
 
-let server = 'localhost:3000';
+let server = require('../app.js');
 
 chai.use(chaiHttp);
 
@@ -19,6 +20,7 @@ describe('valid /copy_text', function () {
 
     // test empty text box
     it('should save no file name as script.py', function (done) {
+       let codeForm = multer();
        chai.request(server)
            .post('/copy_text')
            .type('text/json')
@@ -27,30 +29,31 @@ describe('valid /copy_text', function () {
                'fileName': '',
                'codeArea': ''
            })
-           .end(function (err, res) {
+           .end(async function (err, res) {
               chai.expect(err).to.be.null;
               chai.expect(res).to.have.status(200);
               chai.expect(res.body).to.have.property('file_name', 'script.py');
+              done();
            });
-       done();
+
     });
 
     // test text box with name "file"
     it('should save file as file.py', function (done) {
-        chai.request(server)
+
+        chai.request('localhost:8000')
             .post('/copy_text')
             .type('text/json')
             .send({
-                'method_': 'post',
                 'fileName': 'file',
                 'codeArea': ''
             })
-            .end(function (err, res) {
+            .end(async function (err, res) {
                 chai.expect(err).to.be.null;
                 chai.expect(res).to.have.status(200);
                 chai.expect(res.body).to.have.property('file_name', 'file.py');
+                done();
             });
-        done();
     });
 
     // test text box with name "file.py"
@@ -67,8 +70,9 @@ describe('valid /copy_text', function () {
                 chai.expect(err).to.be.null;
                 chai.expect(res).to.have.status(200);
                 chai.expect(res.body).to.have.property('file_name', 'file.py');
+                done();
             });
-        done();
+
     });
 
     // test text box with name "file.py"
@@ -85,8 +89,9 @@ describe('valid /copy_text', function () {
                 chai.expect(err).to.be.null;
                 chai.expect(res).to.have.status(200);
                 chai.expect(res.body).to.have.property('file_name', 'file.py');
+                done();
             });
-        done();
+
     });
 
 
@@ -128,8 +133,8 @@ describe('invalid /copy_text', function () {
                 chai.expect(err).to.not.be.null;
                 chai.expect(res).to.have.status(422);
                 chai.expect(res.body.errors[0]).to.have.property("msg", '?, :, \\, |, and * cannot be used in file names.');
+                done();
             });
-        done();
     });
 
     it('should reject ?:\\|* as a file name', function (done) {
@@ -145,8 +150,9 @@ describe('invalid /copy_text', function () {
                 chai.expect(err).to.not.be.null;
                 chai.expect(res).to.have.status(422);
                 chai.expect(res.body.errors[0]).to.have.property("msg", '?, :, \\, |, and * cannot be used in file names.');
+                done();
             });
-        done();
+
     });
 
     it('should reject strings longer than 100 characters', function (done) {
@@ -163,7 +169,8 @@ describe('invalid /copy_text', function () {
                 chai.expect(err).to.not.be.null;
                 chai.expect(res).to.have.status(422);
                 chai.expect(res.body.errors[0]).to.have.property("msg","File names must be 100 characters or less.");
+                done();
             });
-        done();
+
     });
 });
