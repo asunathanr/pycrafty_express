@@ -44,7 +44,7 @@ function loadBlocks() {
             let data = fileReader.result;
             Blockly.mainWorkspace.clear();
             let xmlDom = Blockly.Xml.textToDom(data);
-            Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xmlDom);
+            Blockly.Xml.domToWorkspace(xmlDom, Blockly.mainWorkspace);
         };
     }
     displaySuccessNotification(".menu","Load was successful.");
