@@ -219,3 +219,11 @@ Blockly.Extensions.register("check_for_setter", function() {
   });
 
 })
+
+
+// check to verify a setter block is not attached to a getter of the same variable
+
+Blockly.Extensions.register("check_setter_connection", function () {
+
+  
+})
