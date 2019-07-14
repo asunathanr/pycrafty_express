@@ -54,6 +54,6 @@ onresize();
 Blockly.svgResize(mainWorkspace);
 
 // Scroll to leftmost and topmost position of workspace
-mainWorkspace.scrollX = mainWorkspace.width;
-mainWorkspace.scrollY = mainWorkspace.height;
-mainWorkspace.render();
+//mainWorkspace.scrollX = mainWorkspace.width;
+//mainWorkspace.scrollY = mainWorkspace.height;
+//mainWorkspace.render();
