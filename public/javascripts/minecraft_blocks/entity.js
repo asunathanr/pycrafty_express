@@ -136,10 +136,13 @@ Blockly.defineBlocksWithJsonArray([
 // Code Generation Functions
 Blockly.Python['entity_get_position'] = function(block) {
     var value_entityid = Blockly.Python.valueToCode(block, 'ENTITYID', Blockly.Python.ORDER_ATOMIC);
-    // TODO: Assemble Python into code variable.
-    var code = 'mc.entity.getPos('+value_entityid+')\n';
-    // TODO: Change ORDER_NONE to the correct strength.
-    return [code, Blockly.Python.ORDER_NONE];
+    var code = 'mc.entity.getPos('+value_entityid+')';
+    if(block.getParent() === null) {
+      // TODO: Change ORDER_NONE to the correct strength.
+      return [code+'\n', Blockly.Python.ORDER_NONE];
+    } else {
+      return [code, Blockly.Python.ORDER_NONE];
+    }
   };
   Blockly.Python['entity_set_position'] = function(block) {
     var value_entityid = Blockly.Python.valueToCode(block, 'ENTITYID', Blockly.Python.ORDER_ATOMIC);
@@ -150,10 +153,13 @@ Blockly.Python['entity_get_position'] = function(block) {
   };
   Blockly.Python['entity_get_tile_position'] = function(block) {
     var value_entityid = Blockly.Python.valueToCode(block, 'ENTITYID', Blockly.Python.ORDER_ATOMIC);
-    // TODO: Assemble Python into code variable.
-    var code = 'mc.entity.getTilePos('+value_entityid+')\n';
-    // TODO: Change ORDER_NONE to the correct strength.
-    return [code, Blockly.Python.ORDER_NONE];
+    var code = 'mc.entity.getTilePos('+value_entityid+')';
+    if(block.getParent() === null) {
+      // TODO: Change ORDER_NONE to the correct strength.
+      return [code+'\n', Blockly.Python.ORDER_NONE];
+    } else {
+      return [code, Blockly.Python.ORDER_NONE];
+    }
   };
   Blockly.Python['entity_set_tile_position'] = function(block) {
     var value_entityid = Blockly.Python.valueToCode(block, 'ENTITYID', Blockly.Python.ORDER_ATOMIC);
@@ -164,22 +170,31 @@ Blockly.Python['entity_get_position'] = function(block) {
   };
   Blockly.Python['entity_get_direction'] = function(block) {
     var value_entityid = Blockly.Python.valueToCode(block, 'ENTITYID', Blockly.Python.ORDER_ATOMIC);
-    // TODO: Assemble Python into code variable.
-    var code = 'mc.entity.getDirection('+value_entityid+')\n';
-    // TODO: Change ORDER_NONE to the correct strength.
-    return [code, Blockly.Python.ORDER_NONE];
+    var code = 'mc.entity.getDirection('+value_entityid+')';
+    if(block.getParent() === null) {
+      // TODO: Change ORDER_NONE to the correct strength.
+      return [code+'\n', Blockly.Python.ORDER_NONE];
+    } else {
+      return [code, Blockly.Python.ORDER_NONE];
+    }
   };
   Blockly.Python['entity_get_rotation'] = function(block) {
     var value_entityid = Blockly.Python.valueToCode(block, 'ENTITYID', Blockly.Python.ORDER_ATOMIC);
-    // TODO: Assemble Python into code variable.
-    var code = 'mc.entity.getRotation('+value_entityid+')\n';
-    // TODO: Change ORDER_NONE to the correct strength.
-    return [code, Blockly.Python.ORDER_NONE];
+    var code = 'mc.entity.getRotation('+value_entityid+')';
+    if(block.getParent() === null) {
+      // TODO: Change ORDER_NONE to the correct strength.
+      return [code+'\n', Blockly.Python.ORDER_NONE];
+    } else {
+      return [code, Blockly.Python.ORDER_NONE];
+    }
   };
   Blockly.Python['entity_get_pitch'] = function(block) {
     var value_entityid = Blockly.Python.valueToCode(block, 'ENTITYID', Blockly.Python.ORDER_ATOMIC);
-    // TODO: Assemble Python into code variable.
-    var code = 'mc.entity.getPitch('+value_entityid+')\n';
-    // TODO: Change ORDER_NONE to the correct strength.
-    return [code, Blockly.Python.ORDER_NONE];
+    var code = 'mc.entity.getPitch('+value_entityid+')';
+    if(block.getParent() === null) {
+      // TODO: Change ORDER_NONE to the correct strength.
+      return [code+'\n', Blockly.Python.ORDER_NONE];
+    } else {
+      return [code, Blockly.Python.ORDER_NONE];
+    }
   };

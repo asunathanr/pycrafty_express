@@ -2,9 +2,11 @@
 // AUTHORS: Richie Burch, Nathan Robertson
 // PURPOSE: Detects various GET and POST requests and performs appropriate actions on them.
 
+
 const fs = require('fs');
 const os = require('os');
 const express = require('express');
+const validator = require('express-validator');
 let router = express.Router();
 
 
@@ -13,79 +15,77 @@ router.get('/', function(req, res, next) {
     res.render('/public/index.html');
 });
 
-
-const SUCCESS_MSG = "SUCCESS";
-const FILE_WRITE_ERROR = "WRITE_ERROR";
-const UNKNOWN_OS_ERROR = "UNKNOWN_OS";
-// Catches copy_text and writes requested text to python file in mcpipy directory.
-router.post('/copy_text', function (req, res) {
-    let userOS = getOS();
-    let file_path = getFilePath(userOS);
-    if (userOS === UNKNOWN_OS) {
-        console.log("Error: operating system could not be determined");
-        res.send(UNKNOWN_OS_ERROR);
-    }
-    else {
-        file_path += "gen_script.py";
-        fs.writeFile(file_path, req.body.codeArea, function (err) {
-            if (!err) {
-                console.log("wrote file at " + file_path);
-                res.send(SUCCESS_MSG);
-            }
-            else {
-                console.log(err);
-                res.send(FILE_WRITE_ERROR);
-            }
-        });
-    }
-});
+// FROM: https://medium.com/@Abazhenov/using-async-await-in-express-with-node-8-b8af872c0016
+const asyncMiddleware = fn =>
+    (req, res, next) => {
+        Promise.resolve(fn(req, res, next))
+            .catch(next);
+    };
 
 
-/**
- * Function: getOS
- * Returns either name of a supported OS or UNKNOWN_OS if OS is not supported
- * @type {string}
- */
+
+// Writes requested code to python file in mcpipy directory.
+// If the input field is empty a default file called "script.py" is used.
+// Only Windows file paths are supported.
+// https://docs.microsoft.com/en-us/windows/win32/fileio/naming-a-file
+// Validator/Sanitizer documentation: https://express-validator.github.io/docs/index.html
+// TODO: Ensure file name is sanitized before trying to save it
+// TODO: Create unit tests for this post request with mocha and chai
+const ILLEGAL_FILENAME_CHARS = /[:\\|?*]+/;
+const MAX_FILE_LENGTH = 100;
 const WINDOWS = "win32";
-const MAC_OS = "darwin";
-const LINUX = "linux";
-const UNKNOWN_OS = "UNKNOWN";
-function getOS() {
-    let userOS = os.platform();
-    let isSupportedOS = [WINDOWS, MAC_OS, LINUX].find(function (element, index, array) {
-        return element === userOS;
-    }) !== undefined;
-    if (isSupportedOS) {
-        return userOS;
-    }
-    else {
-        return UNKNOWN_OS;
-    }
-}
+const ERROR_STATUS_CODE = 422;
+const SUCCESS_STATUS_CODE = 200;
+router.post(
+    '/copy_text',
+    [
+        validator.check('fileName')
+            // SANITIZERS
+            .trim()
+            .escape()
+            .stripLow()
+            // TODO: make regex recognize ..py and ...py and so on
+            .customSanitizer((value, {}) => value.replace(/(\.[\w]*)$/, ""))
+            .customSanitizer((value, {}) => {
+                return String(value).length === 0 ? "script" : value;
+            })
+
+            // VALIDATORS
+            .custom((_, {}) => os.platform() === WINDOWS)
+            .withMessage("This page only supports Windows based operating systems.")
+            .isLength({min: 1, max:MAX_FILE_LENGTH})
+            .withMessage("File names must be 100 characters or less.")
+            .custom((value, {}) => value.match(ILLEGAL_FILENAME_CHARS) === null)
+            .withMessage("?, :, \\, |, and * cannot be used in file names.")
+    ],
+    asyncMiddleware(function (req, res, next) {
+            let errors = validator.validationResult(req);
+            let file_path = getFilePath(req.body.fileName);
+            if (!errors.isEmpty()) {
+                return res.status(ERROR_STATUS_CODE).json({errors: errors.array()});
+            }
+            fs.writeFile(file_path, req.body.codeArea, function (err) {
+                if (!err) {
+                    res.status(SUCCESS_STATUS_CODE).json({file_name: String(req.body.fileName) + ".py"});
+                } else {
+                    res.status(ERROR_STATUS_CODE).json({"errors": [{msg: "Could not write file"}]});
+                }
+            });
+
+        })
+);
+
+
 
 
 /**
- * getFilePath: Returns correct file path for .minecraft/mcpipy folder based on user's OS
+ * getFilePath: Returns correct file path for .minecraft/mcpipy folder
  * Sources:
- * https://stackoverflow.com/questions/8683895/how-do-i-determine-the-current-operating-system-with-node-js
  * https://minecraft.gamepedia.com/.minecraft
  */
-
-function getFilePath(userOS) {
-    let file_path = "";
-    if (userOS === WINDOWS) {
-        file_path = os.userInfo().homedir + "\\AppData\\Roaming\\.minecraft\\mcpipy\\";
-    }
-    else if (userOS === MAC_OS) {
-        file_path = "~/Library/\"Application Support\"/minecraft/mcpipy/";
-    }
-    else if (userOS === LINUX) {
-        file_path = "~/.minecraft/mcpipy/";
-    }
-    else {
-        file_path = UNKNOWN_OS;
-    }
-    return file_path;
+function getFilePath(fileName) {
+    return os.userInfo().homedir + "\\AppData\\Roaming\\.minecraft\\mcpipy\\" + fileName + ".py";
 }
+
 
 module.exports = router;
