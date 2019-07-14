@@ -8,7 +8,7 @@ var blocklyDiv = document.getElementById('blocklyDiv');
 var mainWorkspace = Blockly.inject(blocklyDiv,
     {
         media: 'media' + "\\",
-        toolbox: document.getElementById('toolbox')
+        toolbox: document.getElementById('toolbox'),
     });
 
 var onresize = function (event) {
@@ -47,6 +47,12 @@ mainWorkspace.addChangeListener(function () {
     displayCodeInBrowser();
 });
 
+
+
 window.addEventListener('resize', onresize, false);
 onresize();
 Blockly.svgResize(mainWorkspace);
+
+// Scroll to leftmost and topmost position of workspace
+mainWorkspace.scroll(mainWorkspace.width, mainWorkspace.height);
+mainWorkspace.render();

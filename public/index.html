@@ -46,9 +46,9 @@
     <input id="bmenub" type="checkbox" class="show">
     <label for="bmenub" class="burger pseudo button">menu</label>
 
-
     <div class="menu">
-        <a href="#" class="pseudo button" id="generateButton" onclick="generateScript()">Create Script</a>
+        <input id="fileNameTextBox" type="text" placeholder="File name" maxlength="100">
+        <a href="#" class="pseudo button" id="generateButton" onclick="createScript()">Create Script</a>
         <a href="#" class="pseudo button" id="exportButton" onclick="saveBlocks()">Save Blocks</a>
         <!-- https://stackoverflow.com/questions/16215771/how-open-select-file-dialog-via-js -->
         <a href="#" class="pseudo button" id="importButton" onclick="document.getElementById('file-input').click()">Load Blocks</a>
@@ -76,7 +76,7 @@
         </div>
 
         <div>
-            <textarea id="codeArea" name="codeArea" style="position:relative; "></textarea>
+            <textarea id="codeArea" name="codeArea" style="position:relative;" readonly></textarea>
         </div>
     </div>
 
@@ -484,7 +484,6 @@
 
 <!-- Misc Libraries -->
 <script src="javascripts/jquery.js"></script>
-<!-- TODO: Install bootstrap so network connection is not necessary -->
 <script src="javascripts/bootstrap-4.3.1-dist/css/bootstrap.css"></script>
 <script src="javascripts/bootstrap-4.3.1-dist/js/bootstrap.bundle.js"></script>
 <script src="javascripts/notify.js"></script>

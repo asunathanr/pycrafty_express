@@ -6,6 +6,8 @@ const PREAMBLE = "from mine import *\n\n" +
     "mc = Minecraft()\n" +
     "\n";
 
+const NOTIFY_OPTIONS = {autoHideDelay: 10000};
+
 
 // https://groups.google.com/forum/#!topic/blockly/NDlC-l6DLEM
 // TODO: Clean up and finalize createSnapshot and restoreSnapshot
@@ -20,7 +22,7 @@ function createSnapshot() {
  * restoreSnapshot: Restores a saved workspace in browser.
  */
 function restoreSnapshot() {
-    var xmlText = localStorage.getItem("blockly.xml");
+    let xmlText = localStorage.getItem("blockly.xml");
     if (xmlText) {
         Blockly.mainWorkspace.clear();
         xmlDom = Blockly.Xml.textToDom(xmlText);
@@ -66,7 +68,6 @@ function saveBlocks() {
     document.body.appendChild(downloadLink);
     //Clicks on the created element to Prompt for download.
     downloadLink.click();
-    displaySuccessNotification(".menu", "Save was successful");
 }
 
 // Helper for export blocks.
@@ -75,17 +76,15 @@ function destroyClickedElement(event) {
 }
 
 /**
- * generateScript: Sends request to server to record code in pycrafty directory
+ * createScript: Sends request to server to record code in pycrafty directory
  */
-const SUCCESS_MSG = "SUCCESS";
-const FILE_WRITE_ERROR = "WRITE_ERROR";
-const UNKNOWN_OS_ERROR = "UNKNOWN_OS";
-function generateScript() {
+function createScript() {
     let codeForm = new FormData();
     let xhttp = new XMLHttpRequest();
     Blockly.Python.INFINITE_LOOP_TRAP = null;
     let code = PREAMBLE + Blockly.Python.workspaceToCode(mainWorkspace);
     codeForm.append("codeArea", code);
+    codeForm.append("fileName", document.getElementById("fileNameTextBox").value);
     xhttp.open("POST", "/copy_text", true);
     addLoadEvent(xhttp);
     xhttp.send(codeForm);
@@ -97,14 +96,11 @@ function generateScript() {
  */
 function addLoadEvent(xhttp) {
     xhttp.addEventListener('load', function () {
-        if (xhttp.responseText === SUCCESS_MSG) {
-            displaySuccessNotification(".menu", "File saved");
-        } else if (xhttp.responseText === UNKNOWN_OS_ERROR) {
-            $(".menu").notify("Unknown OS", "error");
-        } else if (xhttp.responseText === FILE_WRITE_ERROR) {
-            $(".menu").notify("File write error", "error");
+        let response = JSON.parse(xhttp.responseText);
+        if (response['errors'] === undefined) {
+            displaySuccessNotification(".menu", "File: " + response.file_name + " saved");
         } else {
-            $(".menu").notify("Unknown error occurred " + xhttp.responseText, "error");
+            $(".menu").notify(JSON.stringify(response.errors[0].msg), "error", NOTIFY_OPTIONS);
         }
     });
 }
