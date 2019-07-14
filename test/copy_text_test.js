@@ -1,3 +1,7 @@
+// FILE: copy_text_test.js
+// AUTHOR: Nathan Robertson
+// PURPOSE: Tests valid and invalid POST requests to the copy_text URL
+
 let assert = require('assert');
 let chai = require('chai');
 let chaiHttp = require('chai-http');
@@ -5,8 +9,6 @@ let chaiHttp = require('chai-http');
 let server = 'localhost:3000';
 
 chai.use(chaiHttp);
-
-// TODO: Fix issue where tests succeed when run separately but fail when running together.
 
 /**
  * Tests the POST request /copy_text with several cases.
@@ -69,6 +71,23 @@ describe('valid /copy_text', function () {
         done();
     });
 
+    // test text box with name "file.py"
+    it('should save file.py.py as file.py', function (done) {
+        chai.request(server)
+            .post('/copy_text')
+            .type('text/json')
+            .send({
+                'method_': 'post',
+                'fileName': 'file.py.py',
+                'codeArea': ''
+            })
+            .end(function (err, res) {
+                chai.expect(err).to.be.null;
+                chai.expect(res).to.have.status(200);
+                chai.expect(res.body).to.have.property('file_name', 'file.py');
+            });
+        done();
+    });
 
 
 
