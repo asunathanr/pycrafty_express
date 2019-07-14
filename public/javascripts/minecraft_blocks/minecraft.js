@@ -187,12 +187,13 @@ Blockly.defineBlocksWithJsonArray([
 // Code generators
 Blockly.Python['post_to_chat'] = function (block) {
   let value_topost = block.getFieldValue('TOPOST');
-  return 'mc.postToChat(' + '"' + value_topost + '"' + ')\n';
+  var code = 'mc.postToChat(' + '"' + value_topost + '"' + ')\n';
+  return code;
 };
 Blockly.Python['set_block'] = function(block) {
   var value_vec = Blockly.Python.valueToCode(block, 'vec', Blockly.Python.ORDER_ATOMIC);
   var value_block = Blockly.Python.valueToCode(block, 'block', Blockly.Python.ORDER_ATOMIC);
-  var code = 'mc.setBlock('+value_vec+', '+value_block+')\n';
+  var code = 'mc.setBlock('+value_vec+', '+value_block+')';
   return code;
 };
 Blockly.Python['set_blocks'] = function(block) {
@@ -204,36 +205,60 @@ Blockly.Python['set_blocks'] = function(block) {
 };
 Blockly.Python['get_block'] = function(block) {
     var value_vec = Blockly.Python.valueToCode(block, 'vec', Blockly.Python.ORDER_ATOMIC);
-    var code = 'mc.getBlock('+value_vec+')\n';
+    var code = 'mc.getBlock('+value_vec+')';
+    if(block.getParent() === null) {
     // TODO: Change ORDER_NONE to the correct strength.
-    return [code, Blockly.Python.ORDER_NONE];
+      return [code+'\n', Blockly.Python.ORDER_NONE];
+    } else {
+      return [code, Blockly.Python.ORDER_NONE];
+    }
 };
 Blockly.Python['get_block_with_data'] = function(block) {
   var value_vec = Blockly.Python.valueToCode(block, 'vec', Blockly.Python.ORDER_ATOMIC);
-  var code = 'mc.getBlockWithData('+value_vec+')\n';
-  // TODO: Change ORDER_NONE to the correct strength.
-  return [code, Blockly.Python.ORDER_NONE];
+  var code = 'mc.getBlockWithData('+value_vec+')';
+  if(block.getParent() === null) {
+    // TODO: Change ORDER_NONE to the correct strength.
+    return [code+'\n', Blockly.Python.ORDER_NONE];
+  } else {
+    return [code, Blockly.Python.ORDER_NONE];
+  }
 };
 Blockly.Python['get_blocks'] = function(block) {
     var value_vec1 = Blockly.Python.valueToCode(block, 'vec1', Blockly.Python.ORDER_ATOMIC);
     var value_vec2 = Blockly.Python.valueToCode(block, 'vec2', Blockly.Python.ORDER_ATOMIC);
-    var code = 'mc.getBlocks('+value_vec1+', '+value_vec2+')\n';
-    // TODO: Change ORDER_NONE to the correct strength.
-    return [code, Blockly.Python.ORDER_NONE];
+    var code = 'mc.getBlocks('+value_vec1+', '+value_vec2+')';
+    if(block.getParent() === null) {
+        // TODO: Change ORDER_NONE to the correct strength.
+        return [code+'\n', Blockly.Python.ORDER_NONE];
+    } else {
+        return [code, Blockly.Python.ORDER_NONE];
+    }
 };
 Blockly.Python['get_height'] = function(block) {
     var value_vec = Blockly.Python.valueToCode(block, 'vec', Blockly.Python.ORDER_ATOMIC);
-    var code = 'mc.getHeight('+value_vec+')\n';
-    // TODO: Change ORDER_NONE to the correct strength.
-    return [code, Blockly.Python.ORDER_NONE];
+    var code = 'mc.getHeight('+value_vec+')';
+    if(block.getParent() === null) {
+      // TODO: Change ORDER_NONE to the correct strength.
+      return [code+'\n', Blockly.Python.ORDER_NONE];
+    } else {
+      return [code, Blockly.Python.ORDER_NONE];
+    }
 };
 Blockly.Python['get_player_id'] = function (block) {
-  var code = 'mc.getPlayerId()\n';
-  // TODO: Change ORDER_NONE to the correct strength.
-  return [code, Blockly.Python.ORDER_NONE];
+  var code = 'mc.getPlayerId()';
+  if(block.getParent() === null) {
+    // TODO: Change ORDER_NONE to the correct strength.
+    return [code+'\n', Blockly.Python.ORDER_NONE];
+  } else {
+    return [code, Blockly.Python.ORDER_NONE];
+  }
 };
 Blockly.Python['get_player_entity_ids'] = function (block) {
-    var code = 'mc.getPlayerEntityIds()\n';
-    // TODO: Change ORDER_NONE to the correct strength.
-    return [code, Blockly.Python.ORDER_NONE];
+    var code = 'mc.getPlayerEntityIds()';
+    if(block.getParent() === null) {
+      // TODO: Change ORDER_NONE to the correct strength.
+      return [code+'\n', Blockly.Python.ORDER_NONE];
+    } else {
+      return [code, Blockly.Python.ORDER_NONE];
+    }
 };

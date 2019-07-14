@@ -95,7 +95,12 @@ Blockly.defineBlocksWithJsonArray([
 // code generators
 Blockly.Python['player_get_position'] = function (block) {
     let code = makeFunctionCall("mc.player.getPos");
-    return [code, Blockly.Python.ORDER_NONE];
+    if(block.getParent() === null) {
+        // TODO: Change ORDER_NONE to the correct strength.
+        return [code+'\n', Blockly.Python.ORDER_NONE];
+    } else {
+        return [code, Blockly.Python.ORDER_NONE];
+    }
 };
 Blockly.Python['player_set_position'] = function (block) {
     let vector3 = Blockly.Python.valueToCode(block,"VEC3", Blockly.Python.ORDER_ATOMIC);
@@ -103,7 +108,12 @@ Blockly.Python['player_set_position'] = function (block) {
 };
 Blockly.Python['player_get_tile_position'] = function (block) {
     let code = makeFunctionCall("mc.player.getTilePos");
-    return [code, Blockly.Python.ORDER_NONE];
+    if(block.getParent() === null) {
+        // TODO: Change ORDER_NONE to the correct strength.
+        return [code+'\n', Blockly.Python.ORDER_NONE];
+      } else {
+        return [code, Blockly.Python.ORDER_NONE];
+      }
 };
 Blockly.Python['player_set_tile_position'] = function (block) {
     let vector3 = Blockly.Python.valueToCode(block,"VEC3", Blockly.Python.ORDER_ATOMIC);
@@ -111,15 +121,30 @@ Blockly.Python['player_set_tile_position'] = function (block) {
 };
 Blockly.Python['player_get_direction'] = function (block) {
     let code = makeFunctionCall("mc.player.getDirection");
-    return [code, Blockly.Python.ORDER_NONE];
+    if(block.getParent() === null) {
+        // TODO: Change ORDER_NONE to the correct strength.
+        return [code+'\n', Blockly.Python.ORDER_NONE];
+      } else {
+        return [code, Blockly.Python.ORDER_NONE];
+      }
 };
 Blockly.Python['player_get_rotation'] = function (block) {
     let code = makeFunctionCall("mc.player.getRotation");
-    return [code, Blockly.Python.ORDER_NONE];
+    if(block.getParent() === null) {
+        // TODO: Change ORDER_NONE to the correct strength.
+        return [code+'\n', Blockly.Python.ORDER_NONE];
+      } else {
+        return [code, Blockly.Python.ORDER_NONE];
+      }
 };
 Blockly.Python['player_get_pitch'] = function (block) {
     let code = makeFunctionCall("mc.player.getPitch");
-    return [code, Blockly.Python.ORDER_NONE];
+    if(block.getParent() === null) {
+        // TODO: Change ORDER_NONE to the correct strength.
+        return [code+'\n', Blockly.Python.ORDER_NONE];
+      } else {
+        return [code, Blockly.Python.ORDER_NONE];
+      }
 };
 
 // HELPERS
@@ -130,5 +155,5 @@ Blockly.Python['player_get_pitch'] = function (block) {
  * @param arguments: array (empty by default)
  */
 let makeFunctionCall = (functionName, arguments=[]) => {
-    return functionName + "(" + arguments.join(", ") + ")\n";
+    return functionName + "(" + arguments.join(", ") + ")";
 };
