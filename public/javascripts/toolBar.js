@@ -26,7 +26,7 @@ function restoreSnapshot() {
     if (xmlText) {
         Blockly.mainWorkspace.clear();
         xmlDom = Blockly.Xml.textToDom(xmlText);
-        Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xmlDom);
+        Blockly.Xml.domToWorkspace(xmlDom, Blockly.mainWorkspace);
     }
     displaySuccessNotification(".menu", "Snapshot restored");
 }
@@ -107,5 +107,5 @@ function addLoadEvent(xhttp) {
 
 // Source: https://notifyjs.jpillora.com/
 function displaySuccessNotification(element, notificationText) {
-    $(element).notify(notificationText, "success");
+    $(element).notify(notificationText, "success", NOTIFY_OPTIONS);
 }
