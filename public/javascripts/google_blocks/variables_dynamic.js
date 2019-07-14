@@ -55,7 +55,7 @@ Blockly.defineBlocksWithJsonArray([ // BEGIN JSON EXTRACT
     "style": "variable_dynamic_blocks",
     "helpUrl": "%{BKY_VARIABLES_GET_HELPURL}",
     "tooltip": "%{BKY_VARIABLES_GET_TOOLTIP}",
-    "extensions": ["contextMenu_variableDynamicSetterGetter"]
+    "extensions": ["contextMenu_variableDynamicSetterGetter", "check_for_setter"]
   },
   // Block for variable setter.
   {
@@ -76,7 +76,7 @@ Blockly.defineBlocksWithJsonArray([ // BEGIN JSON EXTRACT
     "style": "variable_dynamic_blocks",
     "tooltip": "%{BKY_VARIABLES_SET_TOOLTIP}",
     "helpUrl": "%{BKY_VARIABLES_SET_HELPURL}",
-    "extensions": ["contextMenu_variableDynamicSetterGetter"]
+    "extensions": ["contextMenu_variableDynamicSetterGetter", "check_setter_connection"]
   }
 ]); // END JSON EXTRACT (Do not delete this comment.)
 
@@ -184,3 +184,59 @@ Blockly.Constants.VariablesDynamic.DELETE_OPTION_CALLBACK_FACTORY = function(blo
 
 Blockly.Extensions.registerMixin('contextMenu_variableDynamicSetterGetter',
     Blockly.Constants.VariablesDynamic.CUSTOM_CONTEXT_MENU_VARIABLE_GETTER_SETTER_MIXIN);
+
+
+// Check to verify a blocks setter is being used so block is correctly initiallized before use
+
+Blockly.Extensions.register("check_for_setter", function() {
+  // on change function so this check will happen every time a variables_get_dynamic block fires an event
+  this.setOnChange(function(changeEvent) {
+    //get a list of all blocks in the workspace
+    var blocks = Blockly.getMainWorkspace().getAllBlocks();
+    // get the id of the variable we're checking for so we can match it to it's own setter
+    var id = this.getFieldValue("VAR");
+    // check if there are any setter variables in the list
+    if(blocks.some(e => (e.type === "variables_set_dynamic") && (e.getFieldValue("VAR") === id))) {
+      //itterate through the blocks in the workspace
+      for(var i of blocks) {
+        // if the block is the setter type for that variable
+        if(i.type === "variables_set_dynamic") {
+          // and if it is the right variable
+          if(id === i.getFieldValue("VAR")) {
+            // if the getter is lower than the setter, warn 
+              if(this.getRelativeToSurfaceXY().y < i.getRelativeToSurfaceXY().y) {
+                  this.setWarningText("You need to set variable first!");
+              } else { // otherwise remove warning
+                this.setWarningText(null);
+                break;
+              }
+          }
+        }
+      }
+    } else { // if there are no setters for the current variable, warn
+      this.setWarningText("You need to set variable first!");
+    }
+  });
+
+})
+
+
+// check to verify a setter block is not attached to a getter of the same variable
+
+Blockly.Extensions.register("check_setter_connection", function () {
+
+  this.setOnChange(function(changeEvent) {
+    // get variable id
+    var id  = this.getFieldValue("VAR");
+    // get block attached to input
+    var input = this.getInputTargetBlock("VALUE");
+    // if the input is empty, or if the attached block matches the variable id warn
+    if((input === null) || (id == input.getFieldValue("VAR"))) {
+      this.setWarningText("You should assign this variable a valid value!");
+    } else { // otherwise remove warning
+      this.setWarningText(null);
+    }
+
+  });
+  
+})

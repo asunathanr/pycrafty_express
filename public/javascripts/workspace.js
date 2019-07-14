@@ -8,7 +8,15 @@ var blocklyDiv = document.getElementById('blocklyDiv');
 var mainWorkspace = Blockly.inject(blocklyDiv,
     {
         media: 'media' + "\\",
-        toolbox: document.getElementById('toolbox')
+        toolbox: document.getElementById('toolbox'),
+        zoom:
+            {controls: true,
+                wheel: true,
+                startScale: 1.0,
+                maxScale: 3,
+                minScale: 0.3,
+                scaleSpeed: 1.2},
+        trashcan: true
     });
 
 var onresize = function (event) {
@@ -47,6 +55,13 @@ mainWorkspace.addChangeListener(function () {
     displayCodeInBrowser();
 });
 
+
+
 window.addEventListener('resize', onresize, false);
 onresize();
 Blockly.svgResize(mainWorkspace);
+
+// Scroll to leftmost and topmost position of workspace
+//mainWorkspace.scrollX = mainWorkspace.width;
+//mainWorkspace.scrollY = mainWorkspace.height;
+//mainWorkspace.render();
