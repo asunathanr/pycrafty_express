@@ -24,7 +24,8 @@ You should now see the full work environment.
 
 # Create a script:
 Enter the desired file name in the text box with the text "File name" and click 
-the Create Script button. The file should be saved in the appropriate directory.
+the Create Script button. It is recommended to use just alphanumeric characters for the file name.
+The file should be saved in the appropriate directory.
 If no file name is entered in that text box a file named "script.py" is created
 instead. 
 

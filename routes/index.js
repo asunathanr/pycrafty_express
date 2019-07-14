@@ -29,7 +29,6 @@ const asyncMiddleware = fn =>
 // Only Windows file paths are supported.
 // https://docs.microsoft.com/en-us/windows/win32/fileio/naming-a-file
 // Validator/Sanitizer documentation: https://express-validator.github.io/docs/index.html
-// TODO: Ensure file name is sanitized before trying to save it
 const ILLEGAL_FILENAME_CHARS = /[:\\|?*]+/;
 const MAX_FILE_LENGTH = 100;
 const WINDOWS = "win32";
@@ -43,7 +42,6 @@ router.post(
             .trim()
             .escape()
             .stripLow()
-            // TODO: make regex recognize ..py and ...py and so on
             .customSanitizer((value, {}) => value.replace(/(\.[\w]*)$/, ""))
             .customSanitizer((value, {}) => {
                 return String(value).length === 0 ? "script" : value;
@@ -77,7 +75,6 @@ router.post(
 
 /**
  * getFilePath: Returns correct file path for .minecraft/mcpipy folder
- * Sources:
  * https://minecraft.gamepedia.com/.minecraft
  */
 function getFilePath(fileName) {

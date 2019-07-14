@@ -9,8 +9,10 @@ const PREAMBLE = "from mine import *\n\n" +
 const NOTIFY_OPTIONS = {autoHideDelay: 10000};
 
 
+/**
+ * createSnapshot: Allows user to save current workspace.
+ */
 // https://groups.google.com/forum/#!topic/blockly/NDlC-l6DLEM
-// TODO: Clean up and finalize createSnapshot and restoreSnapshot
 function createSnapshot() {
     var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
     var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
