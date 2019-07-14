@@ -30,7 +30,6 @@ const asyncMiddleware = fn =>
 // https://docs.microsoft.com/en-us/windows/win32/fileio/naming-a-file
 // Validator/Sanitizer documentation: https://express-validator.github.io/docs/index.html
 // TODO: Ensure file name is sanitized before trying to save it
-// TODO: Create unit tests for this post request with mocha and chai
 const ILLEGAL_FILENAME_CHARS = /[:\\|?*]+/;
 const MAX_FILE_LENGTH = 100;
 const WINDOWS = "win32";
@@ -74,8 +73,6 @@ router.post(
 
         })
 );
-
-
 
 
 /**
