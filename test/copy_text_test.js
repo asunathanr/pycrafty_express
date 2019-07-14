@@ -5,6 +5,7 @@
 let assert = require('assert');
 let chai = require('chai');
 let chaiHttp = require('chai-http');
+var multer = require('multer');
 
 let server = require('../app.js');
 
@@ -19,6 +20,7 @@ describe('valid /copy_text', function () {
 
     // test empty text box
     it('should save no file name as script.py', function (done) {
+       let codeForm = multer();
        chai.request(server)
            .post('/copy_text')
            .type('text/json')
@@ -27,7 +29,7 @@ describe('valid /copy_text', function () {
                'fileName': '',
                'codeArea': ''
            })
-           .end(function (err, res) {
+           .end(async function (err, res) {
               chai.expect(err).to.be.null;
               chai.expect(res).to.have.status(200);
               chai.expect(res.body).to.have.property('file_name', 'script.py');
@@ -38,15 +40,15 @@ describe('valid /copy_text', function () {
 
     // test text box with name "file"
     it('should save file as file.py', function (done) {
-        chai.request(server)
+
+        chai.request('localhost:8000')
             .post('/copy_text')
             .type('text/json')
             .send({
-                'method_': 'post',
-                fileName: 'file',
+                'fileName': 'file',
                 'codeArea': ''
             })
-            .end(function (err, res) {
+            .end(async function (err, res) {
                 chai.expect(err).to.be.null;
                 chai.expect(res).to.have.status(200);
                 chai.expect(res.body).to.have.property('file_name', 'file.py');

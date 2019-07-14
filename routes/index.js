@@ -49,6 +49,7 @@ router.post(
             .customSanitizer((value, {}) => {
                 return String(value).length === 0 ? "script" : value;
             })
+
             // VALIDATORS
             .custom((_, {}) => os.platform() === WINDOWS)
             .withMessage("This page only supports Windows based operating systems.")
@@ -57,7 +58,7 @@ router.post(
             .custom((value, {}) => value.match(ILLEGAL_FILENAME_CHARS) === null)
             .withMessage("?, :, \\, |, and * cannot be used in file names.")
     ],
-    asyncMiddleware(async function (req, res, next) {
+    asyncMiddleware(function (req, res, next) {
             let errors = validator.validationResult(req);
             let file_path = getFilePath(req.body.fileName);
             if (!errors.isEmpty()) {
@@ -70,6 +71,7 @@ router.post(
                     res.status(ERROR_STATUS_CODE).json({"errors": [{msg: "Could not write file"}]});
                 }
             });
+
         })
 );
 
