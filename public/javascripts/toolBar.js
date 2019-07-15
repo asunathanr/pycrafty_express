@@ -27,7 +27,7 @@ function restoreSnapshot() {
     let xmlText = localStorage.getItem("blockly.xml");
     if (xmlText) {
         Blockly.mainWorkspace.clear();
-        xmlDom = Blockly.Xml.textToDom(xmlText);
+        let xmlDom = Blockly.Xml.textToDom(xmlText);
         Blockly.Xml.domToWorkspace(xmlDom, Blockly.mainWorkspace);
     }
     displaySuccessNotification(".menu", "Snapshot restored");
@@ -81,20 +81,27 @@ function destroyClickedElement(event) {
  * createScript: Sends request to server to record code in pycrafty directory
  */
 function createScript() {
-    let codeForm = new FormData();
-    let xhttp = new XMLHttpRequest();
     if (workspaceHasWarnings()) {
         $('.menu').notify("Must resolve warnings before creating script.", "error", NOTIFY_OPTIONS);
     }
     else {
-        Blockly.Python.INFINITE_LOOP_TRAP = null;
-        let code = PREAMBLE + Blockly.Python.workspaceToCode(mainWorkspace);
-        codeForm.append("codeArea", code);
-        codeForm.append("fileName", document.getElementById("fileNameTextBox").value);
-        xhttp.open("POST", "/copy_text", true);
-        addLoadEvent(xhttp);
-        xhttp.send(codeForm);
+        sendCode();
     }
+}
+
+/**
+ * sendCode: Sends generated Blockly code via AJAX to the server.
+ */
+function sendCode() {
+    let codeForm = new FormData();
+    let xhttp = new XMLHttpRequest();
+    Blockly.Python.INFINITE_LOOP_TRAP = null;
+    let code = PREAMBLE + Blockly.Python.workspaceToCode(mainWorkspace);
+    codeForm.append("codeArea", code);
+    codeForm.append("fileName", document.getElementById("fileNameTextBox").value);
+    xhttp.open("POST", "/copy_text", true);
+    addLoadEvent(xhttp);
+    xhttp.send(codeForm);
 }
 
 /**
@@ -116,7 +123,7 @@ function addLoadEvent(xhttp) {
         if (response['errors'] === undefined) {
             displaySuccessNotification(".menu", "File: " + response.file_name + " saved");
         } else {
-            $(".menu").notify(JSON.stringify(response.errors[0].msg), "error", NOTIFY_OPTIONS);
+            $(".menu").notify(response.errors[0].msg, "error", NOTIFY_OPTIONS);
         }
     });
 }
