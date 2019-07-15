@@ -9,8 +9,10 @@ const PREAMBLE = "from mine import *\n\n" +
 const NOTIFY_OPTIONS = {autoHideDelay: 10000};
 
 
+/**
+ * createSnapshot: Allows user to save current workspace.
+ */
 // https://groups.google.com/forum/#!topic/blockly/NDlC-l6DLEM
-// TODO: Clean up and finalize createSnapshot and restoreSnapshot
 function createSnapshot() {
     var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
     var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
@@ -25,7 +27,7 @@ function restoreSnapshot() {
     let xmlText = localStorage.getItem("blockly.xml");
     if (xmlText) {
         Blockly.mainWorkspace.clear();
-        xmlDom = Blockly.Xml.textToDom(xmlText);
+        let xmlDom = Blockly.Xml.textToDom(xmlText);
         Blockly.Xml.domToWorkspace(xmlDom, Blockly.mainWorkspace);
     }
     displaySuccessNotification(".menu", "Snapshot restored");
@@ -79,6 +81,18 @@ function destroyClickedElement(event) {
  * createScript: Sends request to server to record code in pycrafty directory
  */
 function createScript() {
+    if (workspaceHasWarnings()) {
+        $('.menu').notify("Must resolve warnings before creating script.", "error", NOTIFY_OPTIONS);
+    }
+    else {
+        sendCode();
+    }
+}
+
+/**
+ * sendCode: Sends generated Blockly code via AJAX to the server.
+ */
+function sendCode() {
     let codeForm = new FormData();
     let xhttp = new XMLHttpRequest();
     Blockly.Python.INFINITE_LOOP_TRAP = null;
@@ -91,6 +105,15 @@ function createScript() {
 }
 
 /**
+ * A predicate helper function for createScript.
+ * Returns true if any blocks in workspace have a warning assigned to them or false otherwise.
+ */
+function workspaceHasWarnings() {
+    let blocks = mainWorkspace.getAllBlocks();
+    return !!blocks.find((block) => !!block.warning);
+}
+
+/**
  * Displays notification to user based on result of AJAX query.
  * @param xhttp: Object representing the AJAX transaction.
  */
@@ -100,7 +123,7 @@ function addLoadEvent(xhttp) {
         if (response['errors'] === undefined) {
             displaySuccessNotification(".menu", "File: " + response.file_name + " saved");
         } else {
-            $(".menu").notify(JSON.stringify(response.errors[0].msg), "error", NOTIFY_OPTIONS);
+            $(".menu").notify(response.errors[0].msg, "error", NOTIFY_OPTIONS);
         }
     });
 }
