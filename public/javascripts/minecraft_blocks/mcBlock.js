@@ -100,11 +100,14 @@ Blockly.Extensions.register('dynamic_dropdown_extension',
     idDict["24"] = [["Sandstone", "0"], ["Chiseled", "1"], ["Smooth", "2"]];
     idDict["31"] = [["Shrub", "0"], ["Grass", "1"], ["Fern", "2"], ["Biome Grass", "3"]];
     idDict["35"] = [["White", "0"], ["Orange", "1"], ["Magenta", "2"], ["Light Blue", "3"], ["Yellow", "4"], ["Lime", "5"], ["Pink", "6"], ["Grey", "7"], ["Light Grey", "8"], ["Cyan", "9"], ["Purple", "10"], ["Blue", "11"], ["Brown", "12"], ["Green", "13"], ["Red", "14"], ["Black", "15"]];
-    idDict["80"] = [["East", "1"], ["West", "2"], ["South", "3"], ["North", "3"], ["Up", "5"]];
-    idDict["98"] = [["Stone Brick", "0"], ["Mossy", "1"], ["Cracked", "2"], ["Chiseled", "3"]];
     idDict["43"] = [["Stone", "0"], ["Sandstone", "1"], ["Wooden", "2"], ["Cobblestone", "3"], ["Brick", "4"], ["Stone Brick", "5"], ["Nether Brick", "6"], ["Quartz", "7"]];
     idDict["44"] = [["Stone", "0"], ["Sandstone", "1"], ["Wooden", "2"], ["Cobblestone", "3"], ["Brick", "4"], ["Stone Brick", "5"], ["Nether Brick", "6"], ["Quartz", "7"]];
     idDict["46"] = [["Inactive", "0"], ["Active", "1"]];
+    idDict["53"] = [["East", "0"], ["West", "1"], ["South", "2"], ["North", "3"], ["East u/d", "4"], ["West u/d", "5"], ["South u/d", "6"], ["North u/dd", "7"]];
+    idDict["67"] = [["East", "0"], ["West", "1"], ["South", "2"], ["North", "3"], ["East u/d", "4"], ["West u/d", "5"], ["South u/d", "6"], ["North u/dd", "7"]];  
+    idDict["80"] = [["East", "1"], ["West", "2"], ["South", "3"], ["North", "3"], ["Up", "5"]];
+    idDict["98"] = [["Stone Brick", "0"], ["Mossy", "1"], ["Cracked", "2"], ["Chiseled", "3"]];
+    
 
     this.setOnChange(function(changeEvent) {
       var id = this.getFieldValue("ID");
