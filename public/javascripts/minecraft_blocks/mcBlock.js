@@ -101,6 +101,8 @@ Blockly.Extensions.register('dynamic_dropdown_extension',
     idDict["80"] = [["East", "1"], ["West", "2"], ["South", "3"], ["North", "3"], ["Up", "5"]];
     idDict["98"] = [["Stone Brick", "0"], ["Mossy", "1"], ["Cracked", "2"], ["Chiseled", "3"]];
     idDict["43"] = [["Stone", "0"], ["Sandstone", "1"], ["Wooden", "2"], ["Cobblestone", "3"], ["Brick", "4"], ["Stone Brick", "5"], ["Nether Brick", "6"], ["Quartz", "7"]];
+    idDict["44"] = [["Stone", "0"], ["Sandstone", "1"], ["Wooden", "2"], ["Cobblestone", "3"], ["Brick", "4"], ["Stone Brick", "5"], ["Nether Brick", "6"], ["Quartz", "7"]];
+    
 
     this.setOnChange(function(changeEvent) {
       var id = this.getFieldValue("ID");
