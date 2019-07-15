@@ -83,13 +83,27 @@ function destroyClickedElement(event) {
 function createScript() {
     let codeForm = new FormData();
     let xhttp = new XMLHttpRequest();
-    Blockly.Python.INFINITE_LOOP_TRAP = null;
-    let code = PREAMBLE + Blockly.Python.workspaceToCode(mainWorkspace);
-    codeForm.append("codeArea", code);
-    codeForm.append("fileName", document.getElementById("fileNameTextBox").value);
-    xhttp.open("POST", "/copy_text", true);
-    addLoadEvent(xhttp);
-    xhttp.send(codeForm);
+    if (workspaceHasWarnings()) {
+        $('.menu').notify("Must resolve warnings before creating script.", "error", NOTIFY_OPTIONS);
+    }
+    else {
+        Blockly.Python.INFINITE_LOOP_TRAP = null;
+        let code = PREAMBLE + Blockly.Python.workspaceToCode(mainWorkspace);
+        codeForm.append("codeArea", code);
+        codeForm.append("fileName", document.getElementById("fileNameTextBox").value);
+        xhttp.open("POST", "/copy_text", true);
+        addLoadEvent(xhttp);
+        xhttp.send(codeForm);
+    }
+}
+
+/**
+ * A predicate helper function for createScript.
+ * Returns true if any blocks in workspace have a warning assigned to them or false otherwise.
+ */
+function workspaceHasWarnings() {
+    let blocks = mainWorkspace.getAllBlocks();
+    return !!blocks.find((block) => !!block.warning);
 }
 
 /**
