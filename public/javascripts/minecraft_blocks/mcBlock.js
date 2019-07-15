@@ -93,8 +93,12 @@ Blockly.Python['mcblock_all_attrs'] = function(block) {
 Blockly.Extensions.register('dynamic_dropdown_extension', 
   function() {
     var idDict = [];
+    
+    idDict["5"] = [["Oak", "0"], ["Spruce", "1"], ["Birch", "2"], ["Jungle", "3"]];
     idDict["17"] = [["Oak(up/down)", "0"], ["Spruce(up/down)", "1"], ["Birch(up/down)", "2"], ["Jungle(up/down)", "3"], ["Oak(east/west)", "4"], ["Spruce(east/west)", "5"], ["Birch(east/west)", "6"], ["Jungle(east/west)", "7"], ["Oak(north/south)", "8"], ["Spruce(north/south)", "9"], ["Birch(north/south)", "10"], ["Jungle(north/south)", "11"], ["Oak(bark only)", "12"], ["Spruce(bark only)", "13"], ["Birch(bark only)", "14"], ["Jungle(bark only)", "15"]];
+    idDict["31"] = [["Shrub", "0"], ["Grass", "1"], ["Fern", "2"], ["Biome Grass", "3"]];
     idDict["35"] = [["White", "0"], ["Orange", "1"], ["Magenta", "2"], ["Light Blue", "3"], ["Yellow", "4"], ["Lime", "5"], ["Pink", "6"], ["Grey", "7"], ["Light Grey", "8"], ["Cyan", "9"], ["Purple", "10"], ["Blue", "11"], ["Brown", "12"], ["Green", "13"], ["Red", "14"], ["Black", "15"]];
+    
     this.setOnChange(function(changeEvent) {
       var id = this.getFieldValue("ID");
       if(idDict.hasOwnProperty(id)) {
