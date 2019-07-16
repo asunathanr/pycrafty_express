@@ -118,7 +118,7 @@ SECOND_DROPDOWN_MIXIN = {
           if(this.getInput("DATAIN") === null) {
             var dataList = idDict[id];
             var dropdown = new Blockly.FieldDropdown(dataList);
-            this.appendDummyInput("DATAIN").appendField("sub-type: ").appendField(dropdown, "DATA");
+            this.appendValueInput("DATAIN").appendField("sub-type: ");
             
             console.log(this.getField("DATA"));
           }   
