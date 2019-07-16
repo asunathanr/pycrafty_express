@@ -81,19 +81,17 @@ Blockly.Python['mcblock_all_attrs'] = function(block) {
 SECOND_DROPDOWN_MIXIN = {
     
   
-    mutationToDom: function() {
-      var mutationXml = document.createElement("mutation");
-      mutationXml.setAttribute('dropdown2', this.getFieldValue("DATA"));
-      return mutationXml;
-    },
-    
-    domToMutation: function(xmlElement) {
-      var dropdown2 = xmlElement.getAttribute('dropdown2');
-      if(dropdown2 && dropdown2 !== 'undefined') {
-        this.dropdown2 = dropdown2;
-      }
-      this.updateShape_();
-    },
+  mutationToDom: function() {
+    var mutationXml = document.createElement("mutation");
+    mutationXml.setAttribute('idvalue', this.getFieldValue("ID"));
+    return mutationXml;
+  },
+  
+  domToMutation: function(xmlElement) {
+    var idValue = xmlElement.getAttribute('idValue');
+    this.setFieldValue(idValue, "ID");
+    this.updateShape_();
+  },
 
     updateShape_: function() {
       var idDict = [];
@@ -118,7 +116,7 @@ SECOND_DROPDOWN_MIXIN = {
           if(this.getInput("DATAIN") === null) {
             var dataList = idDict[id];
             var dropdown = new Blockly.FieldDropdown(dataList);
-            this.appendValueInput("DATAIN").appendField("sub-type: ");
+            this.appendDummyInput("DATAIN").appendField("sub-type: ").appendField(dropdown, "DATA");
             
             console.log(this.getField("DATA"));
           }   
