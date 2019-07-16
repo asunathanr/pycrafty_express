@@ -53,6 +53,7 @@ Blockly.defineBlocksWithJsonArray([
     "previousStatement": null,
     "nextStatement": null,
     "colour": 230,
+    "extensions": ["setBlock_warning"],
     "tooltip": "Set a single block.",
     "helpUrl": ""
   },
@@ -266,4 +267,25 @@ Blockly.Python['get_player_entity_ids'] = function (block) {
     }
 };
 
+// extensions for warnings on the blocks for code checking
+Blockly.Extensions.register("setBlock_warning", function () {
 
+  this.setOnChange(function(changeEvent) {
+    // get blocks attached to input
+    var position_input = this.getInputTargetBlock("vec");
+    var block_input = this.getInputTargetBlock("block");
+
+    if(position_input === null && block_input === null) {
+      this.setWarningText("You must attach a block to the Position and Block inputs.");
+    } else if(position_input === null && block_input !== null) {
+      this.setWarningText("You must attach a block to the Position input.")
+    } else if(position_input !== null && block_input === null) {
+      this.setWarningText("You must attach a block to the Block input.")
+    }
+    else { // otherwise remove warning
+      this.setWarningText(null);
+    }
+
+  });
+  
+})
