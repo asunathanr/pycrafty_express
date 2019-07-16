@@ -191,7 +191,6 @@ Blockly.Extensions.registerMixin('contextMenu_variableDynamicSetterGetter',
 Blockly.Extensions.register("check_for_setter", function() {
   // on change function so this check will happen every time a variables_get_dynamic block fires an event
   this.setOnChange(function(changeEvent) {
-    console.log(this);
     var id = this.getFieldValue('VAR');
     var variableModel = this.workspace.getVariableById(id);
     if (this.type === 'variables_get_dynamic') {
@@ -234,10 +233,9 @@ Blockly.Extensions.register("check_for_setter", function() {
 Blockly.Extensions.register("check_setter_connection", function () {
 
   this.setOnChange(function(changeEvent) {
-    //console.log(this.getField("VAR").variable_.type);
-    //console.log(this);
     // get variable id
     var id = this.getFieldValue('VAR');
+    //code to re-set input type checking
     var variableModel = this.workspace.getVariableById(id);
     if (this.type === 'variables_get_dynamic') {
       this.outputConnection.setCheck(variableModel.type);
@@ -247,7 +245,6 @@ Blockly.Extensions.register("check_setter_connection", function () {
     var id  = this.getFieldValue("VAR");
     // get block attached to input
     var input = this.getInputTargetBlock("VALUE");
-    console.log(this.getInput("VALUE").connection.check_);
     // if the input is empty, or if the attached block matches the variable id warn
     if((input === null) || (id === input.getFieldValue("VAR"))) {
       this.setWarningText("You should assign this variable a valid value!");
