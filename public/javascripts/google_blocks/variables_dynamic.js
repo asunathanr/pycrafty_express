@@ -191,6 +191,7 @@ Blockly.Extensions.registerMixin('contextMenu_variableDynamicSetterGetter',
 Blockly.Extensions.register("check_for_setter", function() {
   // on change function so this check will happen every time a variables_get_dynamic block fires an event
   this.setOnChange(function(changeEvent) {
+    console.log(this);
     //get a list of all blocks in the workspace
     var blocks = Blockly.getMainWorkspace().getAllBlocks();
     // get the id of the variable we're checking for so we can match it to it's own setter
