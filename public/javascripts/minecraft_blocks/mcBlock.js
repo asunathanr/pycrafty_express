@@ -139,5 +139,4 @@ SECOND_DROPDOWN_MIXIN = {
       this.updateShape_();
     })
   })
-
   

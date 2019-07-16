@@ -186,7 +186,7 @@ Blockly.defineBlocksWithJsonArray([
 
 // Code generators
 Blockly.Python['post_to_chat'] = function (block) {
-  let value_topost = block.getFieldValue('TOPOST');
+  var value_topost = Blockly.Python.valueToCode(block, 'TOPOST', Blockly.Python.ORDER_ATOMIC);
   var code = 'mc.postToChat(' + '"' + value_topost + '"' + ')\n';
   return code;
 };
@@ -262,3 +262,5 @@ Blockly.Python['get_player_entity_ids'] = function (block) {
       return [code, Blockly.Python.ORDER_NONE];
     }
 };
+
+
