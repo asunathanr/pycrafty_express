@@ -14,8 +14,8 @@ const NOTIFY_OPTIONS = {autoHideDelay: 10000};
  */
 // https://groups.google.com/forum/#!topic/blockly/NDlC-l6DLEM
 function createSnapshot() {
-    var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
-    var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
+    let xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+    let xmlText = Blockly.Xml.domToPrettyText(xmlDom);
     localStorage.setItem("blockly.xml", xmlText);
     displaySuccessNotification(".menu","Snapshot created");
 }
@@ -59,17 +59,20 @@ function loadBlocks() {
 function saveBlocks() {
     let xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
     let xmlText = Blockly.Xml.domToPrettyText(xmlDom);
-    var xmlBlob = new Blob([xmlText], {type: "text/plain"});
-    var textToSaveAsURL = window.URL.createObjectURL(xmlBlob);
-    var downloadLink = document.createElement("a");
+    let xmlBlob = new Blob([xmlText], {type: "text/plain"});
+    let textToSaveAsURL = window.URL.createObjectURL(xmlBlob);
+    createDownloadLink(textToSaveAsURL).click();
+}
+
+function createDownloadLink(textToSaveAsURL) {
+    let downloadLink = document.createElement("a");
     downloadLink.download = 'export.xml';
     downloadLink.innerHTML = "Download File";
     downloadLink.href = textToSaveAsURL;
     downloadLink.onclick = destroyClickedElement;
     downloadLink.style.display = "none";
     document.body.appendChild(downloadLink);
-    //Clicks on the created element to Prompt for download.
-    downloadLink.click();
+    return downloadLink;
 }
 
 // Helper for export blocks.
