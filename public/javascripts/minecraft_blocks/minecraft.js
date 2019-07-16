@@ -3,6 +3,9 @@
 // PURPOSE: Implement google_blocks for all methods found in the Minecraft class
 
 
+// Saves toolbox color for MINECRAFT entities. Since Colour hue is unused we use that for Minecraft toolbars.
+Blockly.Msg.MINECRAFT_HUE = '%{BKY_COLOUR_HUE}';
+
 
 //JSON array of blocks
 Blockly.defineBlocksWithJsonArray([
