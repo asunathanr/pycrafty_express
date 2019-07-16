@@ -227,10 +227,13 @@ Blockly.Extensions.register("check_for_setter", function() {
 Blockly.Extensions.register("check_setter_connection", function () {
 
   this.setOnChange(function(changeEvent) {
+    //console.log(this.getField("VAR").variable_.type);
+    //console.log(this);
     // get variable id
     var id  = this.getFieldValue("VAR");
     // get block attached to input
     var input = this.getInputTargetBlock("VALUE");
+    console.log(this.getInput("VALUE").connection.check_);
     // if the input is empty, or if the attached block matches the variable id warn
     if((input === null) || (id == input.getFieldValue("VAR"))) {
       this.setWarningText("You should assign this variable a valid value!");
