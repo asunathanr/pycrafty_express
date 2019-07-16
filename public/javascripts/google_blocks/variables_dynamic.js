@@ -192,6 +192,13 @@ Blockly.Extensions.register("check_for_setter", function() {
   // on change function so this check will happen every time a variables_get_dynamic block fires an event
   this.setOnChange(function(changeEvent) {
     console.log(this);
+    var id = this.getFieldValue('VAR');
+    var variableModel = this.workspace.getVariableById(id);
+    if (this.type === 'variables_get_dynamic') {
+      this.outputConnection.setCheck(variableModel.type);
+    } else {
+      this.getInput('VALUE').connection.setCheck(variableModel.type);
+    }
     //get a list of all blocks in the workspace
     var blocks = Blockly.getMainWorkspace().getAllBlocks();
     // get the id of the variable we're checking for so we can match it to it's own setter
@@ -230,6 +237,13 @@ Blockly.Extensions.register("check_setter_connection", function () {
     //console.log(this.getField("VAR").variable_.type);
     //console.log(this);
     // get variable id
+    var id = this.getFieldValue('VAR');
+    var variableModel = this.workspace.getVariableById(id);
+    if (this.type === 'variables_get_dynamic') {
+      this.outputConnection.setCheck(variableModel.type);
+    } else {
+      this.getInput('VALUE').connection.setCheck(variableModel.type);
+    }
     var id  = this.getFieldValue("VAR");
     // get block attached to input
     var input = this.getInputTargetBlock("VALUE");
