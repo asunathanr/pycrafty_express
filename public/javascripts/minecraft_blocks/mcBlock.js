@@ -54,7 +54,8 @@ Blockly.defineBlocksWithJsonArray([
     "inputsInline": true,
     "previousStatement": null,
     "nextStatement": null,
-    "extensions" : ["dynamic_dropdown_extension"],
+    "mutator" : "dynamic_dropdown_mutator",
+    "extensions" : ["dd_on_change"],
     "colour": 230,
     "tooltip": "Change the type and sup-type of a provided block object.",
     "helpUrl": ""
@@ -65,67 +66,78 @@ Blockly.defineBlocksWithJsonArray([
 Blockly.Python['mcblock_all_attrs'] = function(block) {
   var value_block = Blockly.Python.valueToCode(block, 'BLOCK', Blockly.Python.ORDER_ATOMIC);
   var dropdown_id = block.getFieldValue('ID');
+  var dropdown2_id = block.getFieldValue('DATA');
   // TODO: Assemble Python into code variable.
-  var code = value_block+'.id = '+dropdown_id+'\n';
+  var code = value_block+'.id = '+dropdown_id+'\n'+value_block+'.data = '+dropdown2_id+'\n';
   return code;
 };
 
 
   // helper functions
-  function getvals(){
-    return fetch('http://localhost:3000/javascripts/minecraft_blocks/mcBlockIds.txt')
-    .then(response => response.text())
-    .then(data => {
-      console.dir(data);
-    })
-    .catch(error => console.log(error));
-  }
 
-  function dynamicOptions(optsString) {
-    var options = []
-    for(i of optsString.split(" ")) {
-      options.push([i, i]);
-    }
-    return options;
-  }
 
 // Extension for dropdown
-Blockly.Extensions.register('dynamic_dropdown_extension', 
-  function() {
-    var idDict = [];
-    
-    idDict["5"] = [["Oak", "0"], ["Spruce", "1"], ["Birch", "2"], ["Jungle", "3"]];
-    idDict["17"] = [["Oak(up/down)", "0"], ["Spruce(up/down)", "1"], ["Birch(up/down)", "2"], ["Jungle(up/down)", "3"], ["Oak(east/west)", "4"], ["Spruce(east/west)", "5"], ["Birch(east/west)", "6"], ["Jungle(east/west)", "7"], ["Oak(north/south)", "8"], ["Spruce(north/south)", "9"], ["Birch(north/south)", "10"], ["Jungle(north/south)", "11"], ["Oak(bark only)", "12"], ["Spruce(bark only)", "13"], ["Birch(bark only)", "14"], ["Jungle(bark only)", "15"]];
-    idDict["18"] = [["Oak Leaves", "1"], ["Spruce Leaves", "2"], ["Birch Leaves", "3"]];
-    idDict["24"] = [["Sandstone", "0"], ["Chiseled", "1"], ["Smooth", "2"]];
-    idDict["31"] = [["Shrub", "0"], ["Grass", "1"], ["Fern", "2"], ["Biome Grass", "3"]];
-    idDict["35"] = [["White", "0"], ["Orange", "1"], ["Magenta", "2"], ["Light Blue", "3"], ["Yellow", "4"], ["Lime", "5"], ["Pink", "6"], ["Grey", "7"], ["Light Grey", "8"], ["Cyan", "9"], ["Purple", "10"], ["Blue", "11"], ["Brown", "12"], ["Green", "13"], ["Red", "14"], ["Black", "15"]];
-    idDict["43"] = [["Stone", "0"], ["Sandstone", "1"], ["Wooden", "2"], ["Cobblestone", "3"], ["Brick", "4"], ["Stone Brick", "5"], ["Nether Brick", "6"], ["Quartz", "7"]];
-    idDict["44"] = [["Stone", "0"], ["Sandstone", "1"], ["Wooden", "2"], ["Cobblestone", "3"], ["Brick", "4"], ["Stone Brick", "5"], ["Nether Brick", "6"], ["Quartz", "7"]];
-    idDict["46"] = [["Inactive", "0"], ["Active", "1"]];
-    idDict["53"] = [["East", "0"], ["West", "1"], ["South", "2"], ["North", "3"], ["East u/d", "4"], ["West u/d", "5"], ["South u/d", "6"], ["North u/dd", "7"]];
-    idDict["67"] = [["East", "0"], ["West", "1"], ["South", "2"], ["North", "3"], ["East u/d", "4"], ["West u/d", "5"], ["South u/d", "6"], ["North u/dd", "7"]];  
-    idDict["80"] = [["East", "1"], ["West", "2"], ["South", "3"], ["North", "3"], ["Up", "5"]];
-    idDict["98"] = [["Stone Brick", "0"], ["Mossy", "1"], ["Cracked", "2"], ["Chiseled", "3"]];
-    
 
-    this.setOnChange(function(changeEvent) {
-      var id = this.getFieldValue("ID");
-      if(idDict.hasOwnProperty(id)) {
-        if(this.getInput("DATAIN") === null) {
-          var dataList = idDict[id];
-          var dropdown = new Blockly.FieldDropdown(dataList);
-          this.appendDummyInput("DATAIN").appendField("sub-type: ").appendField(dropdown, "DATA");
-        }   
-      } else {
-        if(this.getInput("DATAIN") === null) {
-
-        } else {
-          this.removeInput("DATAIN");
-        }
+SECOND_DROPDOWN_MIXIN = {
+    
+  
+    mutationToDom: function() {
+      var mutationXml = document.createElement("mutation");
+      mutationXml.setAttribute('dropdown2', this.getFieldValue("DATA"));
+      return mutationXml;
+    },
+    
+    domToMutation: function(xmlElement) {
+      var dropdown2 = xmlElement.getAttribute('dropdown2');
+      if(dropdown2 && dropdown2 !== 'undefined') {
+        this.dropdown2 = dropdown2;
       }
-    
-    //console.log(id);
+      this.updateShape_();
+    },
+
+    updateShape_: function() {
+      var idDict = [];
+      
+      idDict["5"] = [["Oak", "0"], ["Spruce", "1"], ["Birch", "2"], ["Jungle", "3"]];
+      idDict["17"] = [["Oak(up/down)", "0"], ["Spruce(up/down)", "1"], ["Birch(up/down)", "2"], ["Jungle(up/down)", "3"], ["Oak(east/west)", "4"], ["Spruce(east/west)", "5"], ["Birch(east/west)", "6"], ["Jungle(east/west)", "7"], ["Oak(north/south)", "8"], ["Spruce(north/south)", "9"], ["Birch(north/south)", "10"], ["Jungle(north/south)", "11"], ["Oak(bark only)", "12"], ["Spruce(bark only)", "13"], ["Birch(bark only)", "14"], ["Jungle(bark only)", "15"]];
+      idDict["18"] = [["Oak Leaves", "1"], ["Spruce Leaves", "2"], ["Birch Leaves", "3"]];
+      idDict["24"] = [["Sandstone", "0"], ["Chiseled", "1"], ["Smooth", "2"]];
+      idDict["31"] = [["Shrub", "0"], ["Grass", "1"], ["Fern", "2"], ["Biome Grass", "3"]];
+      idDict["35"] = [["White", "0"], ["Orange", "1"], ["Magenta", "2"], ["Light Blue", "3"], ["Yellow", "4"], ["Lime", "5"], ["Pink", "6"], ["Grey", "7"], ["Light Grey", "8"], ["Cyan", "9"], ["Purple", "10"], ["Blue", "11"], ["Brown", "12"], ["Green", "13"], ["Red", "14"], ["Black", "15"]];
+      idDict["43"] = [["Stone", "0"], ["Sandstone", "1"], ["Wooden", "2"], ["Cobblestone", "3"], ["Brick", "4"], ["Stone Brick", "5"], ["Nether Brick", "6"], ["Quartz", "7"]];
+      idDict["44"] = [["Stone", "0"], ["Sandstone", "1"], ["Wooden", "2"], ["Cobblestone", "3"], ["Brick", "4"], ["Stone Brick", "5"], ["Nether Brick", "6"], ["Quartz", "7"]];
+      idDict["46"] = [["Inactive", "0"], ["Active", "1"]];
+      idDict["53"] = [["East", "0"], ["West", "1"], ["South", "2"], ["North", "3"], ["East u/d", "4"], ["West u/d", "5"], ["South u/d", "6"], ["North u/dd", "7"]];
+      idDict["67"] = [["East", "0"], ["West", "1"], ["South", "2"], ["North", "3"], ["East u/d", "4"], ["West u/d", "5"], ["South u/d", "6"], ["North u/dd", "7"]];  
+      idDict["80"] = [["East", "1"], ["West", "2"], ["South", "3"], ["North", "3"], ["Up", "5"]];
+      idDict["98"] = [["Stone Brick", "0"], ["Mossy", "1"], ["Cracked", "2"], ["Chiseled", "3"]];
+      
+      var id = this.getFieldValue("ID");
+      
+        if(idDict.hasOwnProperty(id)) {
+          if(this.getInput("DATAIN") === null) {
+            var dataList = idDict[id];
+            var dropdown = new Blockly.FieldDropdown(dataList);
+            this.appendDummyInput("DATAIN").appendField("sub-type: ").appendField(dropdown, "DATA");
+            
+            console.log(this.getField("DATA"));
+          }   
+        } else {
+          if(this.getInput("DATAIN") === null) {
+  
+          } else {
+            this.removeInput("DATAIN");
+          }
+        }
+    }
+  };
+
+
+  Blockly.Extensions.registerMutator('dynamic_dropdown_mutator', SECOND_DROPDOWN_MIXIN);
+  Blockly.Extensions.register('dd_on_change', function() {
+    this.setOnChange(function(changeEvent) {
+      this.updateShape_();
     })
-    
-  });
+  })
+
+  
