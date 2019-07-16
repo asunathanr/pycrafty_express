@@ -2,7 +2,7 @@
 // AUTHORS: Justin Erickson, Richie Burch, Matt Hardin, Nathan Robertson
 // PURPOSE: Code to setup and work with main blockly workspace.
 
-
+const WORKSPACE_KEY = "workspace";
 var blocklyArea = document.getElementById('blocklyArea');
 var blocklyDiv = document.getElementById('blocklyDiv');
 var mainWorkspace = Blockly.inject(blocklyDiv,
@@ -50,18 +50,25 @@ function displayCodeInBrowser() {
     codeArea.value = preamble + Blockly.Python.workspaceToCode(mainWorkspace);
 }
 
+
+function storeWorkspace() {
+    let xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+    let xmlText = Blockly.Xml.domToPrettyText(xmlDom);
+    sessionStorage.setItem(WORKSPACE_KEY, xmlText);
+}
+
 // Update python code in textarea when the workspace changes.
 mainWorkspace.addChangeListener(function () {
     displayCodeInBrowser();
+    storeWorkspace();
 });
-
 
 
 window.addEventListener('resize', onresize, false);
 onresize();
 Blockly.svgResize(mainWorkspace);
 
-// Scroll to leftmost and topmost position of workspace
-//mainWorkspace.scrollX = mainWorkspace.width;
-//mainWorkspace.scrollY = mainWorkspace.height;
-//mainWorkspace.render();
+// Restore session storage of workspace.
+let data = sessionStorage.getItem(WORKSPACE_KEY);
+let xmlDom = Blockly.Xml.textToDom(data);
+Blockly.Xml.domToWorkspace(xmlDom, mainWorkspace);
