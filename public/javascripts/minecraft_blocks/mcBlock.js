@@ -68,7 +68,11 @@ Blockly.Python['mcblock_all_attrs'] = function(block) {
   var dropdown_id = block.getFieldValue('ID');
   var dropdown2_id = block.getFieldValue('DATA');
   // TODO: Assemble Python into code variable.
-  var code = value_block+'.id = '+dropdown_id+'\n'+value_block+'.data = '+dropdown2_id+'\n';
+  if(block.getField("DATA") !== null) {
+    var code = value_block+'.id = '+dropdown_id+'\n'+value_block+'.data = '+dropdown2_id+'\n';
+  } else {
+    var code = value_block+'.id = '+dropdown_id+'\n';
+  }
   return code;
 };
 
@@ -117,8 +121,6 @@ SECOND_DROPDOWN_MIXIN = {
             var dataList = idDict[id];
             var dropdown = new Blockly.FieldDropdown(dataList);
             this.appendDummyInput("DATAIN").appendField("sub-type: ").appendField(dropdown, "DATA");
-            
-            console.log(this.getField("DATA"));
           }   
         } else {
           if(this.getInput("DATAIN") === null) {
