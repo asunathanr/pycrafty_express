@@ -193,11 +193,14 @@ Blockly.Extensions.register("check_for_setter", function() {
   this.setOnChange(function(changeEvent) {
     var id = this.getFieldValue('VAR');
     var variableModel = this.workspace.getVariableById(id);
-    if (this.type === 'variables_get_dynamic') {
-      this.outputConnection.setCheck(variableModel.type);
-    } else {
-      this.getInput('VALUE').connection.setCheck(variableModel.type);
+    if(variableModel !== null) {
+      if (this.type === 'variables_get_dynamic') {
+        this.outputConnection.setCheck(variableModel.type);
+      } else {
+        this.getInput('VALUE').connection.setCheck(variableModel.type);
+      }
     }
+    
     //get a list of all blocks in the workspace
     var blocks = Blockly.getMainWorkspace().getAllBlocks();
     // get the id of the variable we're checking for so we can match it to it's own setter

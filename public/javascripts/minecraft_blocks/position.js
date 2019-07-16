@@ -112,6 +112,7 @@ Blockly.defineBlocksWithJsonArray([
         "previousStatement": null,
         "nextStatement": null,
         "colour": 230,
+        "extensions": ["empty_input_warning"],
         "tooltip": "Modify attributes of a position variable. Keep + 0 to leave an attribute unchanged.",
         "helpUrl": ""
       }
