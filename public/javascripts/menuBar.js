@@ -1,4 +1,4 @@
-// FILE: toolBar.js
+// FILE: menuBar.js
 // AUTHORS: Justin Erickson, Richie Burch, Matt Hardin, Nathan Robertson
 // PURPOSE: Controls behavior of the toolbar. Most functions in this file are triggered upon an event happening.
 
@@ -107,6 +107,8 @@ function sendCode() {
 /**
  * A predicate helper function for createScript.
  * Returns true if any blocks in workspace have a warning assigned to them or false otherwise.
+ * Note: !! is necessary as it casts a variable into a boolean expression and then returns
+ * true if variable is not undefined or false otherwise.
  */
 function workspaceHasWarnings() {
     let blocks = mainWorkspace.getAllBlocks();
