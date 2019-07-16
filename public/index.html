@@ -91,7 +91,7 @@
 <!--This defines the toolbox to be given to Blockly.  -->
 <!--Additional blocks can be added and categorized.   -->
 <xml xmlns="http://www.w3.org/1999/xhtml" id="toolbox" style="display: none;">
-    <category name="Minecraft" colour="#a55b6d">
+    <category name="Minecraft" colour="%{BKY_MINECRAFT_HUE}">
         <block type="post_to_chat"></block>
         <block type="set_block"></block>
         <block type="set_blocks"></block>
@@ -102,7 +102,7 @@
         <block type="get_player_id"></block>
         <block type="get_player_entity_ids"></block>
 
-        <category name="Player" colour="#a55b6d">
+        <category name="Player" colour="%{BKY_MINECRAFT_HUE}">
             <block type="player_get_position"></block>
             <block type="player_set_position"></block>
             <block type="player_get_tile_position"></block>
@@ -112,7 +112,7 @@
             <block type="player_get_pitch"></block>
         </category>
 
-        <category name="Position" colour="#a55b6d">
+        <category name="Position" colour="%{BKY_MINECRAFT_HUE}">
             <block type="vector_all_attrs">
                 <value name="X">
                     <block type="math_number">
@@ -132,7 +132,7 @@
             </block>
         </category>
 
-        <category name="Entity" colour="#a55b6d">
+        <category name="Entity" colour="%{BKY_MINECRAFT_HUE}">
             <block type="entity_get_position"></block>
             <block type="entity_set_position"></block>
             <block type="entity_get_tile_position"></block>
@@ -142,7 +142,7 @@
             <block type="entity_get_pitch"></block>
         </category>
 
-        <category name="Minecraft Block" colour="#A65C81">
+        <category name="Minecraft Block" colour="%{BKY_MINECRAFT_HUE}">
             <block type="mcblock_all_attrs">
                 <mutation idvalue='0'></mutation>
             </block>
@@ -150,7 +150,7 @@
 
     </category> <!-- End of Minecraft Category -->
 
-    <category name="Logic" colour="#5C81A6">
+    <category name="Logic" colour="%{BKY_LOGIC_HUE}">
         <block type="controls_if"></block>
         <block type="logic_compare">
             <field name="OP">EQ</field>
@@ -165,7 +165,7 @@
         <block type="logic_null"></block>
         <block type="logic_ternary"></block>
     </category>
-    <category name="Loops" colour="#5CA65C">
+    <category name="Loops" colour="%{BKY_LOOPS_HUE}">
         <block type="controls_repeat_ext">
             <value name="TIMES">
                 <shadow type="math_number">
@@ -201,7 +201,7 @@
             <field name="FLOW">BREAK</field>
         </block>
     </category>
-    <category name="Math" colour="#5C68A6">
+    <category name="Math" colour="%{BKY_MATH_HUE}">
         <block type="math_number">
             <field name="NUM">0</field>
         </block>
@@ -301,7 +301,7 @@
         </block>
         <block type="math_random_float"></block>
     </category>
-    <category name="Text" colour="#5CA68D">
+    <category name="Text" colour="%{BKY_TEXTS_HUE}">
         <block type="text">
             <field name="TEXT"></field>
         </block>
@@ -395,7 +395,7 @@
             </value>
         </block>
     </category>
-    <category name="Lists" colour="#745CA6">
+    <category name="Lists" colour="%{BKY_LISTS_HUE}">
         <block type="lists_create_with">
             <mutation items="0"></mutation>
         </block>
@@ -464,7 +464,6 @@
         </block>
     </category>
 
-    <sep></sep>
     <category name="Variables" colour="%{BKY_VARIABLES_HUE}" custom="VARIABLE_DYNAMIC"></category>
 
     <category name="Functions" colour="%{BKY_PROCEDURES_HUE}">
