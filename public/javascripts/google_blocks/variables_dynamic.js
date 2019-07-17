@@ -223,6 +223,8 @@ Blockly.Extensions.register("check_for_setter", function() {
           }
         }
       }
+    } else if ((this.getRootBlock().type === 'controls_forEach') &&(this.getRootBlock().getFieldValue("VAR") === id)) {
+      this.setWarningText(null);
     } else { // if there are no setters for the current variable, warn
       this.setWarningText("You need to set variable first!");
     }
