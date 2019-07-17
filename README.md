@@ -1,10 +1,11 @@
 # Prerequisites
 1. Minecraft Java Edition
 2. Minecraft Forge Client (single-player) Version (Version of Forge must match the Minecraft version)
-2. RaspberryJam Minecraft Mod
-3. Python3
-4. Node.js
-5. Internet connection (for cdn packages)
+3. Java version 8
+4. RaspberryJam Minecraft Mod
+5. Python3
+6. Node.js
+7. Internet connection (for cdn packages)
 
 # Setup Forge and Raspberry Jam Mod
 Follow the instructions for installing Forge and Raspberry Jam at: https://github.com/arpruss/raspberryjammod
