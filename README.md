@@ -1,9 +1,14 @@
 # Prerequisites
-1. Minecraft
+1. Minecraft Java Edition
 2. RaspberryJam Minecraft Mod
 3. Python3
 4. Node.js
 5. Internet connection (for cdn packages)
+
+# Setup Raspberry Jam Mod
+1. Install Minecraft Forge
+2. Place the Raspberry Jam jar file in the mods directory of the .minecraft directory
+3. Run the Raspberry Jam jar file.
 
 # Start Pycrafty
 First, install node.js on your system. You can download it at: https://nodejs.org/en/
@@ -12,6 +17,10 @@ To verify node is properly installed open up a terminal and type:
 ```
 node -v 
 ```
+You should see a version number displayed in the terminal.
+
+Run ```npm install``` from the folder which holds the Pycrafty code.
+This will install any dependencies for the server on the machine.
 
 Next, start a server for Pycrafty by running the command
 ```
