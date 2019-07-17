@@ -10,29 +10,35 @@
 
 # Setup Minecraft
 1. Install Minecraft on target machine
-2. Run the Minecraft Launcher
-3. Add version 12.1.2 as a selection in the launcher and run that version once.
+2. Start the Minecraft Launcher and click installations
 ![Step 1.1](public/media/readme_images/step1-1.png)
-![Step 1.2](public/media/readme_images/step1-2.png)
-![Step 1.3](public/media/readme_images/step1-3.png)
+3. Click the version dropdown
+![Step 1.2](public/media/readme_images/step1-3.png)
+4. Select version 12.1.2
+![Step 1.3](public/media/readme_images/step1-2.png)
+5. Click on the new button to create a new installation
 ![Step 1.4](public/media/readme_images/step1-4.png)
+6. Click Create to save the new installation
 ![Step 1.5](public/media/readme_images/step1-5.png)
+7. Select the newly created installation
 ![Step 1.6](public/media/readme_images/step1-6.png)
+8. Click play to start a game with the new installation
 ![Step 1.7](public/media/readme_images/step1-7.png)
 
 # Setup Forge and Raspberry Jam Mod
 1. Install Java version 8
-2. Install Python 3
-2. Follow the instructions for installing Forge 12.1.2 and Raspberry Jam at: https://github.com/arpruss/raspberryjammod
-
 ![Step 2.1](public/media/readme_images/step2-1.png)
+2. Install Python 3
+3. Download Minecraft Forge version 1.12.2 at: https://files.minecraftforge.net/
 ![Step 2.2](public/media/readme_images/step2-2.png)
+4. Start the Windows Installer and install the forge client version
 ![Step 2.3](public/media/readme_images/step2-3.png)
+5. Start the minecraft launcher and select the newly created installation
 ![Step 2.4](public/media/readme_images/step2-4.png)
+6. Go to the Raspberry Jam Repository at https://github.com/arpruss/raspberryjammod and click clone or download
 ![Step 2.5](public/media/readme_images/step2-5.png)
+7. Click Download Zip
 ![Step 2.6](public/media/readme_images/step2-6.png)
-![Step 2.7](public/media/readme_images/step2-7.png)
-![Step 2.8](public/media/readme_images/step2-8.png)
 
 
 # Start Pycrafty
