@@ -16,7 +16,7 @@ Blockly.defineBlocksWithJsonArray([
           }
         ],
         "output": "Vector",
-        "colour": 230,
+        "colour": '%{BKY_MINECRAFT_HUE}',
         "extensions": ["empty_input_warning"],
         "tooltip": "Get position of specified player.",
         "helpUrl": ""
@@ -40,7 +40,7 @@ Blockly.defineBlocksWithJsonArray([
         "inputsInline": true,
         "previousStatement": null,
         "nextStatement": null,
-        "colour": 230,
+        "colour": '%{BKY_MINECRAFT_HUE}',
         "extensions": ["empty_input_warning"],
         "tooltip": "Move the specified player to the provided location.",
         "helpUrl": ""
@@ -57,7 +57,7 @@ Blockly.defineBlocksWithJsonArray([
           }
         ],
         "output": "Vector",
-        "colour": 230,
+        "colour": '%{BKY_MINECRAFT_HUE}',
         "extensions": ["empty_input_warning"],
         "tooltip": "Get the position of the block located directly under the supplied player.",
         "helpUrl": ""
@@ -81,7 +81,7 @@ Blockly.defineBlocksWithJsonArray([
         "inputsInline": true,
         "previousStatement": null,
         "nextStatement": null,
-        "colour": 230,
+        "colour": '%{BKY_MINECRAFT_HUE}',
         "extensions": ["empty_input_warning"],
         "tooltip": "Move the provided player on top of the provided position.",
         "helpUrl": ""
@@ -98,7 +98,7 @@ Blockly.defineBlocksWithJsonArray([
           }
         ],
         "output": "Number",
-        "colour": 230,
+        "colour": '%{BKY_MINECRAFT_HUE}',
         "extensions": ["empty_input_warning"],
         "tooltip": "Get the direction of the provided player.",
         "helpUrl": ""
@@ -115,7 +115,7 @@ Blockly.defineBlocksWithJsonArray([
           }
         ],
         "output": "Number",
-        "colour": 230,
+        "colour": '%{BKY_MINECRAFT_HUE}',
         "extensions": ["empty_input_warning"],
         "tooltip": "Get rotation of the provided player.",
         "helpUrl": ""
@@ -131,7 +131,7 @@ Blockly.defineBlocksWithJsonArray([
           }
         ],
         "output": "Number",
-        "colour": 230,
+        "colour": '%{BKY_MINECRAFT_HUE}',
         "extensions": ["empty_input_warning"],
         "tooltip": "Get pitch of the provided player.",
         "helpUrl": ""
