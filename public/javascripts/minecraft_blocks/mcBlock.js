@@ -55,7 +55,7 @@ Blockly.defineBlocksWithJsonArray([
     "previousStatement": null,
     "nextStatement": null,
     "mutator" : "dynamic_dropdown_mutator",
-    "extensions" : ["dd_on_change"],
+    "extensions" : ["dd_on_change", "empty_input_warning"],
     "colour": 230,
     "tooltip": "Change the type and sup-type of a provided block object.",
     "helpUrl": ""

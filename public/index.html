@@ -35,7 +35,6 @@
     <script src="javascripts/google_blocks/math.js"></script>
     <script src="javascripts/google_blocks/procedures.js"></script>
     <script src="javascripts/google_blocks/text.js"></script>
-    <!-- <script src="javascripts/google_blocks/variables.js"></script> -->
     <script src="javascripts/google_blocks/variables_dynamic.js"></script>
 
 
@@ -332,11 +331,6 @@
         </block>
         <block type="text_indexOf">
             <field name="END">FIRST</field>
-            <value name="VALUE">
-                <block type="variables_get">
-                    <field name="VAR" id="iKD!ueZ.y:.]R[B]P;X8" variabletype="">text</field>
-                </block>
-            </value>
             <value name="FIND">
                 <shadow type="text">
                     <field name="TEXT">abc</field>
@@ -346,21 +340,11 @@
         <block type="text_charAt">
             <mutation at="true"></mutation>
             <field name="WHERE">FROM_START</field>
-            <value name="VALUE">
-                <block type="variables_get">
-                    <field name="VAR" id="iKD!ueZ.y:.]R[B]P;X8" variabletype="">text</field>
-                </block>
-            </value>
         </block>
         <block type="text_getSubstring">
             <mutation at1="true" at2="true"></mutation>
             <field name="WHERE1">FROM_START</field>
             <field name="WHERE2">FROM_START</field>
-            <value name="STRING">
-                <block type="variables_get">
-                    <field name="VAR" id="iKD!ueZ.y:.]R[B]P;X8" variabletype="">text</field>
-                </block>
-            </value>
         </block>
         <block type="text_changeCase">
             <field name="CASE">UPPERCASE</field>
@@ -413,41 +397,21 @@
         <block type="lists_isEmpty"></block>
         <block type="lists_indexOf">
             <field name="END">FIRST</field>
-            <value name="VALUE">
-                <block type="variables_get">
-                    <field name="VAR" id="iSY:!i3xuq3afcHn#R,%" variabletype="">list</field>
-                </block>
-            </value>
         </block>
         <block type="lists_getIndex">
             <mutation statement="false" at="true"></mutation>
             <field name="MODE">GET</field>
             <field name="WHERE">FROM_START</field>
-            <value name="VALUE">
-                <block type="variables_get">
-                    <field name="VAR" id="iSY:!i3xuq3afcHn#R,%" variabletype="">list</field>
-                </block>
-            </value>
         </block>
         <block type="lists_setIndex">
             <mutation at="true"></mutation>
             <field name="MODE">SET</field>
             <field name="WHERE">FROM_START</field>
-            <value name="LIST">
-                <block type="variables_get">
-                    <field name="VAR" id="iSY:!i3xuq3afcHn#R,%" variabletype="">list</field>
-                </block>
-            </value>
         </block>
         <block type="lists_getSublist">
             <mutation at1="true" at2="true"></mutation>
             <field name="WHERE1">FROM_START</field>
             <field name="WHERE2">FROM_START</field>
-            <value name="LIST">
-                <block type="variables_get">
-                    <field name="VAR" id="iSY:!i3xuq3afcHn#R,%" variabletype="">list</field>
-                </block>
-            </value>
         </block>
         <block type="lists_split">
             <mutation mode="SPLIT"></mutation>

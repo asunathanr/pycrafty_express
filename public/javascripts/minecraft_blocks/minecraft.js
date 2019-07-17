@@ -53,7 +53,7 @@ Blockly.defineBlocksWithJsonArray([
     "previousStatement": null,
     "nextStatement": null,
     "colour": 230,
-    "extensions": ["setBlock_warning"],
+    "extensions": ["empty_input_warning"],
     "tooltip": "Set a single block.",
     "helpUrl": ""
   },
@@ -83,6 +83,7 @@ Blockly.defineBlocksWithJsonArray([
     ],
     "previousStatement": null,
     "nextStatement": null,
+    "extensions": ["empty_input_warning"],
     "colour": 230,
     "tooltip": "",
     "helpUrl": ""
@@ -103,6 +104,7 @@ Blockly.defineBlocksWithJsonArray([
     ],
     "output": "Block",
     "colour": 230,
+    "extensions": ["empty_input_warning"],
     "tooltip": "Get block type from provided coordinates.",
     "helpUrl": ""
   },
@@ -122,6 +124,7 @@ Blockly.defineBlocksWithJsonArray([
     ],
     "output": "Block",
     "colour": 230,
+    "extensions": ["empty_input_warning"],
     "tooltip": "",
     "helpUrl": ""
   },
@@ -146,6 +149,7 @@ Blockly.defineBlocksWithJsonArray([
     ],
     "output": "List",
     "colour": 230,
+    "extensions": ["empty_input_warning"],
     "tooltip": "Gets types of blocks in a cuboid. Returns a list of ints.",
     "helpUrl": ""
   },
@@ -165,6 +169,7 @@ Blockly.defineBlocksWithJsonArray([
     ],
     "output": "Number",
     "colour": 230,
+    "extensions": ["empty_input_warning"],
     "tooltip": "Get height of tallest non-air block at position.",
     "helpUrl": ""
   },
@@ -268,24 +273,32 @@ Blockly.Python['get_player_entity_ids'] = function (block) {
 };
 
 // extensions for warnings on the blocks for code checking
-Blockly.Extensions.register("setBlock_warning", function () {
+Blockly.Extensions.register("empty_input_warning", function () {
 
   this.setOnChange(function(changeEvent) {
-    // get blocks attached to input
-    var position_input = this.getInputTargetBlock("vec");
-    var block_input = this.getInputTargetBlock("block");
 
-    if(position_input === null && block_input === null) {
-      this.setWarningText("You must attach a block to the Position and Block inputs.");
-    } else if(position_input === null && block_input !== null) {
-      this.setWarningText("You must attach a block to the Position input.")
-    } else if(position_input !== null && block_input === null) {
-      this.setWarningText("You must attach a block to the Block input.")
+    let inputs = this.inputList;
+    let emptyInputs = [];
+    for(input of inputs) {
+      if(input.type === 1 && !input.connection.isConnected()) {
+        emptyInputs.push(input.fieldRow[0].text_.substring(0, input.fieldRow[0].text_.length-1));
+      }
     }
-    else { // otherwise remove warning
+    
+    let warningString = "You must have a block in ";
+
+    if(emptyInputs.length > 0) {
+      for(var i = 0; i < emptyInputs.length; i++) {
+        if(i < (emptyInputs.length - 1)) {
+          warningString += emptyInputs[i]+", ";
+        } else {
+          warningString += emptyInputs[i]+".";
+        }
+      }
+      this.setWarningText(warningString)
+    } else {
       this.setWarningText(null);
     }
-
   });
   
 })
