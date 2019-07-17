@@ -104,7 +104,7 @@ Blockly.Python['player_get_position'] = function (block) {
 };
 Blockly.Python['player_set_position'] = function (block) {
     let vector3 = Blockly.Python.valueToCode(block,"VEC3", Blockly.Python.ORDER_ATOMIC);
-    return makeFunctionCall("mc.player.setPos", [vector3]);
+    return makeFunctionCall("mc.player.setPos", [vector3])+'\n';
 };
 Blockly.Python['player_get_tile_position'] = function (block) {
     let code = makeFunctionCall("mc.player.getTilePos");
