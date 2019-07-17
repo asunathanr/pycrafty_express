@@ -1,14 +1,22 @@
-# Prerequisites
-1. Minecraft Java Edition
-2. Minecraft Forge Client (single-player) Version (Version of Forge must match the Minecraft version)
-3. Java version 8
-4. RaspberryJam Minecraft Mod
-5. Python3
-6. Node.js
-7. Internet connection (for cdn packages)
+# What you'll need
+1. Windows (preferably Windows 10)
+2. Minecraft Java Edition Version 1.12.2
+3. Minecraft Forge Client (single-player) Version 1.12.2
+4. Java version 8
+5. RaspberryJam Minecraft Mod
+6. Python 3
+7. Node.js
+8. Internet connection (for cdn packages)
+
+# Setup Minecraft
+1. Install Minecraft on target machine
+2. Run the Minecraft Launcher
+3. Add version 12.1.2 as a selection in the launcher and run that version once.
 
 # Setup Forge and Raspberry Jam Mod
-Follow the instructions for installing Forge and Raspberry Jam at: https://github.com/arpruss/raspberryjammod
+1. Install Java version 8
+2. Install Python 3
+2. Follow the instructions for installing Forge 12.1.2 and Raspberry Jam at: https://github.com/arpruss/raspberryjammod
 
 # Start Pycrafty
 First, install node.js on your system. You can download it at: https://nodejs.org/en/
