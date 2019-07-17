@@ -47,7 +47,7 @@ Blockly.defineBlocksWithJsonArray([
       {
         "type": "input_value",
         "name": "block",
-        "check": "Block"
+        "check": ["Block", "Number"]
       }
     ],
     "previousStatement": null,
@@ -78,7 +78,7 @@ Blockly.defineBlocksWithJsonArray([
       {
         "type": "input_value",
         "name": "block",
-        "check": "Block"
+        "check": ["Block", "Number"]
       }
     ],
     "previousStatement": null,
@@ -102,7 +102,7 @@ Blockly.defineBlocksWithJsonArray([
         "check": "Vector"
       }
     ],
-    "output": "Block",
+    "output": "Number",
     "colour": '%{BKY_MINECRAFT_HUE}',
     "extensions": ["empty_input_warning"],
     "tooltip": "Get block type from provided coordinates.",
@@ -196,13 +196,13 @@ Blockly.defineBlocksWithJsonArray([
 // Code generators
 Blockly.Python['post_to_chat'] = function (block) {
   var value_topost = Blockly.Python.valueToCode(block, 'TOPOST', Blockly.Python.ORDER_ATOMIC);
-  var code = 'mc.postToChat(' + '"' + value_topost + '"' + ')\n';
+  var code = 'mc.postToChat('  + value_topost + ')\n';
   return code;
 };
 Blockly.Python['set_block'] = function(block) {
   var value_vec = Blockly.Python.valueToCode(block, 'vec', Blockly.Python.ORDER_ATOMIC);
   var value_block = Blockly.Python.valueToCode(block, 'block', Blockly.Python.ORDER_ATOMIC);
-  var code = 'mc.setBlock('+value_vec+', '+value_block+')';
+  var code = 'mc.setBlock('+value_vec+', '+value_block+')\n';
   return code;
 };
 Blockly.Python['set_blocks'] = function(block) {
