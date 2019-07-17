@@ -96,7 +96,6 @@ Blockly.defineBlocksWithJsonArray([
 Blockly.Python['player_get_position'] = function (block) {
     let code = makeFunctionCall("mc.player.getPos");
     if(block.getParent() === null) {
-        // TODO: Change ORDER_NONE to the correct strength.
         return [code+'\n', Blockly.Python.ORDER_NONE];
     } else {
         return [code, Blockly.Python.ORDER_NONE];
@@ -109,7 +108,6 @@ Blockly.Python['player_set_position'] = function (block) {
 Blockly.Python['player_get_tile_position'] = function (block) {
     let code = makeFunctionCall("mc.player.getTilePos");
     if(block.getParent() === null) {
-        // TODO: Change ORDER_NONE to the correct strength.
         return [code+'\n', Blockly.Python.ORDER_NONE];
       } else {
         return [code, Blockly.Python.ORDER_NONE];
@@ -122,7 +120,6 @@ Blockly.Python['player_set_tile_position'] = function (block) {
 Blockly.Python['player_get_direction'] = function (block) {
     let code = makeFunctionCall("mc.player.getDirection");
     if(block.getParent() === null) {
-        // TODO: Change ORDER_NONE to the correct strength.
         return [code+'\n', Blockly.Python.ORDER_NONE];
       } else {
         return [code, Blockly.Python.ORDER_NONE];
@@ -131,7 +128,6 @@ Blockly.Python['player_get_direction'] = function (block) {
 Blockly.Python['player_get_rotation'] = function (block) {
     let code = makeFunctionCall("mc.player.getRotation");
     if(block.getParent() === null) {
-        // TODO: Change ORDER_NONE to the correct strength.
         return [code+'\n', Blockly.Python.ORDER_NONE];
       } else {
         return [code, Blockly.Python.ORDER_NONE];
@@ -140,7 +136,6 @@ Blockly.Python['player_get_rotation'] = function (block) {
 Blockly.Python['player_get_pitch'] = function (block) {
     let code = makeFunctionCall("mc.player.getPitch");
     if(block.getParent() === null) {
-        // TODO: Change ORDER_NONE to the correct strength.
         return [code+'\n', Blockly.Python.ORDER_NONE];
       } else {
         return [code, Blockly.Python.ORDER_NONE];
