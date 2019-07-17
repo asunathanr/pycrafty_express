@@ -3,6 +3,9 @@
 // PURPOSE: Implement google_blocks for all methods found in the Minecraft class
 
 
+// Saves toolbox color for MINECRAFT entities. Since Colour hue is unused we use that for Minecraft toolbars.
+Blockly.Msg.MINECRAFT_HUE = '%{BKY_COLOUR_HUE}';
+
 
 //JSON array of blocks
 Blockly.defineBlocksWithJsonArray([
@@ -50,6 +53,7 @@ Blockly.defineBlocksWithJsonArray([
     "previousStatement": null,
     "nextStatement": null,
     "colour": 230,
+    "extensions": ["empty_input_warning"],
     "tooltip": "Set a single block.",
     "helpUrl": ""
   },
@@ -79,6 +83,7 @@ Blockly.defineBlocksWithJsonArray([
     ],
     "previousStatement": null,
     "nextStatement": null,
+    "extensions": ["empty_input_warning"],
     "colour": 230,
     "tooltip": "",
     "helpUrl": ""
@@ -99,6 +104,7 @@ Blockly.defineBlocksWithJsonArray([
     ],
     "output": "Block",
     "colour": 230,
+    "extensions": ["empty_input_warning"],
     "tooltip": "Get block type from provided coordinates.",
     "helpUrl": ""
   },
@@ -118,6 +124,7 @@ Blockly.defineBlocksWithJsonArray([
     ],
     "output": "Block",
     "colour": 230,
+    "extensions": ["empty_input_warning"],
     "tooltip": "",
     "helpUrl": ""
   },
@@ -142,6 +149,7 @@ Blockly.defineBlocksWithJsonArray([
     ],
     "output": "List",
     "colour": 230,
+    "extensions": ["empty_input_warning"],
     "tooltip": "Gets types of blocks in a cuboid. Returns a list of ints.",
     "helpUrl": ""
   },
@@ -161,6 +169,7 @@ Blockly.defineBlocksWithJsonArray([
     ],
     "output": "Number",
     "colour": 230,
+    "extensions": ["empty_input_warning"],
     "tooltip": "Get height of tallest non-air block at position.",
     "helpUrl": ""
   },
@@ -186,7 +195,7 @@ Blockly.defineBlocksWithJsonArray([
 
 // Code generators
 Blockly.Python['post_to_chat'] = function (block) {
-  let value_topost = block.getFieldValue('TOPOST');
+  var value_topost = Blockly.Python.valueToCode(block, 'TOPOST', Blockly.Python.ORDER_ATOMIC);
   var code = 'mc.postToChat(' + '"' + value_topost + '"' + ')\n';
   return code;
 };
@@ -262,3 +271,34 @@ Blockly.Python['get_player_entity_ids'] = function (block) {
       return [code, Blockly.Python.ORDER_NONE];
     }
 };
+
+// extensions for warnings on the blocks for code checking
+Blockly.Extensions.register("empty_input_warning", function () {
+
+  this.setOnChange(function(changeEvent) {
+
+    let inputs = this.inputList;
+    let emptyInputs = [];
+    for(input of inputs) {
+      if(input.type === 1 && !input.connection.isConnected()) {
+        emptyInputs.push(input.fieldRow[0].text_.substring(0, input.fieldRow[0].text_.length-1));
+      }
+    }
+    
+    let warningString = "You must have a block in ";
+
+    if(emptyInputs.length > 0) {
+      for(var i = 0; i < emptyInputs.length; i++) {
+        if(i < (emptyInputs.length - 1)) {
+          warningString += emptyInputs[i]+", ";
+        } else {
+          warningString += emptyInputs[i]+".";
+        }
+      }
+      this.setWarningText(warningString)
+    } else {
+      this.setWarningText(null);
+    }
+  });
+  
+})

@@ -7,8 +7,7 @@
   "license": "APACHE 2.0",
   "main": "./bin/www.js",
   "scripts": {
-    "start": "SET NODE_ENV=dev && node ./bin/www",
-    "test": "mocha --timeout 10000"
+    "start": "SET NODE_ENV=dev && node ./bin/www"
   },
   "dependencies": {
     "clean-css": "^=4.1.11",
