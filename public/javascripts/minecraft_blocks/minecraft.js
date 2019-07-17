@@ -216,7 +216,6 @@ Blockly.Python['get_block'] = function(block) {
     var value_vec = Blockly.Python.valueToCode(block, 'vec', Blockly.Python.ORDER_ATOMIC);
     var code = 'mc.getBlock('+value_vec+')';
     if(block.getParent() === null) {
-    // TODO: Change ORDER_NONE to the correct strength.
       return [code+'\n', Blockly.Python.ORDER_NONE];
     } else {
       return [code, Blockly.Python.ORDER_NONE];
@@ -226,7 +225,6 @@ Blockly.Python['get_block_with_data'] = function(block) {
   var value_vec = Blockly.Python.valueToCode(block, 'vec', Blockly.Python.ORDER_ATOMIC);
   var code = 'mc.getBlockWithData('+value_vec+')';
   if(block.getParent() === null) {
-    // TODO: Change ORDER_NONE to the correct strength.
     return [code+'\n', Blockly.Python.ORDER_NONE];
   } else {
     return [code, Blockly.Python.ORDER_NONE];
@@ -237,7 +235,6 @@ Blockly.Python['get_blocks'] = function(block) {
     var value_vec2 = Blockly.Python.valueToCode(block, 'vec2', Blockly.Python.ORDER_ATOMIC);
     var code = 'mc.getBlocks('+value_vec1+', '+value_vec2+')';
     if(block.getParent() === null) {
-        // TODO: Change ORDER_NONE to the correct strength.
         return [code+'\n', Blockly.Python.ORDER_NONE];
     } else {
         return [code, Blockly.Python.ORDER_NONE];
@@ -247,7 +244,6 @@ Blockly.Python['get_height'] = function(block) {
     var value_vec = Blockly.Python.valueToCode(block, 'vec', Blockly.Python.ORDER_ATOMIC);
     var code = 'mc.getHeight('+value_vec+')';
     if(block.getParent() === null) {
-      // TODO: Change ORDER_NONE to the correct strength.
       return [code+'\n', Blockly.Python.ORDER_NONE];
     } else {
       return [code, Blockly.Python.ORDER_NONE];
@@ -256,7 +252,6 @@ Blockly.Python['get_height'] = function(block) {
 Blockly.Python['get_player_id'] = function (block) {
   var code = 'mc.getPlayerId()';
   if(block.getParent() === null) {
-    // TODO: Change ORDER_NONE to the correct strength.
     return [code+'\n', Blockly.Python.ORDER_NONE];
   } else {
     return [code, Blockly.Python.ORDER_NONE];
@@ -265,7 +260,6 @@ Blockly.Python['get_player_id'] = function (block) {
 Blockly.Python['get_player_entity_ids'] = function (block) {
     var code = 'mc.getPlayerEntityIds()';
     if(block.getParent() === null) {
-      // TODO: Change ORDER_NONE to the correct strength.
       return [code+'\n', Blockly.Python.ORDER_NONE];
     } else {
       return [code, Blockly.Python.ORDER_NONE];
