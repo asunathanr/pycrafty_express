@@ -12,11 +12,28 @@
 1. Install Minecraft on target machine
 2. Run the Minecraft Launcher
 3. Add version 12.1.2 as a selection in the launcher and run that version once.
+![Step 1.1](public/media/readme_images/step1-1.png)
+![Step 1.2](public/media/readme_images/step1-2.png)
+![Step 1.3](public/media/readme_images/step1-3.png)
+![Step 1.4](public/media/readme_images/step1-4.png)
+![Step 1.5](public/media/readme_images/step1-5.png)
+![Step 1.6](public/media/readme_images/step1-6.png)
+![Step 1.7](public/media/readme_images/step1-7.png)
 
 # Setup Forge and Raspberry Jam Mod
 1. Install Java version 8
 2. Install Python 3
 2. Follow the instructions for installing Forge 12.1.2 and Raspberry Jam at: https://github.com/arpruss/raspberryjammod
+
+![Step 2.1](public/media/readme_images/step2-1.png)
+![Step 2.2](public/media/readme_images/step2-2.png)
+![Step 2.3](public/media/readme_images/step2-3.png)
+![Step 2.4](public/media/readme_images/step2-4.png)
+![Step 2.5](public/media/readme_images/step2-5.png)
+![Step 2.6](public/media/readme_images/step2-6.png)
+![Step 2.7](public/media/readme_images/step2-7.png)
+![Step 2.8](public/media/readme_images/step2-8.png)
+
 
 # Start Pycrafty
 First, install node.js on your system. You can download it at: https://nodejs.org/en/
