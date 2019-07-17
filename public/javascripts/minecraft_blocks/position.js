@@ -111,7 +111,7 @@ Blockly.defineBlocksWithJsonArray([
         "inputsInline": true,
         "previousStatement": null,
         "nextStatement": null,
-        "colour": 230,
+        "colour": '%{BKY_MINECRAFT_HUE}',
         "extensions": ["empty_input_warning"],
         "tooltip": "Modify attributes of a position variable. Keep + 0 to leave an attribute unchanged.",
         "helpUrl": ""
