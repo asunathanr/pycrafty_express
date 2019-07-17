@@ -9,6 +9,15 @@ const PREAMBLE = "from mine import *\n\n" +
 const NOTIFY_OPTIONS = {autoHideDelay: 10000};
 
 
+// Let pressing enter inside fileName textbox trigger save file event
+// https://stackoverflow.com/questions/155188/trigger-a-button-click-with-javascript-on-the-enter-key-in-a-text-box
+$("#fileNameTextBox").keyup(function (event) {
+   if (event.keyCode === 13) {
+       $("#generateButton").click();
+   }
+});
+
+
 /**
  * createSnapshot: Allows user to save current workspace.
  */
