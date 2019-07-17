@@ -55,7 +55,7 @@ Blockly.defineBlocksWithJsonArray([
     "previousStatement": null,
     "nextStatement": null,
     "mutator" : "dynamic_dropdown_mutator",
-    "extensions" : ["dd_on_change", "empty_input_warning"],
+    "extensions" : ["dd_on_change"],
     "colour": 230,
     "tooltip": "Change the type and sup-type of a provided block object.",
     "helpUrl": ""
@@ -137,6 +137,12 @@ SECOND_DROPDOWN_MIXIN = {
   Blockly.Extensions.register('dd_on_change', function() {
     this.setOnChange(function(changeEvent) {
       this.updateShape_();
+      let input = this.getInputTargetBlock("BLOCK");
+      if(input === null) {
+        this.setWarningText("You must have a block in Block.");
+      } else {
+        this.setWarningText(null);
+      }
     })
   })
   
