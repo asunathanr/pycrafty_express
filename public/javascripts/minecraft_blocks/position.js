@@ -128,7 +128,6 @@ Blockly.Python['vector_all_attrs'] = function(block) {
     var value_y = Blockly.Python.valueToCode(block, 'Y', Blockly.Python.ORDER_ATOMIC);
     var dropdown_zoperator = block.getFieldValue('ZOPERATOR');
     var value_z = Blockly.Python.valueToCode(block, 'Z', Blockly.Python.ORDER_ATOMIC);
-    // TODO: Assemble Python into code variable.
     var code = value_variable+'.x = '+value_variable+'.x '+dropdown_xoperator+' '+value_x+'\n'+value_variable+'.y = '+value_variable+'.y '+dropdown_yoperator+' '+value_y+'\n'+value_variable+'.z = '+value_variable+'.z '+dropdown_zoperator+' '+value_z+'\n';
     return code;
 };
