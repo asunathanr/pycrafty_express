@@ -1,14 +1,13 @@
 # Prerequisites
 1. Minecraft Java Edition
+2. Minecraft Forge Client (single-player) Version (Version of Forge must match the Minecraft version)
 2. RaspberryJam Minecraft Mod
 3. Python3
 4. Node.js
 5. Internet connection (for cdn packages)
 
-# Setup Raspberry Jam Mod
-1. Install Minecraft Forge
-2. Place the Raspberry Jam jar file in the mods directory of the .minecraft directory
-3. Run the Raspberry Jam jar file.
+# Setup Forge and Raspberry Jam Mod
+Follow the instructions for installing Forge and Raspberry Jam at: https://github.com/arpruss/raspberryjammod
 
 # Start Pycrafty
 First, install node.js on your system. You can download it at: https://nodejs.org/en/
