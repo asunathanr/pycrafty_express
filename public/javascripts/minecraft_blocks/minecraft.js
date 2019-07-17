@@ -27,7 +27,7 @@ Blockly.defineBlocksWithJsonArray([
     ],
     "previousStatement": null,
     "nextStatement": null,
-    "colour": 230,
+    "colour": '%{BKY_MINECRAFT_HUE}',
     "tooltip": "Post a message to in game chat.",
     "helpUrl": ""
   },
@@ -52,7 +52,7 @@ Blockly.defineBlocksWithJsonArray([
     ],
     "previousStatement": null,
     "nextStatement": null,
-    "colour": 230,
+    "colour": '%{BKY_MINECRAFT_HUE}',
     "extensions": ["empty_input_warning"],
     "tooltip": "Set a single block.",
     "helpUrl": ""
@@ -84,7 +84,7 @@ Blockly.defineBlocksWithJsonArray([
     "previousStatement": null,
     "nextStatement": null,
     "extensions": ["empty_input_warning"],
-    "colour": 230,
+    "colour": '%{BKY_MINECRAFT_HUE}',
     "tooltip": "",
     "helpUrl": ""
   },
@@ -103,7 +103,7 @@ Blockly.defineBlocksWithJsonArray([
       }
     ],
     "output": "Block",
-    "colour": 230,
+    "colour": '%{BKY_MINECRAFT_HUE}',
     "extensions": ["empty_input_warning"],
     "tooltip": "Get block type from provided coordinates.",
     "helpUrl": ""
@@ -123,7 +123,7 @@ Blockly.defineBlocksWithJsonArray([
       }
     ],
     "output": "Block",
-    "colour": 230,
+    "colour": '%{BKY_MINECRAFT_HUE}',
     "extensions": ["empty_input_warning"],
     "tooltip": "",
     "helpUrl": ""
@@ -148,7 +148,7 @@ Blockly.defineBlocksWithJsonArray([
       }
     ],
     "output": "List",
-    "colour": 230,
+    "colour": '%{BKY_MINECRAFT_HUE}',
     "extensions": ["empty_input_warning"],
     "tooltip": "Gets types of blocks in a cuboid. Returns a list of ints.",
     "helpUrl": ""
@@ -168,7 +168,7 @@ Blockly.defineBlocksWithJsonArray([
       }
     ],
     "output": "Number",
-    "colour": 230,
+    "colour": '%{BKY_MINECRAFT_HUE}',
     "extensions": ["empty_input_warning"],
     "tooltip": "Get height of tallest non-air block at position.",
     "helpUrl": ""
@@ -178,7 +178,7 @@ Blockly.defineBlocksWithJsonArray([
     "type": "get_player_id",
     "message0": "Get player id.",
     "output": "Number",
-    "colour": 230,
+    "colour": '%{BKY_MINECRAFT_HUE}',
     "tooltip": "Get players id as int.",
     "helpUrl": ""
   },
@@ -187,7 +187,7 @@ Blockly.defineBlocksWithJsonArray([
     "type": "get_player_entity_ids",
     "message0": "Get player ids.",
     "output": "List",
-    "colour": 230,
+    "colour": '%{BKY_MINECRAFT_HUE}',
     "tooltip": "",
     "helpUrl": ""
   }
