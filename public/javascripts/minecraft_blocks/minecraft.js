@@ -270,8 +270,9 @@ Blockly.Python['get_player_entity_ids'] = function (block) {
 Blockly.Extensions.register("empty_input_warning", function () {
 
   this.setOnChange(function(changeEvent) {
-
+    // get list of inputs on current block
     let inputs = this.inputList;
+    //create array of strings with names of blocks attached to inputs
     let emptyInputs = [];
     for(input of inputs) {
       if(input.type === 1 && !input.connection.isConnected()) {
@@ -280,7 +281,7 @@ Blockly.Extensions.register("empty_input_warning", function () {
     }
     
     let warningString = "You must have a block in ";
-
+    //if the array of input names is empty, warn, otherwise add the names to the warning string and attach it to the block.
     if(emptyInputs.length > 0) {
       for(var i = 0; i < emptyInputs.length; i++) {
         if(i < (emptyInputs.length - 1)) {

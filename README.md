@@ -20,7 +20,7 @@
 4. Click the version dropdown
 ![Step 1.2](public/media/readme_images/step1-3.png)
 
-5. Select version 12.1.2
+5. Select version 1.12.2
 ![Step 1.3](public/media/readme_images/step1-2.png)
 
 6. Click Create to save the new installation
@@ -91,7 +91,7 @@ instead.
 Assuming a script was created with the file name "file.py"
 open up a minecraft chat window and type: 
 ```
-\lpy file.py
+/lpy file.py
 ```
 to run the script in Minecraft.
 
@@ -99,5 +99,9 @@ to run the script in Minecraft.
     * Blockly: https://developers.google.com/blockly/
     * node.js: https://nodejs.org/en/
     * express-generator: https://expressjs.com/en/starter/generator.html
+    * notify.js
+    * JQuery
+    * popper.js
+    * bootstrap.js
     * picnic CSS: https://picnicss.com/
     

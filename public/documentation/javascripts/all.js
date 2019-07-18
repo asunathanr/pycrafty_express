@@ -102,7 +102,7 @@ e.TokenStore=function(){this.root={docs:{}},this.length=0},e.TokenStore.load=fun
  *   $('#content').highlight('lorem');
  *
  *   // search for and highlight more terms at once
- *   // so you can createSnapshot some time on traversing DOM
+ *   // so you can save some time on traversing DOM
  *   $('#content').highlight(['lorem', 'ipsum']);
  *   $('#content').highlight('lorem ipsum');
  *
