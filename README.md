@@ -91,7 +91,7 @@ instead.
 Assuming a script was created with the file name "file.py"
 open up a minecraft chat window and type: 
 ```
-\lpy file.py
+/lpy file.py
 ```
 to run the script in Minecraft.
 
