@@ -20,7 +20,7 @@
 4. Click the version dropdown
 ![Step 1.2](public/media/readme_images/step1-3.png)
 
-5. Select version 12.1.2
+5. Select version 1.12.2
 ![Step 1.3](public/media/readme_images/step1-2.png)
 
 6. Click Create to save the new installation
