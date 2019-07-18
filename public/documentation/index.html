@@ -201,7 +201,7 @@
       <script src="javascripts/all_nosearch.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;Blockly&quot;,&quot;python&quot;]">
+  <body class="index" data-languages="[]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -210,11 +210,21 @@
     </a>
     <div class="toc-wrapper">
       <img src="images/logo.png" class="logo" alt="Logo" />
-        <div class="lang-selector">
-              <a href="#" data-language-name="Blockly">Blockly</a>
-              <a href="#" data-language-name="python">python</a>
-        </div>
       <ul id="toc" class="toc-list-h1">
+          <li>
+            <a href="#getting-started" class="toc-h1 toc-link" data-title="Getting Started">Getting Started</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#menu-bar" class="toc-h2 toc-link" data-title="Menu bar">Menu bar</a>
+                  </li>
+                  <li>
+                    <a href="#create-script" class="toc-h2 toc-link" data-title="Create Script">Create Script</a>
+                  </li>
+                  <li>
+                    <a href="#view-your-code" class="toc-h2 toc-link" data-title="View your Code">View your Code</a>
+                  </li>
+              </ul>
+          </li>
           <li>
             <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
           </li>
@@ -222,16 +232,13 @@
             <a href="#minecraft" class="toc-h1 toc-link" data-title="Minecraft">Minecraft</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#create-minecraft-connection" class="toc-h2 toc-link" data-title="Create Minecraft Connection">Create Minecraft Connection</a>
-                  </li>
-                  <li>
                     <a href="#get-block" class="toc-h2 toc-link" data-title="Get Block">Get Block</a>
                   </li>
                   <li>
                     <a href="#get-blocks" class="toc-h2 toc-link" data-title="Get Blocks">Get Blocks</a>
                   </li>
                   <li>
-                    <a href="#get-block-with-data" class="toc-h2 toc-link" data-title="Get Block with Data">Get Block with Data</a>
+                    <a href="#get-block-type-and-id" class="toc-h2 toc-link" data-title="Get Block Type and ID">Get Block Type and ID</a>
                   </li>
                   <li>
                     <a href="#set-block" class="toc-h2 toc-link" data-title="Set Block">Set Block</a>
@@ -249,13 +256,7 @@
                     <a href="#get-player-id" class="toc-h2 toc-link" data-title="Get Player ID">Get Player ID</a>
                   </li>
                   <li>
-                    <a href="#save-checkpoint" class="toc-h2 toc-link" data-title="Save Checkpoint">Save Checkpoint</a>
-                  </li>
-                  <li>
                     <a href="#post-to-chat" class="toc-h2 toc-link" data-title="Post to Chat">Post to Chat</a>
-                  </li>
-                  <li>
-                    <a href="#change-a-setting" class="toc-h2 toc-link" data-title="Change a Setting">Change a Setting</a>
                   </li>
               </ul>
           </li>
@@ -275,9 +276,6 @@
                     <a href="#set-tile-position" class="toc-h2 toc-link" data-title="Set Tile Position">Set Tile Position</a>
                   </li>
                   <li>
-                    <a href="#setting" class="toc-h2 toc-link" data-title="Setting">Setting</a>
-                  </li>
-                  <li>
                     <a href="#get-player-39-s-rotation" class="toc-h2 toc-link" data-title="Get Player's Rotation">Get Player's Rotation</a>
                   </li>
                   <li>
@@ -287,6 +285,9 @@
                     <a href="#get-player-39-s-direction" class="toc-h2 toc-link" data-title="Get Player's Direction">Get Player's Direction</a>
                   </li>
               </ul>
+          </li>
+          <li>
+            <a href="#position" class="toc-h1 toc-link" data-title="Position">Position</a>
           </li>
           <li>
             <a href="#entity" class="toc-h1 toc-link" data-title="Entity">Entity</a>
@@ -316,9 +317,11 @@
           </li>
           <li>
             <a href="#block" class="toc-h1 toc-link" data-title="Block">Block</a>
-          </li>
-          <li>
-            <a href="#vec3" class="toc-h1 toc-link" data-title="Vec3">Vec3</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#modify-block" class="toc-h2 toc-link" data-title="Modify Block">Modify Block</a>
+                  </li>
+              </ul>
           </li>
       </ul>
         <ul class="toc-footer">
@@ -328,477 +331,173 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='introduction'>Introduction</h1>
+        <h1 id='getting-started'>Getting Started</h1><h2 id='menu-bar'>Menu bar</h2><h3 id='create-your-own-script'>Create your own Script</h3>
+<p><strong>File Name</strong>: Enter the name of your script. </p>
+
+<p><strong>Naming Exceptions</strong>: Cannot contain the following characters: </p>
+
+<ul>
+<li><p>? (Question Mark) </p></li>
+<li><p>: (Colon)</p></li>
+<li><p>&quot; (Double Quote)</p></li>
+<li><p>/ (Forward Slash)</p></li>
+<li><p>\ (Back Slash)</p></li>
+<li><p>| (Veritcal Bar)</p></li>
+<li><p>* (Asterisk)</p></li>
+<li><p>&lt; (Less Than)</p></li>
+<li><p>&gt; (Greater Than)</p></li>
+</ul>
+<h2 id='create-script'>Create Script</h2><h3 id='save-and-load-blocks'>Save and Load Blocks</h3>
+<p>Save Workspace to file and load Workspace from file</p>
+
+<p><strong>Save Blocks</strong>: Saves current Workspace to a file.</p>
+
+<p><strong>Load Blocks</strong>: Loads Workspace from a file.</p>
+<h3 id='create-and-restore-snapshot'>Create and Restore Snapshot</h3>
+<p>Snapshot is all of the blocks in the current Workspace.</p>
+
+<p><strong>Create Snapshot</strong>: Saves current state of workspace.</p>
+
+<p><strong>Restore Snapshot</strong>: Restores the previous snapshot and corresponding code. </p>
+<h2 id='view-your-code'>View your Code</h2>
+<p>To display code created by current block Workspace, click Code tab.</p>
+
+<p>Click Workspace to return to block view.</p>
+<h1 id='introduction'>Introduction</h1>
 <p>This is the documentation for the Picrafty API. Each block and its
 corresponding python code is documented here.  </p>
 
-<p>This API is based around three classes given in the Raspberry Juice mod used to control the minecraft game world inside Python scripts<br>
-1. Minecraft --- Main class for connecting to and interacting with the game.<br>
-2. Player --- Getting and changing a player&#39;s position and settings.<br>
-3. Entity --- Getting and changing an entity&#39;s position and settings.<br>
-4. Block --- A class that holds type and id of a block.<br>
-5. Vec3 --- A class that holds 3d coordinates.  </p>
+<p>This API is based around three classes given in the Raspberry Juice mod used to control the minecraft game world inside Python scripts</p>
 
-<p>This documentation is a spin-off of documentation for Raspberry Juice found at: Add source here.  </p>
-<h1 id='minecraft'>Minecraft</h1><h2 id='create-minecraft-connection'>Create Minecraft Connection</h2>
-<p>Create a connection to your particular minecraft game.
-Inputs:
-* address: address of server
-* port: port on server</p>
-<pre class="highlight python tab-python"><code><span class="n">mc</span> <span class="o">=</span> <span class="n">Minecraft</span><span class="p">()</span><span class="o">.</span><span class="n">create</span><span class="p">()</span>
-</code></pre>
-<blockquote>
-<p>Creates a default server.</p>
-</blockquote>
-<pre class="highlight python tab-python"><code><span class="n">mc</span> <span class="o">=</span> <span class="n">Minecraft</span><span class="p">()</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s">"192.162.1.1"</span><span class="p">,</span> <span class="mi">4711</span><span class="p">)</span>
-</code></pre>
-<blockquote>
-<p>Specify IP Address and Port.</p>
-</blockquote>
-<h2 id='get-block'>Get Block</h2>
-<p>Retrieve block type located at position x, y, z</p>
-<pre class="highlight python tab-python"><code><span class="n">blockType</span> <span class="o">=</span> <span class="n">mc</span><span class="o">.</span><span class="n">getBlock</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-</code></pre>
-<blockquote>
-<p>Retrives block type at position 0,0,0</p>
-</blockquote>
+<ol>
+<li>Minecraft --- Main class for connecting to and interacting with the game.<br></li>
+<li>Player --- Getting and changing a player&#39;s position and settings.<br></li>
+<li>Entity --- Getting and changing an entity&#39;s position and settings.<br></li>
+</ol>
+
+<p>This documentation is a spin-off of documentation for Raspberry Juice found at: <strong>https://www.stuffaboutcode.com/p/minecraft-api-reference.html</strong>  </p>
+<h1 id='minecraft'>Minecraft</h1><h2 id='get-block'>Get Block</h2>
+<p>Retrieve block type located at Position variable</p>
+
+<p><img src="images/GetBlock.png" alt="Get block" width="250" height="100"/></p>
 <h2 id='get-blocks'>Get Blocks</h2>
-<p>Get all block ids ranging from one position to another.</p>
-<pre class="highlight python tab-python"><code><span class="n">blocks</span> <span class="o">=</span> <span class="n">mc</span><span class="o">.</span><span class="n">getBlocks</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">block</span> <span class="ow">in</span> <span class="n">blocks</span><span class="p">:</span>
-   <span class="k">print</span><span class="p">(</span><span class="n">block</span><span class="p">)</span>
-</code></pre>
-<blockquote>
-<p>Prints all block ids in a cuboid.</p>
-</blockquote>
-<h2 id='get-block-with-data'>Get Block with Data</h2><pre class="highlight python tab-python"><code><span class="n">blockObj</span> <span class="o">=</span> <span class="n">mc</span><span class="o">.</span><span class="n">getBlockWithData</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
-</code></pre>
-<blockquote>
-<p>retrieves a block object for the block at 0,0,0 </p>
-</blockquote>
-<h2 id='set-block'>Set Block</h2><pre class="highlight python tab-python"><code><span class="n">mc</span><span class="o">.</span><span class="n">setBlock</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">block</span><span class="o">.</span><span class="n">DIRT</span><span class="o">.</span><span class="nb">id</span><span class="p">)</span>
-</code></pre>
-<blockquote>
-<p>sets a block at an x,y,z coordinate to a particular type.</p>
-</blockquote>
-<pre class="highlight python tab-python"><code><span class="n">mc</span><span class="o">.</span><span class="n">setBlock</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">block</span><span class="o">.</span><span class="n">WOOD</span><span class="o">.</span><span class="nb">id</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-</code></pre>
-<blockquote>
-<p>sets a block to a particular type and subtype.</p>
-</blockquote>
-<h2 id='set-blocks'>Set Blocks</h2><pre class="highlight python tab-python"><code><span class="n">mc</span><span class="o">.</span><span class="n">setBlocks</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">block</span><span class="o">.</span><span class="n">STONE</span><span class="o">.</span><span class="nb">id</span><span class="p">)</span>
-</code></pre>
-<blockquote>
-<p>Sets many blocks at a time, filling the gap between 2 sets of x,y,z coordinates.</p>
-</blockquote>
-<h2 id='get-height'>Get Height</h2><pre class="highlight python tab-python"><code><span class="n">y</span> <span class="o">=</span> <span class="n">mc</span><span class="o">.</span><span class="n">getHeight</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
-</code></pre>
-<blockquote>
-<p>Find the y (vertical) of an x,z coordinate which represents the highest (non-air) block.</p>
-</blockquote>
-<h2 id='get-player-entity-ids'>Get Player Entity IDs</h2><pre class="highlight python tab-python"><code><span class="n">entityIds</span> <span class="o">=</span> <span class="n">mc</span><span class="o">.</span><span class="n">getPlayerEntityIds</span><span class="p">()</span>
-</code></pre>
-<blockquote>
-<p>get the entity ids of the players connected to the game.</p>
-</blockquote>
-<h2 id='get-player-id'>Get Player ID</h2><pre class="highlight python tab-python"><code><span class="n">entityId</span> <span class="o">=</span> <span class="n">mc</span><span class="o">.</span><span class="n">getPlayerId</span><span class="p">(</span><span class="s">"martinohanlon"</span><span class="p">)</span>
-</code></pre>
-<blockquote>
-<p>Get the entity id of a player named &quot;martinohanlon&quot;.</p>
-</blockquote>
-<h2 id='save-checkpoint'>Save Checkpoint</h2><pre class="highlight python tab-python"><code><span class="n">mc</span><span class="o">.</span><span class="n">saveCheckpoint</span><span class="p">()</span>
-</code></pre>
-<blockquote>
-<p>Save a checkpoint that can be useful for restoring the world</p>
-</blockquote>
-<h2 id='post-to-chat'>Post to Chat</h2><pre class="highlight python tab-python"><code><span class="n">mc</span><span class="o">.</span><span class="n">postToChat</span><span class="p">(</span><span class="s">"Hello Minecraft World"</span><span class="p">)</span>
-</code></pre>
-<blockquote>
-<p>Writes the message &quot;Hello Minecraft World&quot; to the chat window.</p>
-</blockquote>
-<h2 id='change-a-setting'>Change a Setting</h2><pre class="highlight python tab-python"><code><span class="n">mc</span><span class="o">.</span><span class="n">setting</span><span class="p">(</span><span class="s">"world_immutable"</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
-</code></pre>
-<blockquote>
-<p>Change world immutable to True.</p>
-</blockquote>
-<pre class="highlight python tab-python"><code><span class="n">mc</span><span class="o">.</span><span class="n">setting</span><span class="p">(</span><span class="s">"nametags_visible"</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
-</code></pre>
-<blockquote>
-<p>Change nametags_visible setting to False.</p>
-</blockquote>
+<p>Get all block IDs ranging from one position to another</p>
+
+<p><img src="images/GetBlocks.png" alt="Get multiple blocks" width="250" height="100"/></p>
+<h2 id='get-block-type-and-id'>Get Block Type and ID</h2>
+<p>Get the block Type and corresponding ID</p>
+
+<p><img src="images/GetBlockWithData.png" alt="Get block with data" width="250" height="100"/></p>
+<h2 id='set-block'>Set Block</h2>
+<p>Sets a block at a Position variable to a particular type</p>
+
+<p><img src="images/SetBlock.png" alt="Set block" width="250" height="150"/></p>
+<h2 id='set-blocks'>Set Blocks</h2>
+<p>Set many blocks at a time, filling the gap between 2 sets of Position variables</p>
+
+<p><img src="images/SetBlocks.png" alt="Set multiple blocks" width="250" height="200"/></p>
+<h2 id='get-height'>Get Height</h2>
+<p>Find the y(vertical) of an x, z coordinate which represents the highest (non-air) block.</p>
+
+<p><img src="images/GetHeight.png" alt="Get height" width="250" height="100"/></p>
+<h2 id='get-player-entity-ids'>Get Player Entity IDs</h2>
+<p>Get the entity IDs of the players connected to the game.</p>
+
+<p><img src="images/GetPlayerIds.png" alt="Get IDs of players in game" width="250" height="85"/></p>
+<h2 id='get-player-id'>Get Player ID</h2>
+<p>Get the entity ID of a player</p>
+
+<p><img src="images/GetPlayerID.png" alt="Get a player's ID" width="250" height="85"/></p>
+<h2 id='post-to-chat'>Post to Chat</h2>
+<p>Writes the message to the chat window</p>
+
+<p><img src="images/PostToChat.png" alt="Post message to chat" width="250" height="100"/></p>
 <h1 id='player'>Player</h1><h2 id='get-player-39-s-position'>Get Player&#39;s Position</h2>
-<p>Outputs a Vec3 object with player&#39;s current position.</p>
-<pre class="highlight plaintext"><code>
-</code></pre><pre class="highlight python tab-python"><code>  <span class="n">mc</span><span class="o">.</span><span class="n">player</span><span class="o">.</span><span class="n">getPos</span><span class="p">()</span>
+<p>Outputs player&#39;s current position.</p>
 
-</code></pre>
-<blockquote>
-<p>Retrieves current position of the player.</p>
-</blockquote>
+<p><img src="images/GetPlayerPos.png" alt="Get player position" width="250" height="125"/></p>
 <h2 id='set-player-39-s-position'>Set Player&#39;s Position</h2>
-<p>Change where you are now to a new position</p>
+<p>Change player&#39;s current location to a new position</p>
 <h3 id='input'>Input</h3>
-<p>x,y,z coordinates (can be grouped in a Vec3 object)</p>
-<pre class="highlight python tab-python"><code><span class="n">mc</span><span class="o">.</span><span class="n">player</span><span class="o">.</span><span class="n">setPos</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
-</code></pre>
-<blockquote>
-<p>Sets player&#39;s position to be at (10, 10, 10)</p>
-</blockquote>
+<p>Position variable</p>
+
+<p><img src="images/SetPlayerPos.png" alt="Set player position" width="250" height="100"/></p>
 <h2 id='get-tile-position'>Get Tile Position</h2>
-<p>Output: Vec3 object of tile coordinates.
-<code>python
-playerPos = mc.player.getTilePos()
-</code></p>
+<p>Output: Position of tile coordinates.</p>
 
-<blockquote>
-<p>Get player position as floats</p>
-</blockquote>
+<p><img src="images/GetPosUnderPlayer.png" alt="Get tile position" width="250" height="100"/></p>
 <h2 id='set-tile-position'>Set Tile Position</h2>
-<p>Input: x,y,z (can be grouped into a single Vec3 object)
-<code>python
-mc.player.setTilePos(1,1,1)
-</code></p>
+<p>Input: Position variable</p>
 
-<blockquote>
-<p>Move player to tile.</p>
-</blockquote>
-<h2 id='setting'>Setting</h2>
-<p>Input: x,y,z coordinates (can be grouped as a Vec3 object)
-<code>python
-mc.player.setting(&quot;autojump&quot;, False)
-print(&quot;Autojump off, 5 seconds to test.&quot;)
-time.sleep(5)
-mc.player.setting(&quot;autojump&quot;, True)
-print(&quot;Autojump back on&quot;)
-</code></p>
-
-<blockquote>
-<p>Turn autojump off and on.</p>
-</blockquote>
+<p><img src="images/SetPlayersPosOnTopOf.png" alt="Set player's position to tile" width="250" height="100"/></p>
 <h2 id='get-player-39-s-rotation'>Get Player&#39;s Rotation</h2>
-<p>Output: Rotation angle as float
-<code>python
-playerRot = mc.player.getRotation()
-print(playerRot)
-</code></p>
+<p>Output: Rotation angle as float</p>
 
-<blockquote>
-<p>Get and print player rotation.</p>
-</blockquote>
+<p><img src="images/GetPlayersAngleOfRotation.png" alt="Get player's angle of rotation" width="250" height="100"/></p>
 <h2 id='get-player-39-s-pitch'>Get Player&#39;s Pitch</h2>
-<p>Output: Pitch angle as float
-<code>python
-playerPitch = mc.player.getPitch()
-</code></p>
+<p>Output: Pitch angle as float</p>
 
-<blockquote>
-<p>Get and print player pitch.</p>
-</blockquote>
+<p><img src="images/GetPlayersPitch.png" alt="Get player's angle of pitch" width="250" height="100"/></p>
 <h2 id='get-player-39-s-direction'>Get Player&#39;s Direction</h2>
-<p>Output: Player direction as Vec3 object.
-<code>python
-playerDirection = mc.player.getDirection()
-print(playerDirection)
-</code></p>
+<p>Output: Player direction as Position variable</p>
 
-<blockquote>
-<p>Get and print player direction</p>
-</blockquote>
+<p><img src="images/GetPlayersDirection.png" alt="Get player's direction" width="250" height="100"/></p>
+<h1 id='position'>Position</h1>
+<p><img src="images/PositionModify.png" alt="Modify position" width="400" height="100"/></p>
 <h1 id='entity'>Entity</h1><h2 id='get-entity-39-s-position'>Get Entity&#39;s Position</h2>
-<p>Input: Entity ID (can get using mc.getPlayerIds())
-<code>python
-entityPos = mc.entity.getPos(entityIds[0])
-print(&quot;entity pos&quot;, entityPos)
-</code></p>
+<p>Input: Entity ID (can get using mc.getPlayerIds())</p>
 
-<blockquote>
-<p>Get player&#39;s position</p>
-</blockquote>
+<p><img src="images/GetEntitysPos.png" alt="Get entity's position" width="350" height="100"/></p>
 <h2 id='set-entity-39-s-position'>Set Entity&#39;s Position</h2>
-<p>Input:
-* Entity ID (can get using mc.getPlayerIds())
-* x,y,z coordinates (can be grouped in Vec3 object)
-<code>python
-entityPos = mc.entity.getPos(entityIds[0])
-print(&quot;entity pos&quot;, entityPos)
-mc.entity.setPos(entityIds[0], 20, 20, 20)
-time.sleep(2)
-mc.entity.setPos(entityIds[0], entityPos)
-</code></p>
+<p>Input: Entity ID (can get using mc.getPlayerIds())</p>
 
-<blockquote>
-</blockquote>
+<ul>
+<li>Position variable</li>
+</ul>
+
+<p><img src="images/SetEntityPos.png" alt="Set entity's position" width="350" height="100"/></p>
 <h2 id='get-position-of-tile-underneath-entity'>Get Position of Tile Underneath Entity</h2>
-<p>Input: Entity ID
-Output: Vec3 position of the tile that an entity is on.
-<code>python
- entityTilePos = mc.entity.getTilePos(entityIds[0])
-print(&quot;Entity tile pos&quot;, entityTilePos)
-</code></p>
+<p>Input: Entity ID</p>
 
-<blockquote>
-<p>Print Position of tile entity is on.</p>
-</blockquote>
+<p>Output: Position variable of the tile that an entity is on</p>
+
+<p><img src="images/GetPosDirectlyUnderEntity.png" alt="Get position of tile under entity" width="350" height="100"/></p>
 <h2 id='set-new-position-underneath-entity'>Set New Position Underneath Entity</h2>
 <p>Input: 
-* Entity ID
-* x,y,z coordinates (can be grouped in a Vec3 object)
-<code>python
-mc.entity.setTilePos(entityIds[0], 15, 1, 25)
-time.sleep(2)
-mc.entity.setTilePos(entityIds[0], entityTilePos)
-</code></p>
+* Entity ID</p>
 
-<blockquote>
-<p>Change entity position</p>
-</blockquote>
+<ul>
+<li>Position variable</li>
+</ul>
+
+<p><img src="images/SetNewPositionUnderEntity.png" alt="Set entity's new position" width="450" height="100"/></p>
 <h2 id='get-entity-39-s-rotation'>Get Entity&#39;s Rotation</h2>
-<p>Input: Entity ID
-Output: Entity rotation angle
-<code>python
-entityRot = mc.entity.getRotation(entityIds[0])
-mc.postToChat(entityRot)
-</code></p>
+<p>Input: Entity ID</p>
 
-<blockquote>
-<p>Get entity rotation.</p>
-</blockquote>
+<p>Output: Entity rotation angle</p>
+
+<p><img src="images/GetEntitysRotation.png" alt="Get entity's rotation" width="350" height="100"/></p>
 <h2 id='get-entity-39-s-pitch'>Get Entity&#39;s Pitch</h2>
-<p>Input: Entity ID
-Output: Entity Pitch Angle
-<code>python
-entityPitch = mc.entity.getPitch(entityIds[0])
-mc.postToChat(entityPitch)
-</code></p>
+<p>Input: Entity ID</p>
 
-<blockquote>
-<p>Get entity pitch</p>
-</blockquote>
+<p>Output: Entity Pitch Angle</p>
+
+<p><img src="images/GetEntitysPitch.png" alt="Get entity's pitch" width="350" height="100"/></p>
 <h2 id='get-entity-39-s-direction'>Get Entity&#39;s Direction</h2>
-<p>Input: Entity ID
-Output: Vec3 object of entity direction.
-<code>python
-entityDirection = mc.entity.getDirection(entityIds[0])
-mc.postToChat(&quot;Entity direction = &quot;)
-mc.postToChat(entityDirection)
-</code></p>
+<p>Input: Entity ID</p>
 
-<blockquote>
-<p>Get entity direction</p>
-</blockquote>
-<h1 id='block'>Block</h1>
-<p>Block(id: int)<br>
-Block(id: int, data: int)  </p>
+<p>Output: Position variable of entity direction</p>
 
-<p>.id<br>
-&quot;The id (or type) of block&quot;  </p>
+<p><img src="images/GetEntitysDirection.png" alt="Get entity's position" width="350" height="100"/></p>
+<h1 id='block'>Block</h1><h2 id='modify-block'>Modify Block</h2>
+<p>Input: Takes block variable</p>
 
-<p>AIR = Block(0)<br>
-STONE = Block(1)<br>
-GRASS = Block(2)<br>
-DIRT = Block(3)<br>
-COBBLESTONE = Block(4)<br>
-WOOD_PLANKS = Block(5)<br>
-SAPLING = Block(6)<br>
-BEDROCK = Block(7)<br>
-WATER_FLOWING = Block(8)<br>
-WATER = WATER_FLOWING<br>
-WATER_STATIONARY = Block(9)<br>
-LAVA_FLOWING = Block(10)<br>
-LAVA = LAVA_FLOWING LAVA_STATIONARY = Block(11)<br>
-SAND = Block(12)<br>
-GRAVEL = Block(13)<br>
-GOLD_ORE = Block(14)<br>
-IRON_ORE = Block(15)<br>
-COAL_ORE = Block(16)<br>
-WOOD = Block(17)<br>
-LEAVES = Block(18)<br>
-GLASS = Block(20)<br>
-LAPIS_LAZULI_ORE = Block(21)<br>
-LAPIS_LAZULI_BLOCK = Block(22)<br>
-SANDSTONE = Block(24)<br>
-BED = Block(26)<br>
-COBWEB = Block(30)<br>
-GRASS_TALL = Block(31)<br>
-WOOL = Block(35)<br>
-FLOWER_YELLOW = Block(37)<br>
-FLOWER_CYAN = Block(38)<br>
-MUSHROOM_BROWN = Block(39)<br>
-MUSHROOM_RED = Block(40)<br>
-GOLD_BLOCK = Block(41)<br>
-IRON_BLOCK = Block(42)<br>
-STONE_SLAB_DOUBLE = Block(43)<br>
-STONE_SLAB = Block(44)<br>
-BRICK_BLOCK = Block(45)<br>
-TNT = Block(46)<br>
-BOOKSHELF = Block(47)<br>
-MOSS_STONE = Block(48)<br>
-OBSIDIAN = Block(49)<br>
-TORCH = Block(50)<br>
-FIRE = Block(51)<br>
-STAIRS_WOOD = Block(53)<br>
-CHEST = Block(54)<br>
-DIAMOND_ORE = Block(56)<br>
-DIAMOND_BLOCK = Block(57)<br>
-CRAFTING_TABLE = Block(58)<br>
-FARMLAND = Block(60)<br>
-FURNACE_INACTIVE = Block(61)<br>
-FURNACE_ACTIVE = Block(62)<br>
-DOOR_WOOD = Block(64)<br>
-LADDER = Block(65)<br>
-STAIRS_COBBLESTONE = Block(67)<br>
-DOOR_IRON = Block(71)<br>
-REDSTONE_ORE = Block(73)<br>
-SNOW = Block(78)<br>
-ICE = Block(79)<br>
-SNOW_BLOCK = Block(80)<br>
-CACTUS = Block(81)<br>
-CLAY = Block(82)<br>
-SUGAR_CANE = Block(83)<br>
-FENCE = Block(85)<br>
-GLOWSTONE_BLOCK = Block(89)<br>
-BEDROCK_INVISIBLE = Block(95)<br>
-STONE_BRICK = Block(98)<br>
-GLASS_PANE = Block(102)<br>
-MELON = Block(103)<br>
-FENCE_GATE = Block(107)<br>
-GLOWING_OBSIDIAN = Block(246)<br>
-NETHER_REACTOR_CORE = Block(247)  </p>
+<p>Output: New block type</p>
 
-<p>.data<br>
-&quot;The data (or sub-type) of a block&quot;  </p>
+<p><img src="images/ModifyBlock.png" alt="Modifies block" width="400" height="100"/></p>
 
-<p>Data Values of blocks:<br>
-WOOL:<br>
-0: White<br>
-1: Orange<br>
-2: Magenta<br>
-3: Light Blue<br>
-4: Yellow<br>
-5: Lime<br>
-6: Pink<br>
-7: Grey<br>
-8: Light grey<br>
-9: Cyan<br>
-10: Purple<br>
-11: Blue<br>
-12: Brown<br>
-13: Green<br>
-14: Red<br>
-15: Black  </p>
-
-<p>WOOD:<br>
-0: Oak (up/down)<br>
-1: Spruce (up/down)<br>
-2: Birch (up/down)<br>
-(below not on Pi)<br>
-3: Jungle (up/down)<br>
-4: Oak (east/west)<br>
-5: Spruce (east/west)<br>
-6: Birch (east/west)<br>
-7: Jungle (east/west)<br>
-8: Oak (north/south)<br>
-9: Spruce (north/south)<br>
-10: Birch (north/south)<br>
-11: Jungle (north/south)<br>
-12: Oak (only bark)<br>
-13: Spruce (only bark)<br>
-14: Birch (only bark)
-15: Jungle (only bark)  </p>
-
-<p>WOOD_PLANKS (Not on Pi): 0: Oak<br>
-1: Spruce<br>
-2: Birch<br>
-3: Jungle  </p>
-
-<p>SAPLING:<br>
-0: Oak<br>
-1: Spruce<br>
-2: Birch<br>
-3: Jungle (Not on Pi)  </p>
-
-<p>GRASS_TALL:<br>
-0: Shrub<br>
-1: Grass<br>
-2: Fern<br>
-3: Grass (color affected by biome) (Not on Pi)  </p>
-
-<p>TORCH:<br>
-1: Pointing east<br>
-2: Pointing west<br>
-3: Pointing south<br>
-4: Pointing north<br>
-5: Facing up  </p>
-
-<p>STONE_BRICK:<br>
-0: Stone brick<br>
-1: Mossy stone brick<br>
-2: Cracked stone brick<br>
-3: Chiseled stone brick  </p>
-
-<p>STONE_SLAB / STONE_SLAB_DOUBLE:<br>
-0: Stone<br>
-1: Sandstone<br>
-2: Wooden<br>
-3: Cobblestone<br>
-4: Brick<br>
-5: Stone Brick<br>
-Below - not on Pi<br>
-6: Nether Brick<br>
-7: Quartz  </p>
-
-<p>Not on Pi<br>
-SNOW_BLOCK:<br>
-0-7: Height of snow, 0 being the lowest, 7 being the highest.  </p>
-
-<p>TNT:<br>
-0: Inactive<br>
-1: Ready to explode  </p>
-
-<p>LEAVES:<br>
-1: Oak leaves<br>
-2: Spruce leaves<br>
-3: Birch leaves  </p>
-
-<p>SANDSTONE:<br>
-0: Sandstone<br>
-1: Chiseled sandstone<br>
-2: Smooth sandstone  </p>
-
-<p>STAIRS_[COBBLESTONE, WOOD]:<br>
-0: Ascending east<br>
-1: Ascending west<br>
-2: Ascending south<br>
-3: Ascending north<br>
-4: Ascending east (upside down)<br>
-5: Ascending west (upside down)<br>
-6: Ascending south (upside down)<br>
-7: Ascending north (upside down)  </p>
-
-<p>LADDERS, CHESTS, FURNACES, FENCE_GATE:<br>
-2: Facing north<br>
-3: Facing south<br>
-4: Facing west<br>
-5: Facing east  </p>
-
-<p>[WATER, LAVA]_STATIONARY:<br>
-0-7: Level of the water, 0 being the highest, 7 the lowest  </p>
-
-<p>NETHER_REACTOR_CORE:<br>
-0: Unused<br>
-1: Active<br>
-2: Stopped / used up  </p>
-<h1 id='vec3'>Vec3</h1>
-<p>The definition of a 3 part vector in Minecraft(a set of x, y, z coordinates):
-x and z = the horizontal positions, y is vertical</p>
-<pre class="highlight python tab-python"><code><span class="n">position</span> <span class="o">=</span> <span class="n">vec3</span><span class="o">.</span><span class="n">Vec</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
-</code></pre>
       </div>
       <div class="dark-box">
-          <div class="lang-selector">
-                <a href="#" data-language-name="Blockly">Blockly</a>
-                <a href="#" data-language-name="python">python</a>
-          </div>
       </div>
     </div>
   </body>
