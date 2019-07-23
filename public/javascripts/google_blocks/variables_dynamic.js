@@ -227,6 +227,10 @@ Blockly.Extensions.register("check_for_setter", function() {
       this.setWarningText(null);
     } else if ((this.getRootBlock().type === 'controls_for') &&(this.getRootBlock().getFieldValue("VAR") === id)) {
       this.setWarningText(null);
+    } else if ((this.getRootBlock().type === 'procedures_defnoreturn') &&(this.getRootBlock().getFieldValue("VAR") === id)) {
+      this.setWarningText(null);
+    } else if ((this.getRootBlock().type === 'procedures_defreturn') &&(this.getRootBlock().getFieldValue("VAR") === id)) {
+      this.setWarningText(null);
     } else { // if there are no setters for the current variable, warn
       this.setWarningText("You need to set variable first!");
     }
